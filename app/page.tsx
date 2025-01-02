@@ -17,25 +17,18 @@ export default function Page() {
       </a>
 
       <h1 className="mb-8 text-2xl font-medium tracking-tight">
-        Portfolio, made simple!
+        Hello world! I am Nitesh Pant.
       </h1>
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          A clean, fast, and lightweight portfolio template built with Next.js,
-          Vercel, and Tailwind CSS for optimal performance.
+          I'm the co-founder of <a target="blank" href="https://devdashlabs.com">DevDash Labs</a>. 
+          I'm current creating <a target="blank" href="https://arthex.io">arthex</a>, an AI powered
+          earnings day stock analyzer to help retail traders earn on earnings.
         </p>
         <p>
-          Nextfolio includes all the essentials for a stunning portfolio: SEO,
-          MDX support, RSS, Atom, & JSON feeds, analytics, tweet & YouTube
-          embeds, KaTeX integration, and{" "}
-          <a
-            target="_blank"
-            href="https://github.com/1msirius/Nextfolio?tab=readme-ov-file#features"
-          >
-            more
-          </a>
-          .
+          I grew up in Nepal, went to Dartmouth College, and worked as a management consultant. More to be added soon. 
+          Visit my other site: <a href="https://niteshpant.com.np">niteshpant.com.np</a>! 
         </p>
         <p>
           Nextfolio is{" "}
