@@ -27,33 +27,14 @@ export default function Page() {
           earnings day stock analyzer to help retail traders earn on earnings.
         </p>
         <p>
-          I grew up in Nepal, went to Dartmouth College, and worked as a management consultant. More to be added soon. 
+          I grew up in Nepal, went to Dartmouth College (studied economics and government), and worked as a management consultant. 
           Visit my other site: <a href="https://niteshpant.com.np">niteshpant.com.np</a>! 
         </p>
         <p>
-          Nextfolio is{" "}
-          <a href={socialLinks.github} target="_blank">
-            open-source
-          </a>{" "}
-          and fully customizable, making it easy to add more features.
+          I started  DevDash Labs to provide research-backed AI solutions to SMBs and enterprises. At DevDash, we do the research so that our clients can focus on their core competencies - adding value to their customers. Connect with me <a href="mailto:nitesh.pant@devdashlabs.com">via email</a> to collaborate on projects. Plus points for fintech and AI products!
         </p>
         <p>
-          <a
-            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F1msirius%2FNextfolio"
-            target="_blank"
-          >
-            Deploy
-          </a>{" "}
-          your Nextfolio site with Vercel in minutes and follow the set up
-          instructions in the{" "}
-          <a href="/blog/getting-started">Getting Started</a> post.
-        </p>
-        <p>
-          Built and maintained by{" "}
-          <a href="https://imsirius.xyz/" target="_blank">
-            Sirius
-          </a>
-          .
+          I love building products, creating amazing marketing ideas, thinking about philosophy (political economy), and bringing structure to madness. Talk to me about architecture and we will have a good convo. 
         </p>
       </div>
     </section>
