@@ -27,4 +27,11 @@ export const projects: Project[] = [
       "Simple, open-source web-based census app optimized for mobile devices. Daily patient census taking and dashboard analytics.",
     url: "https://github.com/niteshpant99/nova-census-app",
   },
+  {
+    title: "Luna",
+    year: 2024,
+    description:
+      "Chatbot with AI capabilities, built on enterprise-grade, for SMBs; flexible and nimble to be integrated anywhere.",
+    url: "https://devdashlabs.com/luna-demo",
+  },
 ];
