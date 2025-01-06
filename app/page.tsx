@@ -19,6 +19,7 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-medium tracking-tight">
         Hello world! I am Nitesh Pant.
       </h1>
+      <h2 className="text-[#00693e] dark:text-[#a5d75f]">I seek impact.</h2>
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
