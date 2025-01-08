@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { projects } from "../project-data";
+import { getProjectContent } from "../project";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -9,7 +10,6 @@ interface Props {
   };
 }
 
-// Generate metadata for each project page
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find(
     (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
@@ -27,12 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ProjectPage({ params }: Props) {
+export default async function ProjectPage({ params }: Props) {
   const project = projects.find(
     (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
   );
 
   if (!project) {
+    notFound();
+  }
+
+  const content = await getProjectContent(params.slug);
+
+  if (!content) {
     notFound();
   }
 
@@ -63,20 +69,13 @@ export default function ProjectPage({ params }: Props) {
         </div>
 
         <div className="prose prose-neutral dark:prose-invert">
-          <p>{project.description}</p>
-          
-          {/* You can add more sections here as needed */}
-          <h2>Project Details</h2>
-          <p>
-            {/* Add more detailed content about the project here */}
-          </p>
+          {content}
         </div>
       </div>
     </article>
   );
 }
 
-// Generate static paths for all projects
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.title.toLowerCase().replace(/\s+/g, '-'),

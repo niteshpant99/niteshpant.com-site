@@ -1,3 +1,4 @@
+// app/blog/page.tsx
 import Link from "next/link";
 import { formatDate, getBlogPosts } from "app/lib/posts";
 
