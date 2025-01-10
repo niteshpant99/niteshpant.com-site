@@ -12,5 +12,5 @@ export const socialLinks = {
   github: "https://github.com/niteshpant99",
   instagram: "https://www.instagram.com/",
   linkedin: "https://www.linkedin.com/in/niteshpant22/",
-  email: "mailto:nitesh.pant@devdashlabs.com",
+  email: "mailto:nitesh@niteshpant.com",
 };
