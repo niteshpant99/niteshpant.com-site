@@ -14,7 +14,7 @@ export const projects: Project[] = [
     url: "https://devdashlabs.com/",
   },
   {
-    title: "artehx",
+    title: "arthex",
     year: 2024,
     description:
       "AI powered earnings day trading assistant - earn on earnings.",
