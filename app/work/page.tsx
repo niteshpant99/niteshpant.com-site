@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { ImageGrid } from "app/components/image-grid";
 
 export const metadata: Metadata = {
-  title: "Photos",
-  description: "My Photos",
+  title: "Work",
+  description: "Work done by Nitesh Pant",
 };
 
-export default function Photos() {
+export default function Work() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-medium tracking-tight">Photos</h1>
