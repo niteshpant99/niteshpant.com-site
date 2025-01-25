@@ -17,6 +17,9 @@ export default function BlogPosts() {
       <div>
       <h2 className="mb-6 text-l">by Nitesh</h2>
       </div>
+
+      <p>If stuck, start here</p>
+      <p className="mb-6" >My story to <a href='/dartmouth' className="hover:underline">Dartmouth</a></p>
       <div>
         {allBlogs
           .sort((a, b) => {
@@ -32,7 +35,7 @@ export default function BlogPosts() {
             <Link
               key={post.slug}
               className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
-              href={`/blog/${post.slug}`}
+              href={`/essays/${post.slug}`}
             >
               <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
                 <p className="text-black dark:text-white tracking-tight">

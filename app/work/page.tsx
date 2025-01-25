@@ -3,14 +3,24 @@ import type { Metadata } from "next";
 import { ImageGrid } from "app/components/image-grid";
 
 export const metadata: Metadata = {
-  title: "Photos",
-  description: "My Photos",
+  title: "Work",
+  description: "Work done by Nitesh Pant",
 };
 
-export default function Photos() {
+export default function Work() {
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-medium tracking-tight">Photos</h1>
+      <h1 className="mb-2 text-2xl font-medium tracking-tight">Work</h1>
+      <p>A selection of work I've done</p>
+
+      <h2 className="mb-4 pl-4 pt-4 text-xl">Hercules Transformation</h2>
+      <h2 className="mb-4 pl-4 pt-4 text-xl">DevDash Metamorphosis</h2>
+      <h2 className="mb-4 pl-4 pt-4 text-xl">Novodaya</h2>
+      <h2 className="mb-4 pl-4 pt-4 text-xl">Luna</h2>
+      <h2 className="mb-4 pl-4 pt-4 text-xl">Safka</h2>
+      <h2 className="mb-4 pl-4 pt-4 text-xl">Fun React Weekend gigs</h2>
+      
+      {/*}
       <ImageGrid
         columns={3}
         images={[
@@ -45,8 +55,9 @@ export default function Photos() {
             href: "https://unsplash.com/photos/brown-concrete-building-under-blue-sky-during-daytime-3cyBR1rIJmA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash",
           },
         ]}
+          
       />
-
+      
       <ImageGrid
         columns={2}
         images={[
@@ -68,6 +79,8 @@ export default function Photos() {
           { src: "/photos/photo6.jpg", alt: "Colosseum" },
         ]}
       />
+      */}
+
     </section>
   );
 }
