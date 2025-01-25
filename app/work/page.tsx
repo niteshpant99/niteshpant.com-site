@@ -18,6 +18,7 @@ export default function Work() {
       <h2 className="mb-4 pl-4 pt-4 text-xl">Novodaya</h2>
       <h2 className="mb-4 pl-4 pt-4 text-xl">Luna</h2>
       <h2 className="mb-4 pl-4 pt-4 text-xl">Safka</h2>
+      <h2 className="mb-4 pl-4 pt-4 text-xl">Fun React Weekend gigs</h2>
       
       {/*}
       <ImageGrid
@@ -79,7 +80,7 @@ export default function Work() {
         ]}
       />
       */}
-      
+
     </section>
   );
 }

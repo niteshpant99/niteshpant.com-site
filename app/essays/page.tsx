@@ -17,6 +17,9 @@ export default function BlogPosts() {
       <div>
       <h2 className="mb-6 text-l">by Nitesh</h2>
       </div>
+
+      <p>If stuck, start here</p>
+      <p className="mb-6" >My story to <a href='/dartmouth' className="hover:underline">Dartmouth</a></p>
       <div>
         {allBlogs
           .sort((a, b) => {
