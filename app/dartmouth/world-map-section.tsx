@@ -5,6 +5,7 @@ import WorldMap from "../components/ui/world-map";
 import { motion } from "motion/react";
 import React from "react";
 
+
 export default function WorldMapSection() {
   return (
     <div className=" py-2 dark:bg-[--background] w-full">
@@ -18,7 +19,7 @@ export default function WorldMapSection() {
                 className="inline-block"
                 initial={{ x: -10, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.2, delay: idx * 0.04 }}
+                transition={{ duration: 0.02, delay: idx * 0.04 }}
               >
                 {word}
               </motion.span>
@@ -26,14 +27,14 @@ export default function WorldMapSection() {
           </span>
         </p>
         <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
-        From a small town in Nepal to Dartmouth College. 
+        From a small town in Farwest Nepal to Dartmouth College. 
         </p>
       </div>
       <WorldMap
         dots={[
           {
-            start: { lat: 28.6667, lng: 80.36, label: "Dhangadhi" }, // Dhangadhi, Nepal
-            end: { lat: 43.7023, lng: -72.2901, label: "Hanover" }, // Hanover, NH, USA
+            start: { lat: 26.6667, lng: 84.36, label: "Dhangadhi" }, // Dhangadhi, Nepal
+            end: { lat: 47.1023, lng: -71.2901, label: "Hanover" }, // Hanover, NH, USA
           },
         ]}
       />
