@@ -1,3 +1,4 @@
+// app/components/Footer.tsx
 "use client";
 
 import React from "react";
@@ -9,7 +10,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 import { TbMailFilled } from "react-icons/tb";
-import { metaData, socialLinks } from "app/config";
+import { metaData, socialLinks } from "../config";
 
 const YEAR = new Date().getFullYear();
 
@@ -38,7 +39,7 @@ function SocialLinks() {
 
 export default function Footer() {
   return (
-    <small className="block lg:mt-24 mt-16 text-[#1C1C1C] dark:text-[#D4D4D4]">
+    <small className="block lg:mt-24 mt-16 text-[--prose-text] dark:text-[--prose-text]">
       <time>© {YEAR}</time>{" "}
       <a
         className="no-underline"

@@ -1,8 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import { ThemeSwitch } from "./theme-switch";
 import { metaData } from "../config";
 
 const navItems = {
+  "/about": { name: "About" },
   "/essays": { name: "Essays" },
   "/projects": { name: "Projects" },
   "/work": { name: "Work" },
