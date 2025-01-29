@@ -32,7 +32,7 @@ export default function About() {
       </p>
     </div>
 
-    <div className="relative flex w-full flex-col items-center justify-start text-left">
+    <div className="relative flex w-full flex-col items-center justify-center text-left">
       <p className="font-semibold mt-2 mb-2 text-lg">My Values</p> 
       <ol className="list-decimal pl-5"> 
         <li className="font-medium">Knowledge over money</li> 
