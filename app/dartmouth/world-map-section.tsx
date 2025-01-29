@@ -7,18 +7,18 @@ import React from "react";
 
 export default function WorldMapSection() {
   return (
-    <div className=" py-2 dark:bg-black w-full">
+    <div className=" py-2 dark:bg-[--background] w-full">
       <div className="max-w-7xl mx-auto text-center">
-        <p className="font-bold text-xl md:text-4xl dark:text-white text-black">
+        <p className="text-[--prose-text] font-bold text-xl md:text-4xl">
           Dhangadhi →{" "}
-          <span className="text-neutral-400">
+          <span className="text-[--prose-dartmouth]">
             {"Dartmouth".split("").map((word, idx) => (
               <motion.span
                 key={idx}
                 className="inline-block"
                 initial={{ x: -10, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.04 }}
+                transition={{ duration: 0.2, delay: idx * 0.04 }}
               >
                 {word}
               </motion.span>
