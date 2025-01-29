@@ -7,8 +7,9 @@
   color: #fefefe;
 }
 
-/* Light theme colors */
+/* Original Theme Colors as CSS Variables */
 :root {
+  /* Syntax Highlighting (Keep these) */
   --sh-class: #2d5e9d;
   --sh-identifier: #354150;
   --sh-sign: #8996a3;
@@ -18,11 +19,20 @@
   --sh-jsxliterals: #6266d1;
   --sh-property: #e25a1c;
   --sh-entity: #e25a1c;
+
+  /* Original Prose Theme - Light Mode */
+  --prose-text: #333333;
+  --prose-pre-bg: #F7F7F7;
+  --prose-link-decoration: #9CA3AF; /* neutral-400 in hex - approx */
+  --prose-link-decoration-hover: #D4D4D4; /* neutral-600 in hex - approx - for dark hover in light mode */
+  --prose-anchor-after: #D4D4D4; /* neutral-300 in hex - approx - light mode anchor */
 }
 
 /* Dark theme colors */
 .dark {
-  background-color: hsl(var(--background));
+  background-color: hsl(var(--background)); /* Keep shadcn background if you want to use it */
+
+  /* Syntax Highlighting (Keep these) */
   --sh-class: #4c97f8;
   --sh-identifier: white;
   --sh-sign: #8996a3;
@@ -32,6 +42,13 @@
   --sh-jsxliterals: #6266d1;
   --sh-property: #e25a1c;
   --sh-entity: #e25a1c;
+
+  /* Original Prose Theme - Dark Mode */
+  --prose-text: #e0e0e0;
+  --prose-pre-bg: #181818;
+  --prose-link-decoration: #6B7280; /* neutral-600 in hex - approx */
+  --prose-link-decoration-hover: #9CA3AF; /* neutral-400 in hex - approx - for light hover in dark mode */
+  --prose-anchor-after: #4B5563; /* neutral-700 in hex - approx - dark mode anchor */
 }
 
 html {
@@ -39,7 +56,7 @@ html {
 }
 
 .prose {
-  @apply text-[#333333] dark:text-[#D4D4D4];
+  @apply text-[--prose-text] dark:text-[--prose-text]; /* Use CSS variables for text color */
 }
 
 .prose .anchor {
@@ -56,15 +73,15 @@ html {
 }
 
 .prose a {
-  @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em] font-normal text-[#333333] dark:text-[#D4D4D4];
+  @apply transition-all decoration-[--prose-link-decoration] dark:decoration-[--prose-link-decoration] underline-offset-2 decoration-[0.1em] font-normal text-[--prose-text] dark:text-[--prose-text]; /* Use CSS variables for link decoration and text */
 }
 
 .prose a:hover {
-  @apply dark:decoration-neutral-400 decoration-neutral-600;
+  @apply dark:decoration-[--prose-link-decoration-hover] decoration-[--prose-link-decoration-hover]; /* Use CSS variables for hover decoration */
 }
 
 .prose .anchor:after {
-  @apply text-neutral-300 dark:text-neutral-700;
+  @apply text-[--prose-anchor-after] dark:text-[--prose-anchor-after]; /* Use CSS variables for anchor color */
   content: "#";
 }
 
@@ -73,11 +90,11 @@ html {
 }
 
 .prose pre {
-  @apply bg-[#F7F7F7] dark:bg-[#181818] rounded-lg overflow-x-auto;
+  @apply bg-[--prose-pre-bg] dark:bg-[--prose-pre-bg] rounded-lg overflow-x-auto; /* Use CSS variables for pre background */
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-lg;
+  @apply px-1 py-0.5 rounded-lg; /* Keep default code style if you like it */
 }
 
 .prose pre code {
@@ -151,9 +168,16 @@ table {
 }
 
 @layer base {
+  /* You can keep or remove shadcn base styles.
+     If you want to *fully* control the theme, you can remove this whole @layer base block.
+     If you want to *partially* use shadcn base styles and override prose, keep it and adjust.
+     If you remove it, your app will lose shadcn's default base styles (like background/foreground on body).
+
+     If you *keep* it, and you want to use *your* background color for dark mode, you should modify the `--background` variable in `.dark` within this block to match your desired dark background color.
+  */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 0 0% 100%; /* Shadcn default light background */
+    --foreground: 0 0% 3.9%;  /* Shadcn default light foreground */
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
@@ -179,8 +203,8 @@ table {
     --radius: 0.5rem;
   }
   .dark {
-    --background: hsl(168, 27%, 8%);
-    --foreground: 0 0% 98%;
+    --background: hsl(168, 27%, 8%); /* Your original dark background color in HSL - from previous answer */
+    --foreground: 0 0% 98%;      /* Shadcn default dark foreground */
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
@@ -208,9 +232,9 @@ table {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border; /* Keep border style if you like it */
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground; /* Keep body background and text styles if you like them - they use shadcn variables */
   }
 }
