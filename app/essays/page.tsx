@@ -1,6 +1,8 @@
 // app/blog/page.tsx
 import Link from "next/link";
-import { formatDate, getBlogPosts } from "app/lib/posts";
+import { formatDate, getBlogPosts } from "../lib/posts";
+import {InteractiveGrid} from "../essays/interactive-grid";
+import React from "react";
 
 export const metadata = {
   title: "Essays",
@@ -13,13 +15,25 @@ export default function BlogPosts() {
   return (
     <section>
       
-      <h1 className="mb-2 text-2xl font-medium tracking-tight">Essays</h1>
-      <div>
-      <h2 className="mb-6 text-l">by Nitesh</h2>
-      </div>
+        <InteractiveGrid>
+        <div>
+        <h1 className="mb-2 z-10 whitespace-pre-wrap tracking-tighter text-2xl font-medium tracking-tight text-foreground mt-2">
+        Essays
+          </h1>
+            <h2 className="mb-6 z-10 text-l text-foreground">by Nitesh</h2>
+          
 
-      <p>If stuck, start here</p>
-      <p className="mb-6" >My story to <a href='/dartmouth' className="hover:underline">Dartmouth</a></p>
+          <p className="z-10 text-foreground">If stuck, start here</p>
+          <p className="mb-2 z-10">
+            My story to{" "}
+            <a 
+              href="/dartmouth" 
+              className="text-foreground hover:underline"
+            >
+              Dartmouth
+            </a>
+          </p>
+      </div>
       <div>
         {allBlogs
           .sort((a, b) => {
@@ -48,6 +62,8 @@ export default function BlogPosts() {
             </Link>
           ))}
       </div>
+
+      </InteractiveGrid>
     </section>
   );
 }
