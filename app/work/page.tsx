@@ -12,7 +12,7 @@ export default function Work() {
     <section>
       <h1 className="mb-2 text-2xl font-medium tracking-tight">Work</h1>
       <p>A selection of work I've done</p>
-
+      <h2 className="mb-4 pl-4 pt-4 text-xl">alkemy platform for Roland Berger</h2>
       <h2 className="mb-4 pl-4 pt-4 text-xl">Hercules Transformation</h2>
       <h2 className="mb-4 pl-4 pt-4 text-xl">DevDash Metamorphosis</h2>
       <h2 className="mb-4 pl-4 pt-4 text-xl">Novodaya</h2>
