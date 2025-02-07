@@ -1,3 +1,4 @@
+import React from "react";
 import { notFound } from "next/navigation";
 import { projects } from "../project-data";
 import { getProjectContent } from "../project";
