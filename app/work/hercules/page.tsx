@@ -142,7 +142,7 @@ const PractitionerPricingMatrix = () => {
       <CardHeader className="px-0">
         <CardTitle className="text-foreground">Hercules Practitioner-Based Pricing Analysis</CardTitle>
       </CardHeader>
-      <CardContent className="p-0">
+      <CardContent className="p-0 min-w-[900px]">
         <RevenueMatrix />
       </CardContent>
     </Card>
