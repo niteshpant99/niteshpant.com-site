@@ -152,11 +152,48 @@ const PricingSimulator = () => {
     }).format(value / 100);
   };
 
+  const InstructionsCard = () => {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>How to Use This Simulator</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="space-y-3">
+            <h3 className="font-medium">Configuration Options:</h3>
+            <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+              <li><span className="font-medium text-foreground">Per Practitioner Fee</span>: Toggle and set a monthly fee charged per practitioner</li>
+              <li><span className="font-medium text-foreground">Price Per Case</span>: Set the fee charged for each anesthesia case</li>
+              <li><span className="font-medium text-foreground">Minimum Cases</span>: Set the minimum number of cases included in the base price</li>
+            </ul>
+          </div>
+  
+          <div className="space-y-3">
+            <h3 className="font-medium">Understanding the Views:</h3>
+            <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+              <li>
+                <span className="font-medium text-foreground">Revenue Matrix</span>: Shows total monthly revenue and margins for different combinations of:
+                <ul className="list-circle pl-4 mt-1 space-y-1">
+                  <li>Number of practitioners (rows)</li>
+                  <li>Additional cases beyond minimum (columns)</li>
+                </ul>
+              </li>
+              <li>
+                <span className="font-medium text-foreground">Breakeven Analysis</span>: Shows how many cases per practitioner are needed to reach the breakeven point ($29,781) at different practice sizes
+              </li>
+            </ul>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
   return (
         <div className="relative w-full">
+            <InstructionsCard />
           {/* Container that breaks out of the default layout constraints */}
-          <div className="absolute left-1/2 right-1/2 -mx-[50vw] min-w-[1200px] w-screen">
-            <div className="relative left-1/2 -translate-x-1/2 px-6 w-full max-w-[1400px]">
+          <div className="absolute left-1/2 right-1/2 -mx-[50vw] w-screen">
+            <div className="relative left-1/2 -translate-x-1/2 px-6 w-full max-w-fit">
               {/* Configuration Card */}
               <Card className="mb-8 shadow-md">
                 <CardHeader className="pb-2">
@@ -226,7 +263,6 @@ const PricingSimulator = () => {
                     <Card className="shadow-md overflow-hidden">
                       <CardContent className="p-0">
                         <div className="overflow-x-auto">
-                          <div className="min-w-[800px]">
                             <table className="w-full border-collapse">
                               <thead>
                                 <tr>
@@ -267,7 +303,6 @@ const PricingSimulator = () => {
                               </tbody>
                             </table>
                           </div>
-                        </div>
                       </CardContent>
                     </Card>
                   </TabsContent>
@@ -275,8 +310,8 @@ const PricingSimulator = () => {
                   <TabsContent value="breakeven" className="mt-6">
                     <Card className="shadow-md">
                       <CardContent className="p-6">
-                        <div className="w-full overflow-x-auto">
-                            <div className="min-w-[800px] h-[400px]"> {/* Fixed height container */}
+                        <div className="flex justify-center w-full overflow-x-auto">
+                            <div className="min-w-[800px] h-auto"> {/* Fixed height container */}
                                 <LineChart
                                 width={800}
                                 height={400}
