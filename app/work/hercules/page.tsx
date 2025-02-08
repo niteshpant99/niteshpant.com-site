@@ -6,6 +6,9 @@ import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { Switch } from '../../components/ui/switch';
+import { Button } from "../../components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog";
+import { HelpCircle } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const MONTHLY_COSTS = 29780.51;
@@ -99,7 +102,8 @@ const PricingSimulator = () => {
       practitioner,
       revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
     })),
-    [practitioners, additionalCases, config]
+    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee]
+
   );
 
   // Generate data for breakeven analysis
@@ -152,50 +156,63 @@ const PricingSimulator = () => {
     }).format(value / 100);
   };
 
-  const InstructionsCard = () => {
+  const InstructionsDialog = () => {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>How to Use This Simulator</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-3">
-            <h3 className="font-medium">Configuration Options:</h3>
-            <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
-              <li><span className="font-medium text-foreground">Per Practitioner Fee</span>: Toggle and set a monthly fee charged per practitioner</li>
-              <li><span className="font-medium text-foreground">Price Per Case</span>: Set the fee charged for each anesthesia case</li>
-              <li><span className="font-medium text-foreground">Minimum Cases</span>: Set the minimum number of cases included in the base price</li>
-            </ul>
-          </div>
-  
-          <div className="space-y-3">
-            <h3 className="font-medium">Understanding the Views:</h3>
-            <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
-              <li>
-                <span className="font-medium text-foreground">Revenue Matrix</span>: Shows total monthly revenue and margins for different combinations of:
-                <ul className="list-circle pl-4 mt-1 space-y-1">
-                  <li>Number of practitioners (rows)</li>
-                  <li>Additional cases beyond minimum (columns)</li>
+        <Dialog>
+        <DialogTrigger asChild>
+            <Button variant="secondary" size="icon" className="absolute top-4 right-4 bg-[--prose-link-decoration] hover:bg-[--prose-link-decoration-hover] shadow-lg hover:shadow-xl transition-shadow">
+            <HelpCircle className="h-10 w-10" />
+            </Button>
+        </DialogTrigger>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+            <DialogTitle>How to Use This Simulator</DialogTitle>
+            </DialogHeader>
+            
+            <div className="space-y-6 py-4">
+            <div className="space-y-3">
+                <h3 className="font-medium">Configuration Options:</h3>
+                <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+                <li><span className="font-medium text-foreground">Per Practitioner Fee</span>: Toggle and set a monthly fee charged per practitioner</li>
+                <li><span className="font-medium text-foreground">Price Per Case</span>: Set the fee charged for each anesthesia case</li>
+                <li><span className="font-medium text-foreground">Minimum Cases</span>: Set the minimum number of cases included in the base price</li>
                 </ul>
-              </li>
-              <li>
-                <span className="font-medium text-foreground">Breakeven Analysis</span>: Shows how many cases per practitioner are needed to reach the breakeven point ($29,781) at different practice sizes
-              </li>
-            </ul>
-          </div>
-        </CardContent>
-      </Card>
+            </div>
+
+            <div className="space-y-3">
+                <h3 className="font-medium">Understanding the Views:</h3>
+                <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+                <li>
+                    <span className="font-medium text-foreground">Revenue Matrix</span>: Shows total monthly revenue and margins for different combinations of:
+                    <ul className="list-circle pl-4 mt-1 space-y-1">
+                    <li>Number of practitioners (rows)</li>
+                    <li>Additional cases beyond minimum (columns)</li>
+                    </ul>
+                </li>
+                <li>
+                    <span className="font-medium text-foreground">Breakeven Analysis</span>: Shows how many cases per practitioner are needed to reach the breakeven point ($29,781) at different practice sizes
+                </li>
+                </ul>
+            </div>
+            </div>
+        </DialogContent>
+        </Dialog>
     );
-  };
+    };
 
   return (
+       
         <div className="relative w-full">
-            <InstructionsCard />
+            <div className="flex justify-center align-center">
+                <h1 className="text-xl mb-2">Hercules Pricing Analysis Tool</h1>
+            </div>
+            
           {/* Container that breaks out of the default layout constraints */}
           <div className="absolute left-1/2 right-1/2 -mx-[50vw] w-screen">
             <div className="relative left-1/2 -translate-x-1/2 px-6 w-full max-w-fit">
               {/* Configuration Card */}
               <Card className="mb-8 shadow-md">
+              <InstructionsDialog />
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xl font-semibold">Pricing Configuration</CardTitle>
                 </CardHeader>
@@ -257,7 +274,9 @@ const PricingSimulator = () => {
                   <TabsList className="w-full sm:w-auto">
                     <TabsTrigger value="matrix" className="flex-1 sm:flex-none">Revenue Matrix</TabsTrigger>
                     <TabsTrigger value="breakeven" className="flex-1 sm:flex-none">Breakeven Analysis</TabsTrigger>
+                    
                   </TabsList>
+     
     
                   <TabsContent value="matrix" className="mt-6">
                     <Card className="shadow-md overflow-hidden">
