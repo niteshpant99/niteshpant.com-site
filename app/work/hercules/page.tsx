@@ -12,15 +12,19 @@ const BREAK_EVEN_THRESHOLD = 1000;
 const MIN_BASE_FEE = 0;
 const MIN_OVERAGE_FEE = 0;
 
-const PractitionerPricingMatrix = () => {
+const PricingSimulator = () => {
+  // Core pricing parameters
   const [baseFee, setBaseFee] = useState(150);
   const [overageFee, setOverageFee] = useState(2);
+  const [includedCases, setIncludedCases] = useState(INCLUDED_CASES);
   const [maxCases, setMaxCases] = useState(400);
 
+  // Generate practitioner range (10 to 200 in steps of 10)
   const practitioners = useMemo(() => 
     Array.from({length: 20}, (_, i) => 10 + (i * 10)), 
   []);
 
+  // Generate additional cases range (0 to 200 in steps of 25)
   const additionalCases = useMemo(() => 
     Array.from({length: 9}, (_, i) => i * 25), 
   []);
@@ -38,12 +42,17 @@ const PractitionerPricingMatrix = () => {
     setOverageFee(validateInput(e.target.value, MIN_OVERAGE_FEE));
   };
 
-  const handleMaxCasesChange = (e) => {
-    setMaxCases(validateInput(e.target.value, INCLUDED_CASES));
+  const handleIncludedCasesChange = (e) => {
+    setIncludedCases(validateInput(e.target.value, 0));
   };
 
+  const handleMaxCasesChange = (e) => {
+    setMaxCases(validateInput(e.target.value, includedCases));
+  };
+
+  // Calculate revenue for a given scenario
   const calculateRevenue = (numPractitioners, extraCasesPerPractitioner) => {
-    const totalCases = INCLUDED_CASES + extraCasesPerPractitioner;
+    const totalCases = includedCases + extraCasesPerPractitioner;
     const baseRevenue = numPractitioners * baseFee;
     const overageRevenue = numPractitioners * extraCasesPerPractitioner * overageFee;
     const totalRevenue = baseRevenue + overageRevenue;
@@ -54,17 +63,20 @@ const PractitionerPricingMatrix = () => {
       monthlyRevenuePerPractitioner: totalRevenue / numPractitioners,
       totalCases,
       baseRevenue,
-      overageRevenue
+      overageRevenue,
+      profitMargin: ((totalRevenue - MONTHLY_COSTS) / totalRevenue) * 100
     };
   };
 
+  // Generate the revenue matrix
   const revenueMatrix = useMemo(() => {
     return practitioners.map(practitioner => ({
       practitioner,
       revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
     }));
-  }, [practitioners, additionalCases, baseFee, overageFee, maxCases]);
+  }, [practitioners, additionalCases, baseFee, overageFee, maxCases, includedCases]);
 
+  // Determine cell color based on profitability
   const getRevenueColor = (data) => {
     const { revenue, exceedsLimit } = data;
     
@@ -79,18 +91,16 @@ const PractitionerPricingMatrix = () => {
     }
     
     if (profitability >= 0) {
-      // Further categorize profitable scenarios
       if (profitability > MONTHLY_COSTS * 0.5) {
-        return 'bg-green-300 dark:bg-green-800/50'; // Highly profitable
+        return 'bg-green-300 dark:bg-green-800/50';
       }
-      return 'bg-green-100 dark:bg-green-900/50'; // Profitable
+      return 'bg-green-100 dark:bg-green-900/50';
     }
     
-    // Further categorize unprofitable scenarios
     if (profitability < -MONTHLY_COSTS * 0.5) {
-      return 'bg-red-300 dark:bg-red-800/50'; // Highly unprofitable
+      return 'bg-red-300 dark:bg-red-800/50';
     }
-    return 'bg-red-100 dark:bg-red-900/50'; // Unprofitable
+    return 'bg-red-100 dark:bg-red-900/50';
   };
 
   const formatRevenue = (revenue) => {
@@ -102,19 +112,27 @@ const PractitionerPricingMatrix = () => {
     }).format(revenue);
   };
 
+  const formatPercentage = (value) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'percent',
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(value / 100);
+  };
+
   return (
     <Card className="w-full border-none shadow-none">
       <CardHeader className="px-0">
-        <CardTitle className="text-foreground">
-          Hercules Practitioner-Based Pricing Analysis
+        <CardTitle className="text-xl text-foreground">
+          Hercules Pricing Simulator
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-0 min-w-[900px]">
+      <CardContent className="flex p-0 min-w-[1100px] w-full justify-center items-center">
         <div className="w-full">
-          <div className="mb-4 flex flex-wrap gap-4">
+          <div className="mb-6 flex flex-wrap gap-4">
             <div className="flex-1 min-w-[200px]">
               <Label htmlFor="baseFee" className="text-foreground">
-                Base Subscription Fee ($)
+                Base Monthly Fee ($)
               </Label>
               <Input
                 id="baseFee"
@@ -124,12 +142,11 @@ const PractitionerPricingMatrix = () => {
                 min={MIN_BASE_FEE}
                 step="10"
                 className="w-full"
-                aria-label="Base subscription fee per practitioner"
               />
             </div>
             <div className="flex-1 min-w-[200px]">
               <Label htmlFor="overageFee" className="text-foreground">
-                Overage Fee per Case ($)
+                Additional Case Fee ($)
               </Label>
               <Input
                 id="overageFee"
@@ -139,35 +156,34 @@ const PractitionerPricingMatrix = () => {
                 min={MIN_OVERAGE_FEE}
                 step="0.5"
                 className="w-full"
-                aria-label="Fee per case over included amount"
               />
             </div>
             <div className="flex-1 min-w-[200px]">
-              <Label htmlFor="maxCases" className="text-foreground">
-                Max Cases per Practitioner
+              <Label htmlFor="includedCases" className="text-foreground">
+                Included Cases
               </Label>
               <Input
-                id="maxCases"
+                id="includedCases"
                 type="number"
-                value={maxCases}
-                onChange={handleMaxCasesChange}
-                min={INCLUDED_CASES}
-                step="50"
+                value={includedCases}
+                onChange={handleIncludedCasesChange}
+                min={0}
+                step="25"
                 className="w-full"
-                aria-label="Maximum allowed cases per practitioner"
               />
             </div>
+            
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse" role="grid" aria-label="Revenue matrix">
+            <table className="w-full border-collapse" role="grid">
               <thead>
                 <tr>
-                  <th scope="col" className="p-2 border text-left bg-background">
-                    <div className="flex items-center gap-2">
+                  <th scope="col" className="p-2 border text-left bg-background whitespace-nowrap">
+                    <div className="flex flex-col items-center gap-2">
                       <span className="text-foreground">Practitioners</span>
                       <span className="text-xs text-muted-foreground">
-                        (Base: {INCLUDED_CASES} cases)
+                        (Base: {includedCases} cases)
                       </span>
                     </div>
                   </th>
@@ -180,7 +196,7 @@ const PractitionerPricingMatrix = () => {
                       <div className="flex flex-col">
                         <span className="text-foreground">+{cases} cases</span>
                         <span className="text-xs text-muted-foreground">
-                          (Total: {INCLUDED_CASES + cases})
+                          (Total: {includedCases + cases})
                         </span>
                       </div>
                     </th>
@@ -200,12 +216,13 @@ const PractitionerPricingMatrix = () => {
                       <td
                         key={`${practitioner}-${index}`}
                         className={`p-2 border text-center ${getRevenueColor(revenueData)}`}
-                        role="cell"
-                        aria-label={`Revenue for ${practitioner} practitioners with ${revenueData.totalCases} total cases: ${formatRevenue(revenueData.revenue)}`}
                       >
-                        <div className="flex items-center justify-center gap-1">
-                          <span className="text-foreground">
+                        <div className="flex flex-col items-center justify-center gap-1">
+                          <span className="font-medium text-foreground">
                             {formatRevenue(revenueData.revenue)}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {formatPercentage(revenueData.profitMargin)} margin
                           </span>
                           {revenueData.exceedsLimit && (
                             <AlertCircle 
@@ -222,15 +239,14 @@ const PractitionerPricingMatrix = () => {
             </table>
           </div>
 
-          <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <p>* Each practitioner includes {INCLUDED_CASES} cases/month in base subscription</p>
+          <div className="mt-6 space-y-2 text-sm text-muted-foreground">
+            <p>* Break-even point: {formatRevenue(MONTHLY_COSTS)}</p>
             <p>* Dark green: Highly profitable ({'>'}50% above break-even)</p>
             <p>* Light green: Profitable (above break-even)</p>
             <p>* Blue: Near break-even (±{formatRevenue(BREAK_EVEN_THRESHOLD)})</p>
             <p>* Light red: Unprofitable (below break-even)</p>
             <p>* Dark red: Highly unprofitable ({'>'}50% below break-even)</p>
-            <p>* Yellow cells with ⚠️ exceed maximum allowed cases per practitioner ({maxCases})</p>
-            <p>Break-even point: {formatRevenue(MONTHLY_COSTS)}</p>
+            <p>* Yellow cells with warning icon exceed maximum allowed cases ({maxCases})</p>
           </div>
         </div>
       </CardContent>
@@ -238,4 +254,4 @@ const PractitionerPricingMatrix = () => {
   );
 };
 
-export default PractitionerPricingMatrix;
+export default PricingSimulator;
