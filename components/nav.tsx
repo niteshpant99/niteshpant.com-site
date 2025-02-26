@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ThemeSwitch } from "./theme-switch";
-import { metaData } from "../config";
+import { metaData } from "../app/config";
 
 const navItems = {
   "/about": { name: "About" },

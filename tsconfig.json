@@ -18,10 +18,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "paths": { // Add this section
-      "@/": [
-        "./"
-      ]
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["components/*"]
     },
     "incremental": true,
     "plugins": [

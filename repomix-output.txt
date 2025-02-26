@@ -1,0 +1,4305 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+app/
+  about/
+    page.tsx
+  dartmouth/
+    page.tsx
+    world-map-section.tsx
+  essays/
+    [slug]/
+      page.tsx
+    interactive-grid.tsx
+    page.tsx
+  feed/
+    [format]/
+      route.ts
+  og/
+    route.tsx
+  projects/
+    [slug]/
+      page.tsx
+    content/
+      arthex.mdx
+      devdash-labs.mdx
+      luna.mdx
+      nova-hospital-census-app.mdx
+    page.tsx
+    project-data.tsx
+    project.ts
+  work/
+    hercules/
+      page.tsx
+    page.tsx
+  config.ts
+  error.tsx
+  global.css
+  layout.tsx
+  not-found.tsx
+  page.tsx
+  robots.ts
+  sitemap.ts
+components/
+  ui/
+    apple-cards-carousel.tsx
+    button.tsx
+    card.tsx
+    dialog.tsx
+    input.tsx
+    interactive-grid-pattern.tsx
+    label.tsx
+    meteors.tsx
+    switch.tsx
+    tabs.tsx
+    world-map.tsx
+  work/
+    AlkemyCards.tsx
+  caption.tsx
+  footer.tsx
+  image-grid.tsx
+  mdx.tsx
+  nav.tsx
+  theme-switch.tsx
+  tweet.css
+  tweet.tsx
+  youtube.tsx
+content/
+  ai-future-jan-2025.mdx
+  devdash-labs-overhaul.mdx
+  hello-world.mdx
+  leaving-boston.mdx
+  on-design.mdx
+  space-oddessy.mdx
+  take-more-risk.mdx
+  why-work-at-devdash.mdx
+hooks/
+  use-outside-click.tsx
+lib/
+  posts.ts
+  utils.ts
+public/
+  favicon.svg
+.gitignore
+components.json
+LICENSE
+next.config.js
+package.json
+postcss.config.js
+README.md
+tailwind.config.js
+todo.mdx
+tsconfig.json
+
+================================================================
+Files
+================================================================
+
+================
+File: app/about/page.tsx
+================
+import React from "react";
+import { metaData } from "../config";
+import { Metadata } from "next";
+import { Meteors } from "../components/ui/meteors";
+
+
+export const metadata: Metadata = {
+    title: "About",
+    description: "About Nitesh",
+  };
+
+export default function About() {
+  return (
+    
+    <div>
+      <div className="relative flex h-[100px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background ">
+      <Meteors number={30} />
+      <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+        <h1>About</h1>
+      </span>
+    </div>
+
+    <div>
+      <p className="mb-4 mt-2">
+        I am an economist by training, consultant by trade, and a technology enthusiast at heart. Born and raised in Nepal, I came to the United States in 2018 to study at Dartmouth College, where I majored in Economics. My journey from the remote Far-Western region of Nepal to the Ivy League shaped my perspective on the transformative power of opportunity and education. After graduating in 2023, I worked as a management consultant at Roland Berger, focusing on healthcare and chemical industry projects.
+        </p>
+        <p className="mb-4">
+        Currently, I lead Product, Strategy and Growth at DevDash Labs. I spearhead our pivot to becoming an AI solutions provider, developing products that enhance operational efficiency for clients across multiple states. In the process, I learned to code and sell.
+        </p>
+        <p className="mb-4">
+        My experiences span from managing oxygen supply during COVID-19 in Nepal to evaluating multi-billion dollar M&A deals in Boston. These diverse challenges have taught me adaptability and resilience. Beyond work, I’m a part-time DJ, philosophy enthusiast, and rock climber. I believe in thinking long-term, valuing knowledge over money, and daring to be different. My mission is to leverage technology and economics to drive sustainable development, particularly in emerging markets.
+      </p>
+    </div>
+
+    <div className="relative flex w-full flex-col items-center justify-center text-left">
+      <p className="font-semibold mt-2 mb-2 text-lg">My Values</p> 
+      <ol className="list-decimal pl-5"> 
+        <li className="font-medium">Knowledge over money</li> 
+        <li className="font-medium">Impact over profits</li>
+        <li className="font-medium">Think long-term</li>
+        <li className="font-medium">Dare to be different</li>
+      </ol>
+    </div>  
+  </div>
+
+  );
+}
+
+================
+File: app/dartmouth/page.tsx
+================
+// app/dartmouth/page.tsx
+import WorldMapSection from "../dartmouth/world-map-section";
+import type { Metadata } from "next";
+import React from "react";
+
+export const metadata: Metadata = {
+    title: "Dartmouth",
+    description: "How I went from a small town in Nepal to Dartmouth College",
+  };
+
+export default function Dartmouth() {
+    return (
+        <div>
+            <WorldMapSection /> 
+            <section className="py-12 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Added padding and max-width for text section */}
+                <h1 className="mb-8 text-2xl font-medium tracking-tight">Dartmouth</h1>
+                <h2>STILL A WORK IN PROGRESS</h2>
+                <p className="mb-2">Many times, be it when I'm interviewing or talking to new folks, I get asked one question - how did you make it to Dartmouth?</p>
+                <p className="mb-2">How did a kid born in Dhangadhi, Nepal go on to study at Dartmouth College in Hanover, NH?</p>
+                <p className="mb-2">The answer lies in a lot of hard work, thoughtful planning, and luck. Not to mention immense support from my parents.</p>
+
+                <div className="my-8 max-w-none">
+                    <h2 className="text-xl font-medium mb-4">From Dhangadhi to Dartmouth: A Journey Across Worlds</h2>
+                    
+                    <p className="mb-1 mt-1">There's something poetic about how life's most transformative journeys often begin with the simplest of moments. For me, it was a quiet morning in Dhangadhi, Nepal, coffee in hand, scrolling through the news—a ritual I've maintained for nearly a decade now.</p>
+                    
+                    <h3 className="text-lg font-medium mt-6 mb-3">The Headline That Changed Everything</h3>
+                    
+                    <p className="mb-1 mt-1">It was 2016, and I was in 10th grade when I spotted a headline that would alter my trajectory forever: a student had been accepted to all eight Ivy League universities. Two questions immediately surfaced in my mind:</p>
+                    
+                    <p className="italic mt-1 mb-1">Why was this student's achievement front-page news on what I considered the world's most prestigious news outlets?</p>
+                    
+                    <p className="mb-1 mt-1">And more fundamentally: <span className="italic mb-1 mt-1">ke ho yo "Ivy League"?</span> What exactly was this "Ivy League" that warranted global attention?</p>
+                    
+                    <p className="mb-1 mt-1">Curiosity ignited, I began researching. These weren't just good schools—they represented educational excellence on a global scale. In that moment of discovery, a quiet determination took root: if this person could achieve such recognition, perhaps I could too.</p>
+                    
+                    <h3 className="text-lg font-medium mt-6 mb-3">The Beautiful Obsession</h3>
+                    
+                    <p className="mb-1 mt-1">What followed was my first taste of true obsession—a focused dedication that transformed my approach to education. The Nepal government curriculum suddenly felt like merely a foundation rather than a ceiling.</p>
+                    
+                    <p className="mb-1 mt-1">I immersed myself in SAT preparation, expanded my English writing abilities beyond basic proficiency, and methodically researched every aspect of the American college application process. Each night after completing my regular schoolwork, I'd dive into this parallel education—learning about recommendation letters, personal statements, and the nuanced differences between these prestigious institutions.</p>
+                    
+                    <p className="mb-1 mt-1">My first SAT attempt yielded a 1380—<span className="italic">kasto niraasha lagyo</span>—what disappointment. But failure simply meant another opportunity to improve. The second attempt: 1510. Subject tests followed: Mathematics 780, Physics 730. With minimal TOEFL preparation (perhaps an excess of confidence), I scored 113.</p>
+                    
+                    <h3 className="text-lg font-medium mt-6 mb-3">Finding Purpose Beyond Admission</h3>
+                    
+                    <p className="mb-1 mt-1">Princeton ranked first in my dreams, primarily because of my passion for economics and international development. But when Dartmouth—my second choice—offered admission, I recognized it as the ideal environment for my growth.</p>
+                    
+                    <p className="mb-1 mt-1">The journey from Dhangadhi to Hanover represented more than geographical distance—it spanned cultural worlds, educational systems, and personal transformation. Navigating this path required not just academic preparation but emotional resilience and cultural adaptability.</p>
+                    
+                    <h3 className="text-lg font-medium mt-6 mb-3">The Foundations of Success</h3>
+                    
+                    <p className="mb-1 mt-1">None of this would have been possible without two essential pillars:</p>
+                    
+                    <p className="mb-1 mt-1">My parents, whose unwavering support manifested in both emotional encouragement and practical sacrifice. In a society where educational paths are often predetermined, they embraced my unconventional ambitions with open hearts.</p>
+                    
+                    <p className="mb-1 mt-1">And my dearest Taba..</p>
+                    
+                    <h3 className="text-lg font-medium mt-6 mb-3">Reflections on Transformation</h3>
+                    
+                    <p className="mb-1 mt-1">Looking back from my current vantage point, I see how this journey shaped not just my educational path but my approach to challenges. The process of getting to Dartmouth taught me more about determination, research methodology, and self-belief than perhaps any formal education could.</p>
+                    
+                    <p className="mb-1 mt-1">When people ask how a kid from Dhangadhi ended up at an Ivy League institution, the simple answer is through hard work and luck. But the deeper truth involves cultural bridge-building, intellectual curiosity, and the courage to envision possibilities beyond the visible horizon.</p>
+                    
+                    <p className="mb-1 mt-1">This story remains a work in progress—just as I continue evolving through each new chapter of my professional and personal life.</p>
+                    
+                    <p className="italic">To be continued...</p>
+                </div>
+
+                <p className="mb-2">
+                    About the college: <a href="https://www.dartmouth.edu" className="text-blue-600 hover:underline">Dartmouth College</a> is a private Ivy League research university in Hanover, New Hampshire, United States. Established in 1769 by Eleazar Wheelock, it is the ninth-oldest institution of higher education in the United States and one of the nine colonial colleges chartered before the American Revolution. 
+                </p>
+            </section>
+        </div>
+    )
+}
+
+================
+File: app/dartmouth/world-map-section.tsx
+================
+// app/components/dartmouth/world-map-section.tsx
+"use client";
+
+import WorldMap from "../../components/ui/world-map";
+import { motion } from "motion/react";
+import React from "react";
+
+
+export default function WorldMapSection() {
+  return (
+    <div className=" py-2 dark:bg-[--background] w-full">
+      <div className="max-w-7xl mx-auto text-center">
+        <p className="text-[--prose-text] font-bold text-xl md:text-4xl">
+          Dhangadhi →{" "}
+          <span className="text-[--prose-dartmouth]">
+            {"Dartmouth".split("").map((word, idx) => (
+              <motion.span
+                key={idx}
+                className="inline-block"
+                initial={{ x: -10, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.02, delay: idx * 0.04 }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </span>
+        </p>
+        <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
+        From a small town in Farwest Nepal to Dartmouth College. 
+        </p>
+      </div>
+      <WorldMap
+        dots={[
+          {
+            start: { lat: 26.6667, lng: 84.36, label: "Dhangadhi" }, // Dhangadhi, Nepal
+            end: { lat: 47.1023, lng: -71.2901, label: "Hanover" }, // Hanover, NH, USA
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+================
+File: app/essays/[slug]/page.tsx
+================
+// app/blog/[slug]/page.tsx
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { CustomMDX } from "../../../components/mdx";
+import { formatDate, getBlogPosts } from "../../../lib/posts";
+import { metaData } from "../../config";
+
+export async function generateStaticParams() {
+  let posts = getBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}): Promise<Metadata | undefined> {
+  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  if (!post) {
+    return;
+  }
+
+  let {
+    title,
+    publishedAt: publishedTime,
+    summary: description,
+    image,
+  } = post.metadata;
+  let ogImage = image
+    ? image
+    : `${metaData.baseUrl}/og?title=${encodeURIComponent(title)}`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      publishedTime,
+      url: `${metaData.baseUrl}/blog/${post.slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
+export default function Blog({ params }) {
+  let post = getBlogPosts().find((post) => post.slug === params.slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <section>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.metadata.title,
+            datePublished: post.metadata.publishedAt,
+            dateModified: post.metadata.publishedAt,
+            description: post.metadata.summary,
+            image: post.metadata.image
+              ? `${metaData.baseUrl}${post.metadata.image}`
+              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+            url: `${metaData.baseUrl}/blog/${post.slug}`,
+            author: {
+              "@type": "Person",
+              name: metaData.name,
+            },
+          }),
+        }}
+      />
+      <h1 className="title mb-3 font-medium text-2xl tracking-tight">
+        {post.metadata.title}
+      </h1>
+      <div className="flex justify-between items-center mt-2 mb-8 text-medium">
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          {formatDate(post.metadata.publishedAt)}
+        </p>
+      </div>
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
+        <CustomMDX source={post.content} />
+      </article>
+    </section>
+  );
+}
+
+================
+File: app/essays/interactive-grid.tsx
+================
+// app/essays/interactive-grid.tsx
+"use client";
+
+import { InteractiveGridPattern } from "../../components/ui/interactive-grid-pattern";
+import { cn } from "../../lib/utils";
+import React from "react";
+
+interface InteractiveGridProps {
+    children: React.ReactNode;
+  }
+  
+
+export function InteractiveGrid( {children}: InteractiveGridProps) {
+  return (
+    <div className="relative flex h-full w-full flex-col items-left justify-center rounded-lg bg-background mb-2">
+      
+      <div className="relative z-20">  {/* Add this wrapper with z-10 */}
+        {children}
+      </div>
+
+      <InteractiveGridPattern
+        className={cn(
+            "",
+          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+        )}
+        width={20}
+        height={20}
+        squares={[80, 80]}
+        squaresClassName="hover:fill-primary/20 pointer-events-none"
+      />
+    </div>
+  );
+}
+
+================
+File: app/essays/page.tsx
+================
+// app/blog/page.tsx
+import Link from "next/link";
+import { formatDate, getBlogPosts } from "../../lib/posts";
+import {InteractiveGrid} from "../essays/interactive-grid";
+import React from "react";
+
+export const metadata = {
+  title: "Essays",
+  description: "Essasy by Nitesh Pant",
+};
+
+export default function BlogPosts() {
+  let allBlogs = getBlogPosts();
+
+  return (
+    <section>
+      
+        <InteractiveGrid>
+        <div>
+        <h1 className="mb-2 z-10 whitespace-pre-wrap tracking-tighter text-2xl font-medium tracking-tight text-foreground mt-2">
+        Essays
+          </h1>
+            <h2 className="mb-6 z-10 text-l text-foreground">by Nitesh</h2>
+          
+
+          <p className="z-10 text-foreground italic">If stuck, start here :</p>
+          <p className="mb-4 z-10">
+            My story to{" "}
+            <a 
+              href="/dartmouth" 
+              className="text-foreground hover:underline"
+            >
+              Dartmouth
+            </a>
+          </p>
+      </div>
+      <div>
+        {allBlogs
+          .sort((a, b) => {
+            if (
+              new Date(a.metadata.publishedAt) >
+              new Date(b.metadata.publishedAt)
+            ) {
+              return -1;
+            }
+            return 1;
+          })
+          .map((post) => (
+            <Link
+              key={post.slug}
+              className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
+              href={`/essays/${post.slug}`}
+            >
+              <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <p className="text-[--prose-text] dark:text-white tracking-tight">
+                  {post.metadata.title}
+                </p>
+                <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
+                  {formatDate(post.metadata.publishedAt, false)}
+                </p>
+              </div>
+            </Link>
+          ))}
+      </div>
+
+      </InteractiveGrid>
+    </section>
+  );
+}
+
+================
+File: app/feed/[format]/route.ts
+================
+import { Feed } from "feed";
+import { getBlogPosts } from "../../../lib/posts";
+import { metaData } from "../../config";
+import { NextResponse } from "next/server";
+
+export async function generateStaticParams() {
+  return [
+    { format: "rss.xml" },
+    { format: "atom.xml" },
+    { format: "feed.json" },
+  ];
+}
+
+export async function GET(
+  _: Request,
+  { params }: { params: { format: string } }
+) {
+  const { format } = params;
+  const validFormats = ["rss.xml", "atom.xml", "feed.json"];
+
+  if (!validFormats.includes(format)) {
+    return NextResponse.json(
+      { error: "Unsupported feed format" },
+      { status: 404 }
+    );
+  }
+
+  const BaseUrl = metaData.baseUrl.endsWith("/")
+    ? metaData.baseUrl
+    : `${metaData.baseUrl}/`;
+
+  const feed = new Feed({
+    title: metaData.title,
+    description: metaData.description,
+    id: BaseUrl,
+    link: BaseUrl,
+    copyright: `All rights reserved ${new Date().getFullYear()}, ${
+      metaData.title
+    }`,
+    generator: "Feed for Node.js",
+    feedLinks: {
+      json: `${BaseUrl}feed.json`,
+      atom: `${BaseUrl}atom.xml`,
+      rss: `${BaseUrl}rss.xml`,
+    },
+  });
+
+  const allPosts = await getBlogPosts();
+
+  allPosts.forEach((post) => {
+    const postUrl = `${BaseUrl}blog/${post.slug}`;
+    const categories = post.metadata.tags
+      ? post.metadata.tags.split(",").map((tag) => tag.trim())
+      : [];
+
+    feed.addItem({
+      title: post.metadata.title,
+      id: postUrl,
+      link: postUrl,
+      description: post.metadata.summary,
+      category: categories.map((tag) => ({
+        name: tag,
+        term: tag,
+      })),
+      date: new Date(post.metadata.publishedAt),
+    });
+  });
+
+  const responseMap: Record<string, { content: string; contentType: string }> =
+    {
+      "rss.xml": { content: feed.rss2(), contentType: "application/xml" },
+      "atom.xml": { content: feed.atom1(), contentType: "application/xml" },
+      "feed.json": { content: feed.json1(), contentType: "application/json" },
+    };
+
+  const response = responseMap[format];
+
+  return new NextResponse(response.content, {
+    headers: {
+      "Content-Type": response.contentType,
+    },
+  });
+}
+
+================
+File: app/og/route.tsx
+================
+import { ImageResponse } from "next/og";
+import { metaData } from "../config";
+
+export function GET(request: Request) {
+  let url = new URL(request.url);
+  let title = url.searchParams.get("title") || metaData.title;
+
+  return new ImageResponse(
+    (
+      <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
+        <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
+          <h2 tw="flex flex-col text-4xl font-bold tracking-tight text-left">
+            {title}
+          </h2>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  );
+}
+
+================
+File: app/projects/[slug]/page.tsx
+================
+import React from "react";
+import { notFound } from "next/navigation";
+import { projects } from "../project-data";
+import { getProjectContent } from "../project";
+import type { Metadata } from "next";
+import Link from "next/link";
+
+interface Props {
+  params: {
+    slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = projects.find(
+    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+  );
+
+  if (!project) {
+    return {
+      title: 'Project Not Found',
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+  };
+}
+
+export default async function ProjectPage({ params }: Props) {
+  const project = projects.find(
+    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+  );
+
+  if (!project) {
+    notFound();
+  }
+
+  const content = await getProjectContent(params.slug);
+
+  if (!content) {
+    notFound();
+  }
+
+  return (
+    <article className="prose prose-neutral dark:prose-invert">
+      <Link 
+        href="/projects"
+        className="text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400"
+      >
+        ← Back to Projects
+      </Link>
+      
+      <div className="space-y-8 mt-6">
+        <h1 className="text-3xl font-bold tracking-tight">{project.title}</h1>
+        
+        <div className="flex items-center space-x-4">
+          <span className="text-neutral-600 dark:text-neutral-400">
+            {project.year}
+          </span>
+          <a 
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Visit Project →
+          </a>
+        </div>
+
+        <div className="prose prose-neutral dark:prose-invert">
+          {content}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.title.toLowerCase().replace(/\s+/g, '-'),
+  }));
+}
+
+================
+File: app/projects/content/arthex.mdx
+================
+---
+title: "arthex"
+---
+
+AI powered earnings day trading assistant - earn on earnings.
+
+Visit the project at [arthex.io](https://arthex.io/)
+
+Core idea:
+ARTHEX (Analyzes Real-Time Holdings EXpertly) is an automated earnings announcement analysis system designed for part-time investors. The application helps users monitor, identify, and act on earnings-related trading opportunities through three core functions: real-time monitoring of earnings calendars and market data, intelligent analysis of trading opportunities using historical patterns and AI insights, and decision support tools for executing trades. Built with Next.js and modern web technologies, ARTHEX features a responsive dashboard interface, real-time data updates, and AI-powered analysis to help investors make informed decisions around earnings announcements while minimizing manual research and monitoring.
+
+#### For the investors:
+
+## ARTHEX: Unlock Alpha in Earnings Season. Institutional-Grade Insights, Finally Accessible to All.
+
+Every quarter, billions are in play as earnings reports drive market volatility. For too long, individual investors have been forced to navigate this critical period at a distinct disadvantage – relying on fragmented data and lagging indicators while institutions leverage sophisticated, real-time analysis. The impact? Missed opportunities and misjudged risks during earnings can easily erode portfolio gains by double-digit percentages annually. We've experienced this firsthand, losing significant capital after trusting a misleading headline about "40% earnings improvement" – only to discover it meant losses had merely decreased from -$0.7 to -$0.4 per share.
+That's why we built ARTHEX.
+
+### The Core Problem: Information Asymmetry Costs Retail Investors
+Wall Street's analysts have dedicated teams and expensive tools to extract signal from noise in earnings data instantly. Individual investors are left with hours of manual work, often leading to late decisions, missed trades, and suboptimal returns. This isn't just inefficient; it's a fundamental market imbalance that's costing retail investors real money.
+
+### ARTHEX: The Intelligent Solution. Leveling the Playing Field.
+
+Imagine equipping every retail investor with the analytical power of a top-tier hedge fund, at a fraction of the cost. ARTHEX is that power. Our AI-driven platform delivers:
+- Predictive Monitoring: Real-time tracking of earnings events and pre-emptive analysis of market sentiment and historical patterns to anticipate price movements before they happen.
+- Alpha-Generating Insights: AI algorithms designed to identify statistically significant trading opportunities and quantify risk with unparalleled precision.
+- Actionable Intelligence, Instantly: Clear, concise, and prioritized insights delivered in seconds – no more information overload, just pure signal.
+
+### A Billion-Dollar Market Opportunity
+
+### Why Now?
+With the rise of retail investing, there's never been a greater need for tools that bridge the information gap between institutional and individual investors. ARTHEX isn't about automated trading – it's about empowering fundamental investors with the right information at the right time.
+
+### Vision
+We're building more than just an analysis tool. Our roadmap includes a dedicated community platform where investors can share insights, discuss specific stocks, and collaborate on analysis – all organized by ticker symbol for focused, meaningful discussion.
+
+## ARTHEX: Because making informed investment decisions shouldn't require a Bloomberg terminal or a full-time commitment.
+
+================
+File: app/projects/content/devdash-labs.mdx
+================
+---
+title: "DevDash Labs"
+---
+
+[DevDash Labs](https://devdashlabs.com/) is an AI research and development company dedicated to making artificial intelligence work for businesses of all sizes.
+
+We're a team of researchers, engineers, and business strategists who believe that implementing AI shouldn't be complicated, expensive, or slow. Our approach is simple: we do the research and experimentation in-house first, then help you implement proven solutions that deliver real value. Our services sit at the intersection of digital transformation and technical consulting, supported by our in-house research and product development experience.
+
+We help businesses with:
+- Capacity Enhancement: Implementing GenAI workflows, improving organizational efficiency, and providing AI/ML strategy consulting
+- Product Improvement: Integrating AI features, modernizing existing products, and augmenting technical teams
+- Product Development: Building end-to-end products with cross-functional expertise and implementation support
+
+We've put these capabilities to work across industries: helping SaaS companies automate customer support with AI chatbots in weeks not months, enabling financial services firms to process documents intelligently, and working with healthcare providers to streamline patient care workflows. From startups building their first AI MVP to enterprises scaling their AI capabilities, we've delivered solutions that create measurable business impact.
+
+What makes us different? Wge're researchers who love building products. We've built our own AI products like Luna (enterprise chatbot) and Arthex (AI-powered financial analysis tool). This means when you work with us, we're not experimenting with your resources - we're implementing solutions we've already tested and refined.
+
+For startups and founders, we offer free technical consulting because we believe in supporting the entrepreneurial community. Whether you need help building an MVP, integrating AI features, or developing an entire product, our global team is here to support you 24/7.
+
+Let's have a conversation about what AI can do for your business. Reach me directly at nitesh.pant@devdashlabs.com.
+
+Visit the project at [DevDash Labs](https://devdashlabs.com/)
+
+================
+File: app/projects/content/luna.mdx
+================
+---
+title: "Luna"
+---
+
+Chatbot with AI capabilities, built on enterprise-grade, for SMBs; flexible and nimble to be integrated anywhere.
+
+Visit the project at [Luna Demo](https://devdashlabs.com/luna-demo)
+
+To get a free month long trail, please email me and I'll set it up.
+
+================
+File: app/projects/content/nova-hospital-census-app.mdx
+================
+---
+title: "Nova Hospital Census app"
+---
+
+Simple, open-source web-based census app optimized for mobile devices. Daily patient census taking and dashboard analytics.
+
+Visit the project at [GitHub](https://github.com/niteshpant99/nova-census-app)
+
+================
+File: app/projects/page.tsx
+================
+// app/projects/page.tsx
+import React from "react";
+import type { Metadata } from "next";
+import { projects } from "./project-data";
+import Link from "next/link";  // Added this import
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "My Projects",
+};
+
+export default function Projects() {
+  return (
+    <section>
+      <h1 className="mb-8 text-2xl font-medium tracking-tight">Projects</h1>
+      <div className="space-y-6">
+        {projects.map((project, index) => (
+          <div key={index} className="space-y-2">
+          <Link  // Changed from <a> to <Link>
+            key={index}
+            href={`/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}`}  // Changed from href={project.url}
+            className="block group hover:opacity-80 transition-opacity duration-200"
+          >
+            <div className="flex flex-col">
+              <div className="w-full flex justify-between items-baseline">
+                <span className="text-[--prose-text] font-medium tracking-tight">
+                  {project.title}
+                </span>
+                <span className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm">
+                  {project.year}
+                </span>
+                
+              </div>
+              <p className="prose prose-neutral dark:prose-invert pt-3">
+                {project.description}
+              </p>
+              </div>
+          </Link>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+          >
+            <FaArrowUpRightFromSquare className="mr-1" size={14} /> Explore
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+================
+File: app/projects/project-data.tsx
+================
+export interface Project {
+  title: string;
+  year: number;
+  description: string;
+  url: string;
+}
+
+export const projects: Project[] = [
+  {
+    title: "DevDash Labs",
+    year: 2024,
+    description:
+      "Building an AI Research & Development company, with an aim to empower SMBs with AI agents.",
+    url: "https://devdashlabs.com/",
+  },
+  {
+    title: "arthex",
+    year: 2024,
+    description:
+      "AI powered earnings day trading assistant - earn on earnings.",
+    url: "https://arthex.io/",
+  },
+  {
+    title: "Nova Hospital Census app",
+    year: 2025,
+    description:
+      "Simple, open-source web-based census app optimized for mobile devices. Daily patient census taking and dashboard analytics.",
+    url: "https://github.com/niteshpant99/nova-census-app",
+  },
+  {
+    title: "Luna",
+    year: 2024,
+    description:
+      "Chatbot with AI capabilities, built on enterprise-grade, for SMBs; flexible and nimble to be integrated anywhere.",
+    url: "https://devdashlabs.com/luna-demo",
+  },
+];
+
+================
+File: app/projects/project.ts
+================
+import path from 'path';
+import fs from 'fs';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import { projects } from '../projects/project-data';
+
+export async function getProjectContent(slug: string) {
+  const filePath = path.join(process.cwd(), 'app/projects/content', `${slug}.mdx`);
+  
+  try {
+    const source = fs.readFileSync(filePath, 'utf8');
+    const { content } = await compileMDX({
+      source,
+      options: { parseFrontmatter: true }
+    });
+    
+    return content;
+  } catch (error) {
+    return null;
+  }
+}
+
+================
+File: app/work/hercules/page.tsx
+================
+// app/work/hercules/page.tsx
+'use client';
+import React, { useMemo, useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Switch } from '../../../components/ui/switch';
+import { Button } from "../../../components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
+import { HelpCircle } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
+const MONTHLY_COSTS = 29780.51;
+const MIN_PRACTITIONERS = 10;
+const MAX_PRACTITIONERS = 200;
+const STEP_PRACTITIONERS = 10;
+const MIN_CASES = 0;
+const MAX_ADDITIONAL_CASES = 200;
+const STEP_CASES = 25;
+
+interface PricingConfig {
+  baseFee: number;
+  caseRate: number;
+  minimumCases: number;
+  usePractitionerFee: boolean;
+}
+
+interface SimulationResult {
+  totalRevenue: number;
+  baseRevenue: number;
+  overageRevenue: number;
+  margin: number;
+  averageRevenuePerCase: number;
+  breaksEven: boolean;
+  profitability: 'high-loss' | 'loss' | 'breakeven' | 'profit' | 'high-profit';
+}
+
+const PricingSimulator = () => {
+  const [config, setConfig] = useState<PricingConfig>({
+    baseFee: 150,
+    caseRate: 2,
+    minimumCases: 200,
+    usePractitionerFee: true
+  });
+
+  const [activeView, setActiveView] = useState('matrix');
+
+  // Generate ranges for practitioners and cases
+  const practitioners = useMemo(() => 
+    Array.from(
+      { length: (MAX_PRACTITIONERS - MIN_PRACTITIONERS) / STEP_PRACTITIONERS + 1 },
+      (_, i) => MIN_PRACTITIONERS + (i * STEP_PRACTITIONERS)
+    ),
+    []
+  );
+
+  const additionalCases = useMemo(() =>
+    Array.from(
+      { length: (MAX_ADDITIONAL_CASES - MIN_CASES) / STEP_CASES + 1 },
+      (_, i) => MIN_CASES + (i * STEP_CASES)
+    ),
+    []
+  );
+
+  // Calculate revenue for a given scenario
+  const calculateRevenue = (numPractitioners: number, extraCasesPerPractitioner: number): SimulationResult => {
+    const totalCases = numPractitioners * (config.minimumCases + extraCasesPerPractitioner);
+    
+    let baseRevenue = 0;
+    if (config.usePractitionerFee) {
+      baseRevenue = numPractitioners * config.baseFee;
+    }
+    
+    const caseRevenue = totalCases * config.caseRate;
+    const totalRevenue = baseRevenue + caseRevenue;
+    const margin = ((totalRevenue - MONTHLY_COSTS) / totalRevenue) * 100;
+    
+    const profitability = (() => {
+      const profit = totalRevenue - MONTHLY_COSTS;
+      if (profit < -MONTHLY_COSTS * 0.5) return 'high-loss';
+      if (profit < 0) return 'loss';
+      if (Math.abs(profit) < 1000) return 'breakeven';
+      if (profit > MONTHLY_COSTS * 0.5) return 'high-profit';
+      return 'profit';
+    })();
+
+    return {
+      totalRevenue,
+      baseRevenue,
+      overageRevenue: caseRevenue,
+      margin,
+      averageRevenuePerCase: totalRevenue / totalCases,
+      breaksEven: totalRevenue >= MONTHLY_COSTS,
+      profitability
+    };
+  };
+
+  // Generate data for matrix view
+  const matrixData = useMemo(() => 
+    practitioners.map(practitioner => ({
+      practitioner,
+      revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
+    })),
+    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee]
+
+  );
+
+  // Generate data for breakeven analysis
+  const breakevenData = useMemo(() => {
+    return practitioners.map(practitioner => {
+      let requiredCasesPerPractitioner = 0;
+      
+      if (config.usePractitionerFee) {
+        // Calculate required cases considering both practitioner fee and case rate
+        const monthlyPractitionerRevenue = practitioner * config.baseFee;
+        const remainingRevenue = Math.max(0, MONTHLY_COSTS - monthlyPractitionerRevenue);
+        requiredCasesPerPractitioner = remainingRevenue / (practitioner * config.caseRate);
+      } else {
+        // Calculate required cases with just case rate
+        requiredCasesPerPractitioner = MONTHLY_COSTS / (practitioner * config.caseRate);
+      }
+      
+      return {
+        practitioners: practitioner,
+        requiredCasesPerPractitioner: Math.max(0, Math.round(requiredCasesPerPractitioner)),
+      };
+    });
+  }, [practitioners, config.usePractitionerFee, config.baseFee, config.caseRate]);
+
+  const getRevenueColor = (result: SimulationResult) => {
+    const colors = {
+      'high-loss': 'bg-red-300 dark:bg-red-800/50',
+      'loss': 'bg-red-100 dark:bg-red-900/50',
+      'breakeven': 'bg-blue-100 dark:bg-blue-900/50',
+      'profit': 'bg-green-100 dark:bg-green-900/50',
+      'high-profit': 'bg-green-300 dark:bg-green-800/50'
+    };
+    return colors[result.profitability];
+  };
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
+  const formatPercent = (value: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'percent',
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(value / 100);
+  };
+
+  const InstructionsDialog = () => {
+    return (
+        <Dialog>
+        <DialogTrigger asChild>
+            <Button variant="secondary" size="icon" className="absolute top-4 right-4 bg-[--prose-link-decoration] hover:bg-[--prose-link-decoration-hover] shadow-lg hover:shadow-xl transition-shadow">
+            <HelpCircle className="h-10 w-10" />
+            </Button>
+        </DialogTrigger>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+            <DialogTitle>How to Use This Simulator</DialogTitle>
+            </DialogHeader>
+            
+            <div className="space-y-6 py-4">
+            <div className="space-y-3">
+                <h3 className="font-medium">Configuration Options:</h3>
+                <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+                <li><span className="font-medium text-foreground">Per Practitioner Fee</span>: Toggle and set a monthly fee charged per practitioner</li>
+                <li><span className="font-medium text-foreground">Price Per Case</span>: Set the fee charged for each anesthesia case</li>
+                <li><span className="font-medium text-foreground">Minimum Cases</span>: Set the minimum number of cases included in the base price</li>
+                </ul>
+            </div>
+
+            <div className="space-y-3">
+                <h3 className="font-medium">Understanding the Views:</h3>
+                <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+                <li>
+                    <span className="font-medium text-foreground">Revenue Matrix</span>: Shows total monthly revenue and margins for different combinations of:
+                    <ul className="list-circle pl-4 mt-1 space-y-1">
+                    <li>Number of practitioners (rows)</li>
+                    <li>Additional cases beyond minimum (columns)</li>
+                    </ul>
+                </li>
+                <li>
+                    <span className="font-medium text-foreground">Breakeven Analysis</span>: Shows how many cases per practitioner are needed to reach the breakeven point ($29,781) at different practice sizes
+                </li>
+                </ul>
+            </div>
+            </div>
+        </DialogContent>
+        </Dialog>
+    );
+    };
+
+  return (
+       
+        <div className="relative w-full">
+            <div className="flex justify-center align-center">
+                <h1 className="text-xl mb-2">Hercules Pricing Analysis Tool</h1>
+            </div>
+            
+          {/* Container that breaks out of the default layout constraints */}
+          <div className="absolute left-1/2 right-1/2 -mx-[50vw] w-screen">
+            <div className="relative left-1/2 -translate-x-1/2 px-6 w-full max-w-fit">
+              {/* Configuration Card */}
+              <Card className="mb-8 shadow-md">
+              <InstructionsDialog />
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xl font-semibold">Pricing Configuration</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="baseFee" className="text-sm font-medium">
+                        Per Practitioner Fee
+                      </Label>
+                      <div className="flex items-center gap-3">
+                        <Switch
+                          checked={config.usePractitionerFee}
+                          onCheckedChange={checked => setConfig(prev => ({ ...prev, usePractitionerFee: checked }))}
+                          className="flex-shrink-0"
+                        />
+                        <Input
+                          id="baseFee"
+                          type="number"
+                          value={config.baseFee}
+                          onChange={e => setConfig(prev => ({ ...prev, baseFee: Number(e.target.value) }))}
+                          disabled={!config.usePractitionerFee}
+                          className="w-full"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="caseRate" className="text-sm font-medium">
+                        Price Per Case
+                      </Label>
+                      <Input
+                        id="caseRate"
+                        type="number"
+                        value={config.caseRate}
+                        onChange={e => setConfig(prev => ({ ...prev, caseRate: Number(e.target.value) }))}
+                        className="w-full"
+                      />
+                    </div>
+    
+                    <div className="space-y-2">
+                      <Label htmlFor="minimumCases" className="text-sm font-medium">
+                        Minimum Cases
+                      </Label>
+                      <Input
+                        id="minimumCases"
+                        type="number"
+                        value={config.minimumCases}
+                        onChange={e => setConfig(prev => ({ ...prev, minimumCases: Number(e.target.value) }))}
+                        className="w-full"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+    
+              {/* Tabs Container */}
+              <div className="space-y-6">
+                <Tabs value={activeView} onValueChange={setActiveView} className="w-full">
+                  <TabsList className="w-full sm:w-auto">
+                    <TabsTrigger value="matrix" className="flex-1 sm:flex-none">Revenue Matrix</TabsTrigger>
+                    <TabsTrigger value="breakeven" className="flex-1 sm:flex-none">Breakeven Analysis</TabsTrigger>
+                    
+                  </TabsList>
+     
+    
+                  <TabsContent value="matrix" className="mt-6">
+                    <Card className="shadow-md overflow-hidden">
+                      <CardContent className="p-0">
+                        <div className="overflow-x-auto">
+                            <table className="w-full border-collapse">
+                              <thead>
+                                <tr>
+                                  <th className="p-3 border bg-muted/50 text-left font-medium">
+                                    Practitioners
+                                  </th>
+                                  {additionalCases.map(cases => (
+                                    <th key={cases} className="p-3 border bg-muted/50 text-center font-medium">
+                                      <span>+{cases} cases</span>
+                                      <span className="block text-xs text-muted-foreground">
+                                        (Total: {config.minimumCases + cases})
+                                      </span>
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {matrixData.map(({ practitioner, revenues }) => (
+                                  <tr key={practitioner}>
+                                    <th className="p-3 border text-left font-medium bg-muted/50">
+                                      {practitioner}
+                                    </th>
+                                    {revenues.map((result, idx) => (
+                                      <td
+                                        key={idx}
+                                        className={`p-3 border text-center transition-colors ${getRevenueColor(result)}`}
+                                      >
+                                        <div className="font-medium">
+                                          {formatCurrency(result.totalRevenue)}
+                                        </div>
+                                        <div className="text-sm text-muted-foreground">
+                                          {formatPercent(result.margin)} margin
+                                        </div>
+                                      </td>
+                                    ))}
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+    
+                  <TabsContent value="breakeven" className="mt-6">
+                    <Card className="shadow-md">
+                      <CardContent className="p-6">
+                        <div className="flex justify-center w-full overflow-x-auto">
+                            <div className="min-w-[800px] h-auto"> {/* Fixed height container */}
+                                <LineChart
+                                width={800}
+                                height={400}
+                                data={breakevenData}
+                                margin={{ top: 20, right: 30, left: 50, bottom: 30 }}
+                                >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis 
+                                    dataKey="practitioners"
+                                    type="number"
+                                    domain={[MIN_PRACTITIONERS, MAX_PRACTITIONERS]}
+                                    tickCount={10}
+                                />
+                                <YAxis
+                                    type="number"
+                                    domain={[0, 'dataMax + 20']}
+                                    tickCount={8}
+                                />
+                                <Tooltip
+                                    formatter={(value: number) => Math.round(value)}
+                                    labelFormatter={(value) => `${value} practitioners`}
+                                />
+                                <Legend />
+                                <Line
+                                    type="monotone"
+                                    dataKey="requiredCasesPerPractitioner"
+                                    name="Required Cases per Practitioner"
+                                    stroke="#8884d8"
+                                    strokeWidth={2}
+                                    dot={{ r: 3 }}
+                                    activeDot={{ r: 5 }}
+                                    isAnimationActive={false} // Helps with initial rendering
+                                />
+                                </LineChart>
+                            </div>
+                            </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+    
+                {/* Legend */}
+                <div className="text-sm text-muted-foreground space-y-1.5 p-4 bg-muted/10 rounded-lg">
+                  <p>• Break-even point: {formatCurrency(MONTHLY_COSTS)}</p>
+                  <p>• Dark green: Highly profitable ({'>'}50% above break-even)</p>
+                  <p>• Light green: Profitable</p>
+                  <p>• Blue: Near break-even (±$1,000)</p>
+                  <p>• Light red: Unprofitable</p>
+                  <p>• Dark red: Highly unprofitable ({'>'}50% below break-even)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+export default PricingSimulator;
+
+================
+File: app/work/page.tsx
+================
+import React from "react";
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Work",
+  description: "Work done by Nitesh Pant",
+};
+
+export default function Work() {
+  return (
+    <section>
+      <h1 className="mb-2 text-2xl font-medium tracking-tight">Work</h1>
+      <p>A selection of work I've done</p>
+      <h2 className="mb-4 pt-4 text-xl">alkemy platform for Roland Berger</h2>
+      <p className="mb-2">alkemy is a platform that allows Roland Berger to model any chemical asset in the world based on the technology used and raw material inputs</p>
+      <h2 className="mb-2 pt-4 text-xl">Hercules Transformation</h2>
+      <a 
+            href={`/work/hercules`}
+            rel="noopener noreferrer"
+            className="text-l text-blue-500 hover:text-blue-600 mb-4 pl-1 pt-1"
+          >
+          View pricing estimations →
+          </a>
+      
+      <p className="mb-2">Created a GTM framework for Hercules, a healthtech SaaS. From an updated brand identity, to ICP, price modeling, to crafting an online presence - did it all.</p>
+      <h2 className="mb-4 pt-4 text-xl">DevDash Metamorphosis</h2>
+      <p className="mb-2">Strategic pivot of DevDash from a general IT consulting company to an AI research and development company</p>
+      <h2 className="mb-4 pt-4 text-xl">Novodaya</h2>
+      <h2 className="mb-4 pt-4 text-xl">Luna</h2>
+      <h2 className="mb-4 pt-4 text-xl">Safka</h2>
+      <h2 className="mb-4 pt-4 text-xl">Fun React Weekend gigs</h2>
+
+    </section>
+  );
+}
+
+================
+File: app/config.ts
+================
+export const metaData = {
+  baseUrl: "https://niteshpant.com/",
+  title: "Nitesh Pant",
+  name: "Nitesh",
+  ogImage: "/opengraph-image.png",
+  description:
+    "Portfolio page of Nitesh Pant. Half of the duo behind DevDash Labs. Former management consultant. Dartmouth College educated political economist.",
+};
+
+export const socialLinks = {
+  twitter: "https://x.com/niteshpant56",
+  github: "https://github.com/niteshpant99",
+  instagram: "https://www.instagram.com/",
+  linkedin: "https://www.linkedin.com/in/niteshpant22/",
+  email: "mailto:nitesh@niteshpant.com",
+};
+
+================
+File: app/error.tsx
+================
+"use client";
+
+import React from "react";
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
+  return (
+    <div>
+      <p>Oops! Something went wrong... maybe try refreshing?</p>
+    </div>
+  );
+}
+
+================
+File: app/global.css
+================
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background-color: #47a3f3;
+  color: #fefefe;
+}
+
+@layer base {
+  :root {
+    /* Shadcn UI Variables */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+
+    /* Chart Colors */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+
+    /* Syntax Highlighting - Light Mode */
+    --sh-class: #2d5e9d;
+    --sh-identifier: #354150;
+    --sh-sign: #8996a3;
+    --sh-string: #007f7a;
+    --sh-keyword: #e02518;
+    --sh-comment: #a19595;
+    --sh-jsxliterals: #6266d1;
+    --sh-property: #e25a1c;
+    --sh-entity: #e25a1c;
+
+    /* Prose Theme - Light Mode */
+    --prose-text: #333333;
+    --prose-pre-bg: #F7F7F7;
+    --prose-link-decoration: #9CA3AF;
+    --prose-link-decoration-hover: #D4D4D4;
+    --prose-anchor-after: #D4D4D4;
+    --prose-dartmouth: #00693e;
+  }
+
+  .dark {
+    /* Shadcn UI Variables - Dark */
+    --background: 173, 40%, 4%; 
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
+    /* Chart Colors - Dark */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Syntax Highlighting - Dark Mode */
+    --sh-class: #4c97f8;
+    --sh-identifier: white;
+    --sh-sign: #8996a3;
+    --sh-string: #0fa295;
+    --sh-keyword: #f47067;
+    --sh-comment: #a19595;
+    --sh-jsxliterals: #6266d1;
+    --sh-property: #e25a1c;
+    --sh-entity: #e25a1c;
+
+    /* Prose Theme - Dark Mode */
+    --prose-text: #e0e0e0;
+    --prose-pre-bg: #181818;
+    --prose-link-decoration: #6B7280;
+    --prose-link-decoration-hover: #9CA3AF;
+    --prose-anchor-after: #4B5563;
+    --prose-dartmouth: #00693e;
+  }
+}
+
+html {
+  min-width: 360px;
+}
+
+.prose {
+  @apply text-[--prose-text] dark:text-[--prose-text];
+}
+
+.prose .anchor {
+  @apply absolute invisible no-underline;
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose a {
+  @apply transition-all decoration-[--prose-link-decoration] dark:decoration-[--prose-link-decoration] underline-offset-2 decoration-[0.1em] font-normal text-[--prose-text] dark:text-[--prose-text];
+}
+
+.prose a:hover {
+  @apply dark:decoration-[--prose-link-decoration-hover] decoration-[--prose-link-decoration-hover];
+}
+
+.prose .anchor:after {
+  @apply text-[--prose-anchor-after] dark:text-[--prose-anchor-after];
+  content: "#";
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+.prose pre {
+  @apply bg-[--prose-pre-bg] dark:bg-[--prose-pre-bg] rounded-lg overflow-x-auto;
+}
+
+.prose code {
+  @apply px-1 py-0.5 rounded-lg;
+}
+
+.prose pre code {
+  @apply p-0;
+  border: initial;
+  line-height: 1.5;
+}
+
+.prose code span {
+  @apply font-medium;
+}
+
+.prose img {
+  @apply m-0;
+}
+
+.prose h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-medium tracking-tight !important;
+}
+
+.prose strong {
+  @apply font-medium;
+}
+
+.prose > :first-child {
+  margin-top: 1.25em !important;
+  margin-bottom: 1.25em !important;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+input[type="text"],
+input[type="email"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.prose .tweet a {
+  text-decoration: inherit;
+  font-weight: 500;
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.prose .callout > p {
+  margin: 0 !important;
+}
+
+.title {
+  text-wrap: balance;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+================
+File: app/layout.tsx
+================
+// app/layout.tsx
+import "./global.css";
+import React from "react";
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Navbar } from "../components/nav";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Footer from "../components/footer";
+import { ThemeProvider } from "../components/theme-switch";
+import { metaData } from "./config";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(metaData.baseUrl),
+  title: {
+    default: metaData.title,
+    template: `%s | ${metaData.title}`,
+  },
+  description: metaData.description,
+  openGraph: {
+    images: metaData.ogImage,
+    title: metaData.title,
+    description: metaData.description,
+    url: metaData.baseUrl,
+    siteName: metaData.name,
+    locale: "en_US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    title: metaData.name,
+    card: "summary_large_image",
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
+};
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
+      <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href="/rss.xml"
+          title="RSS Feed"
+        />
+        <link
+          rel="alternate"
+          type="application/atom+xml"
+          href="/atom.xml"
+          title="Atom Feed"
+        />
+        <link
+          rel="alternate"
+          type="application/feed+json"
+          href="/feed.json"
+          title="JSON Feed"
+        />
+      </head>
+      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-2 lg:mt-8 mb-20 lg:mb-40">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="flex-auto min-w-0 mt-2 md:mt-6 flex flex-col px-6 sm:px-4 md:px-0 max-w-[640px] w-full">
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+================
+File: app/not-found.tsx
+================
+import type { Metadata } from "next";
+import React from "react";
+
+export const metadata: Metadata = {
+  title: "404",
+  description: "Error 404",
+};
+
+export default function NotFound() {
+  return (
+    <section>
+      <h1 className="font-medium text-2xl mb-8 tracking-tight">
+        404 - Page not found
+      </h1>
+      <p className="mb-4">
+        Oops! The page you're looking for doesn't seem to exist.
+      </p>
+    </section>
+  );
+}
+
+================
+File: app/page.tsx
+================
+import Image from "next/image";
+import { socialLinks } from "./config";
+import React from "react";
+
+export default function Page() {
+  return (
+    <section>
+      <a href={socialLinks.twitter} target="_blank">
+        <Image
+          src="/profile.jpg"
+          alt="Profile photo"
+          className="rounded-full bg-gray-100 block lg:mt-5 mt-0 lg:mb-5 mb-10 mx-auto sm:float-right sm:ml-5 sm:mb-5 grayscale hover:grayscale-0"
+          unoptimized
+          width={160}
+          height={160}
+          priority
+        />
+      </a>
+
+      <h1 className="mb-8 text-2xl font-medium tracking-tight">
+        Hello world! I am Nitesh Pant.
+      </h1>
+      <h2 className="text-[#00693e] dark:text-[#a5d75f]">I seek impact.</h2>
+
+      <div className="prose prose-neutral dark:prose-invert">
+        <p>
+          I'm the half duo of <a target="blank" href="https://devdashlabs.com">DevDash Labs</a>. 
+          I'm current creating <a target="blank" href="https://arthex.io">arthex</a>, an AI powered
+          earnings day stock analyzer to help retail traders earn on earnings.
+        </p>
+        <p>
+          I grew up in Nepal, went to Dartmouth College (studied economics and government), and worked as a management consultant. 
+          Visit my other site: <a href="https://niteshpant.com.np">niteshpant.com.np</a>! 
+        </p>
+        <p>
+          I started  DevDash Labs to provide research-backed AI solutions to SMBs and enterprises. At DevDash, we do the research so that our clients can focus on their core competencies - adding value to their customers. Connect with me <a href="mailto:nitesh.pant@devdashlabs.com">via email</a> to collaborate on projects. Plus points for fintech and AI products!
+        </p>
+        <p>
+          I love building products, creating amazing marketing ideas, thinking about philosophy (political economy), and bringing structure to madness. Talk to me about architecture and we will have a good convo. 
+        </p>
+      </div>
+    </section>
+  );
+}
+
+================
+File: app/robots.ts
+================
+import { metaData } from "./config";
+
+export default function robots() {
+  return {
+    rules: [
+      {
+        userAgent: "*",
+      },
+    ],
+    sitemap: `${metaData.baseUrl}/sitemap.xml`,
+  };
+}
+
+================
+File: app/sitemap.ts
+================
+import { MetadataRoute } from "next";
+import { getBlogPosts } from "../lib/posts";
+import { metaData } from "./config";
+
+const BaseUrl = metaData.baseUrl.endsWith("/")
+  ? metaData.baseUrl
+  : `${metaData.baseUrl}/`;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  let blogs = getBlogPosts().map((post) => ({
+    url: `${BaseUrl}blog/${post.slug}`,
+    lastModified: post.metadata.publishedAt,
+  }));
+
+  let routes = ["", "blog", "projects", "photos", "dartmouth"].map((route) => ({
+    url: `${BaseUrl}${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+
+  return [...routes, ...blogs];
+}
+
+================
+File: components/ui/apple-cards-carousel.tsx
+================
+"use client";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+  useContext,
+} from "react";
+import {
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconX,
+} from "@tabler/icons-react";
+import { cn } from "../../lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import Image, { ImageProps } from "next/image";
+import { useOutsideClick } from "../../hooks/use-outside-click";
+
+interface CarouselProps {
+  items: JSX.Element[];
+  initialScroll?: number;
+}
+
+type Card = {
+  src: string;
+  title: string;
+  category: string;
+  content: React.ReactNode;
+};
+
+export const CarouselContext = createContext<{
+  onCardClose: (index: number) => void;
+  currentIndex: number;
+}>({
+  onCardClose: () => {},
+  currentIndex: 0,
+});
+
+export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
+  const carouselRef = React.useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = React.useState(false);
+  const [canScrollRight, setCanScrollRight] = React.useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = initialScroll;
+      checkScrollability();
+    }
+  }, [initialScroll]);
+
+  const checkScrollability = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
+  const handleCardClose = (index: number) => {
+    if (carouselRef.current) {
+      const cardWidth = isMobile() ? 230 : 384; // (md:w-96)
+      const gap = isMobile() ? 4 : 8;
+      const scrollPosition = (cardWidth + gap) * (index + 1);
+      carouselRef.current.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+      setCurrentIndex(index);
+    }
+  };
+
+  const isMobile = () => {
+    return window && window.innerWidth < 768;
+  };
+
+  return (
+    <CarouselContext.Provider
+      value={{ onCardClose: handleCardClose, currentIndex }}
+    >
+      <div className="relative w-full">
+        <div
+          className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 scroll-smooth [scrollbar-width:none]"
+          ref={carouselRef}
+          onScroll={checkScrollability}
+        >
+          <div
+            className={cn(
+              "absolute right-0  z-[1000] h-auto  w-[5%] overflow-hidden bg-gradient-to-l"
+            )}
+          ></div>
+
+          <div
+            className={cn(
+              "flex flex-row justify-start gap-4 pl-4",
+              "max-w-7xl mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
+            )}
+          >
+            {items.map((item, index) => (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.5,
+                    delay: 0.2 * index,
+                    ease: "easeOut",
+                    once: true,
+                  },
+                }}
+                key={"card" + index}
+                className="last:pr-[5%] md:last:pr-[33%]  rounded-3xl"
+              >
+                {item}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end gap-2 mr-10">
+          <button
+            className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+          >
+            <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
+          </button>
+          <button
+            className="relative z-40 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center disabled:opacity-50"
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+          >
+            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
+          </button>
+        </div>
+      </div>
+    </CarouselContext.Provider>
+  );
+};
+
+export const Card = ({
+  card,
+  index,
+  layout = false,
+}: {
+  card: Card;
+  index: number;
+  layout?: boolean;
+}) => {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { onCardClose, currentIndex } = useContext(CarouselContext);
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    }
+
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  useOutsideClick(containerRef, () => handleClose());
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    onCardClose(index);
+  };
+
+  return (
+    <>
+      <AnimatePresence>
+        {open && (
+          <div className="fixed inset-0 h-screen z-50 overflow-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="bg-black/80 backdrop-blur-lg h-full w-full fixed inset-0"
+            />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              ref={containerRef}
+              layoutId={layout ? `card-${card.title}` : undefined}
+              className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit  z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
+            >
+              <button
+                className="sticky top-4 h-8 w-8 right-0 ml-auto bg-black dark:bg-white rounded-full flex items-center justify-center"
+                onClick={handleClose}
+              >
+                <IconX className="h-6 w-6 text-neutral-100 dark:text-neutral-900" />
+              </button>
+              <motion.p
+                layoutId={layout ? `category-${card.title}` : undefined}
+                className="text-base font-medium text-black dark:text-white"
+              >
+                {card.category}
+              </motion.p>
+              <motion.p
+                layoutId={layout ? `title-${card.title}` : undefined}
+                className="text-2xl md:text-5xl font-semibold text-neutral-700 mt-4 dark:text-white"
+              >
+                {card.title}
+              </motion.p>
+              <div className="py-10">{card.content}</div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      <motion.button
+        layoutId={layout ? `card-${card.title}` : undefined}
+        onClick={handleOpen}
+        className="rounded-3xl bg-gray-100 dark:bg-neutral-900 h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10"
+      >
+        <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
+        <div className="relative z-40 p-8">
+          <motion.p
+            layoutId={layout ? `category-${card.category}` : undefined}
+            className="text-white text-sm md:text-base font-medium font-sans text-left"
+          >
+            {card.category}
+          </motion.p>
+          <motion.p
+            layoutId={layout ? `title-${card.title}` : undefined}
+            className="text-white text-xl md:text-3xl font-semibold max-w-xs text-left [text-wrap:balance] font-sans mt-2"
+          >
+            {card.title}
+          </motion.p>
+        </div>
+        <BlurImage
+          src={card.src}
+          alt={card.title}
+          fill
+          className="object-cover absolute z-10 inset-0"
+        />
+      </motion.button>
+    </>
+  );
+};
+
+export const BlurImage = ({
+  height,
+  width,
+  src,
+  className,
+  alt,
+  ...rest
+}: ImageProps) => {
+  const [isLoading, setLoading] = useState(true);
+  return (
+    <Image
+      className={cn(
+        "transition duration-300",
+        isLoading ? "blur-sm" : "blur-0",
+        className
+      )}
+      onLoad={() => setLoading(false)}
+      src={src}
+      width={width}
+      height={height}
+      loading="lazy"
+      decoding="async"
+      blurDataURL={typeof src === "string" ? src : undefined}
+      alt={alt ? alt : "Background of a beautiful view"}
+      {...rest}
+    />
+  );
+};
+
+================
+File: components/ui/button.tsx
+================
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "../../lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Button.displayName = "Button"
+
+export { Button, buttonVariants }
+
+================
+File: components/ui/card.tsx
+================
+import * as React from "react"
+
+import { cn } from "../../app/lib/utils";
+
+const Card = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "rounded-xl border bg-card text-card-foreground shadow",
+      className
+    )}
+    {...props}
+  />
+))
+Card.displayName = "Card"
+
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props}
+  />
+))
+CardHeader.displayName = "CardHeader"
+
+const CardTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("font-semibold leading-none tracking-tight", className)}
+    {...props}
+  />
+))
+CardTitle.displayName = "CardTitle"
+
+const CardDescription = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+CardDescription.displayName = "CardDescription"
+
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
+
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+
+================
+File: components/ui/dialog.tsx
+================
+"use client"
+
+import * as React from "react"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { X } from "lucide-react"
+
+import { cn } from "../../app/lib/utils";
+
+const Dialog = DialogPrimitive.Root
+
+const DialogTrigger = DialogPrimitive.Trigger
+
+const DialogPortal = DialogPrimitive.Portal
+
+const DialogClose = DialogPrimitive.Close
+
+const DialogOverlay = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={cn(
+      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className
+    )}
+    {...props}
+  />
+))
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
+
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn(
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+))
+DialogContent.displayName = DialogPrimitive.Content.displayName
+
+const DialogHeader = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col space-y-1.5 text-center sm:text-left",
+      className
+    )}
+    {...props}
+  />
+)
+DialogHeader.displayName = "DialogHeader"
+
+const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className
+    )}
+    {...props}
+  />
+)
+DialogFooter.displayName = "DialogFooter"
+
+const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cn(
+      "text-lg font-semibold leading-none tracking-tight",
+      className
+    )}
+    {...props}
+  />
+))
+DialogTitle.displayName = DialogPrimitive.Title.displayName
+
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+DialogDescription.displayName = DialogPrimitive.Description.displayName
+
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+}
+
+================
+File: components/ui/input.tsx
+================
+import * as React from "react"
+
+import { cn } from "../../app/lib/utils";
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }
+
+================
+File: components/ui/interactive-grid-pattern.tsx
+================
+// components/ui/interactive-grid-pattern.tsx
+import { cn } from "../../lib/utils";
+import React, { useState } from "react";
+
+interface InteractiveGridPatternProps extends React.SVGProps<SVGSVGElement> {
+  width?: number;
+  height?: number;
+  squares?: [number, number];
+  className?: string;
+  squaresClassName?: string;
+}
+
+export function InteractiveGridPattern({
+  width = 40,
+  height = 40,
+  squares = [24, 24],
+  className,
+  squaresClassName,
+  ...props
+}: InteractiveGridPatternProps) {
+  const [horizontal, vertical] = squares;
+  const [hoveredSquare, setHoveredSquare] = useState<number | null>(null);
+
+  return (
+    <svg
+      width={width * horizontal}
+      height={height * vertical}
+      className={cn(
+        "absolute inset-0 h-full w-full border border-border",
+        className,
+      )}
+      {...props}
+    >
+      {Array.from({ length: horizontal * vertical }).map((_, index) => {
+        const x = (index % horizontal) * width;
+        const y = Math.floor(index / horizontal) * height;
+        return (
+          <rect
+            key={index}
+            x={x}
+            y={y}
+            width={width}
+            height={height}
+            className={cn(
+              "stroke-border transition-all duration-100 ease-in-out [&:not(:hover)]:duration-1000",
+              hoveredSquare === index ? "fill-muted" : "fill-transparent",
+              squaresClassName,
+            )}
+            onMouseEnter={() => setHoveredSquare(index)}
+            onMouseLeave={() => setHoveredSquare(null)}
+          />
+        );
+      })}
+    </svg>
+  );
+}
+
+================
+File: components/ui/label.tsx
+================
+"use client"
+
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "../../app/lib/utils";
+
+const labelVariants = cva(
+  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+)
+
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
+    VariantProps<typeof labelVariants>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(labelVariants(), className)}
+    {...props}
+  />
+))
+Label.displayName = LabelPrimitive.Root.displayName
+
+export { Label }
+
+================
+File: components/ui/meteors.tsx
+================
+"use client";
+
+import { useEffect, useState } from "react";
+import React from "react";
+
+import { cn } from "../../app/lib/utils";
+
+interface MeteorsProps extends React.HTMLAttributes<HTMLSpanElement> {
+  number?: number;
+}
+export const Meteors = ({ number = 20, ...props }: MeteorsProps) => {
+  const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>(
+    [],
+  );
+
+  useEffect(() => {
+    const styles = [...new Array(number)].map(() => ({
+      top: -5,
+      left: Math.floor(Math.random() * window.innerWidth) + "px",
+      animationDelay: Math.random() * 1 + 0.2 + "s",
+      animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
+    }));
+    setMeteorStyles(styles);
+  }, [number]);
+
+  return (
+    <>
+      {[...meteorStyles].map((style, idx) => (
+        // Meteor Head
+        <span
+          key={idx}
+          className={cn(
+            "pointer-events-none absolute left-1/2 top-1/2 size-0.5 rotate-[215deg] animate-meteor rounded-full bg-slate-500 shadow-[0_0_0_1px_#ffffff10]",
+          )}
+          style={style}
+          {...props}
+        >
+          {/* Meteor Tail */}
+          <div className="pointer-events-none absolute top-1/2 -z-10 h-px w-[50px] -translate-y-1/2 bg-gradient-to-r from-slate-500 to-transparent" />
+        </span>
+      ))}
+    </>
+  );
+};
+
+================
+File: components/ui/switch.tsx
+================
+"use client"
+
+import * as React from "react"
+import * as SwitchPrimitives from "@radix-ui/react-switch"
+
+import { cn } from "../../app/lib/utils";
+
+const Switch = React.forwardRef<
+  React.ElementRef<typeof SwitchPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
+>(({ className, ...props }, ref) => (
+  <SwitchPrimitives.Root
+    className={cn(
+      "peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+      className
+    )}
+    {...props}
+    ref={ref}
+  >
+    <SwitchPrimitives.Thumb
+      className={cn(
+        "pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"
+      )}
+    />
+  </SwitchPrimitives.Root>
+))
+Switch.displayName = SwitchPrimitives.Root.displayName
+
+export { Switch }
+
+================
+File: components/ui/tabs.tsx
+================
+"use client"
+
+import * as React from "react"
+import * as TabsPrimitive from "@radix-ui/react-tabs"
+
+import { cn } from "../../app/lib/utils";
+
+const Tabs = TabsPrimitive.Root
+
+const TabsList = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.List
+    ref={ref}
+    className={cn(
+      "inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground",
+      className
+    )}
+    {...props}
+  />
+))
+TabsList.displayName = TabsPrimitive.List.displayName
+
+const TabsTrigger = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow",
+      className
+    )}
+    {...props}
+  />
+))
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
+
+const TabsContent = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn(
+      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      className
+    )}
+    {...props}
+  />
+))
+TabsContent.displayName = TabsPrimitive.Content.displayName
+
+export { Tabs, TabsList, TabsTrigger, TabsContent }
+
+================
+File: components/ui/world-map.tsx
+================
+// app/components/ui/world-map.tsx
+"use client";
+
+import { useRef, useMemo, useCallback } from "react";
+import { motion } from "motion/react";
+import DottedMap from "dotted-map";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import React from "react";
+
+interface MapProps {
+  dots?: Array<{
+    start: { lat: number; lng: number; label?: string };
+    end: { lat: number; lng: number; label?: string };
+  }>;
+  lineColor?: string;
+}
+
+// Move map creation outside component to prevent recreation on every render
+const createBaseMap = () => {
+  const map = new DottedMap({ height: 100, grid: "diagonal" });
+  return map;
+};
+
+const baseMap = createBaseMap();
+
+export default function WorldMap({
+  dots = [],
+  lineColor = "#0ea5e9",
+}: MapProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const { theme } = useTheme();
+
+  // Memoize SVG generation
+  const svgMap = useMemo(() => {
+    return baseMap.getSVG({
+      radius: 0.22,
+      color: theme === "dark" ? "#FFFFFF40" : "#00000040",
+      shape: "circle",
+      backgroundColor: theme === "dark" ? "hsl(173, 40%, 4%)" : "white",
+    });
+  }, [theme]);
+
+  // Memoize point projection function
+  const projectPoint = useCallback((lat: number, lng: number) => {
+    const lngOffset = -4.5;
+    const latOffset = 15.5;
+    const x = (lng + 180 + lngOffset) * (800 / 360);
+    const y = (90 - lat + latOffset) * (400 / 180);
+    return { x, y };
+  }, []);
+
+  // Memoize path creation
+  const createCurvedPath = useCallback((
+    start: { x: number; y: number },
+    end: { x: number; y: number }
+  ) => {
+    const midX = (start.x + end.x) / 2;
+    const midY = Math.min(start.y, end.y) - 50;
+    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
+  }, []);
+
+  // Memoize dots calculations
+  const projectedDots = useMemo(() => 
+    dots.map(dot => ({
+      start: projectPoint(dot.start.lat, dot.start.lng),
+      end: projectPoint(dot.end.lat, dot.end.lng)
+    }))
+  , [dots, projectPoint]);
+
+  return (
+    <div className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg relative font-sans">
+      <Image
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+        className="h-full w-full pointer-events-none select-none"
+        alt="world map"
+        height={495}
+        width={1056}
+        priority={true}
+        draggable={false}
+      />
+      <svg
+        ref={svgRef}
+        viewBox="0 0 800 400"
+        className="w-full h-full absolute inset-0 pointer-events-none select-none"
+      >
+        {projectedDots.map((dot, i) => (
+          <React.Fragment key={`path-group-${i}`}>
+            <motion.path
+              d={createCurvedPath(dot.start, dot.end)}
+              fill="none"
+              stroke="url(#path-gradient)"
+              strokeWidth="1"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.2 * i,
+                ease: "easeInOut"
+              }}
+            />
+            <g>
+              {[dot.start, dot.end].map((point, j) => (
+                <React.Fragment key={`point-${i}-${j}`}>
+                  <circle
+                    cx={point.x}
+                    cy={point.y}
+                    r="2"
+                    fill={lineColor}
+                  />
+                  <circle
+                    cx={point.x}
+                    cy={point.y}
+                    r="2"
+                    fill={lineColor}
+                    opacity="0.5"
+                  >
+                    <animate
+                      attributeName="r"
+                      from="2"
+                      to="8"
+                      dur="1.5s"
+                      begin="0s"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      from="0.5"
+                      to="0"
+                      dur="1.5s"
+                      begin="0s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </React.Fragment>
+              ))}
+            </g>
+          </React.Fragment>
+        ))}
+
+        <defs>
+          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+================
+File: components/work/AlkemyCards.tsx
+================
+"use client";
+import Image from "next/image";
+import React from "react";
+import { Carousel, Card } from "../ui/apple-cards-carousel";
+
+export function AppleCardsCarouselDemo() {
+  const cards = data.map((card, index) => (
+    <Card key={card.src} card={card} index={index} />
+  ));
+
+  return (
+    <div className="w-full h-full py-20">
+      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+        Get to know your iSad.
+      </h2>
+      <Carousel items={cards} />
+    </div>
+  );
+}
+
+const DummyContent = () => {
+  return (
+    <>
+      {[...new Array(3).fill(1)].map((_, index) => {
+        return (
+          <div
+            key={"dummy-content" + index}
+            className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4"
+          >
+            <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+              <span className="font-bold text-neutral-700 dark:text-neutral-200">
+                The first rule of Apple club is that you boast about Apple club.
+              </span>{" "}
+              Keep a journal, quickly jot down a grocery list, and take amazing
+              class notes. Want to convert those notes to text? No problem.
+              Langotiya jeetu ka mara hua yaar is ready to capture every
+              thought.
+            </p>
+            <Image
+              src="https://assets.aceternity.com/macbook.png"
+              alt="Macbook mockup from Aceternity UI"
+              height="500"
+              width="500"
+              className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
+            />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+const data = [
+  {
+    category: "Artificial Intelligence",
+    title: "You can do more with AI.",
+    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Productivity",
+    title: "Enhance your productivity.",
+    src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Product",
+    title: "Launching the new Apple Vision Pro.",
+    src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+
+  {
+    category: "Product",
+    title: "Maps for your iPhone 15 Pro Max.",
+    src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "iOS",
+    title: "Photography just got better.",
+    src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+  {
+    category: "Hiring",
+    title: "Hiring for a Staff Software Engineer",
+    src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: <DummyContent />,
+  },
+];
+
+================
+File: components/caption.tsx
+================
+import Balancer from "react-wrap-balancer";
+import React, { type ReactNode } from "react";
+
+
+export function CaptionComponent({ children }: { children: ReactNode }) {
+  return (
+    <span className="block w-full text-xs my-3 font-mono text-gray-500 text-center leading-normal">
+      <Balancer>
+        <span className="[&>a]:post-link">{children}</span>
+      </Balancer>
+    </span>
+  );
+}
+
+================
+File: components/footer.tsx
+================
+// app/components/Footer.tsx
+"use client";
+
+import React from "react";
+import {
+  FaXTwitter,
+  FaGithub,
+  FaInstagram,
+  FaRss,
+  FaLinkedinIn,
+} from "react-icons/fa6";
+import { TbMailFilled } from "react-icons/tb";
+import { metaData, socialLinks } from "../app/config";
+
+const YEAR = new Date().getFullYear();
+
+function SocialLink({ href, icon: Icon }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      <Icon />
+    </a>
+  );
+}
+
+function SocialLinks() {
+  return (
+    <div className="flex text-lg gap-3.5 float-right transition-opacity duration-300 hover:opacity-90">
+      <SocialLink href={socialLinks.twitter} icon={FaXTwitter} />
+      <SocialLink href={socialLinks.github} icon={FaGithub} />
+      <SocialLink href={socialLinks.instagram} icon={FaInstagram} />
+      <SocialLink href={socialLinks.linkedin} icon={FaLinkedinIn} />
+      <SocialLink href={socialLinks.email} icon={TbMailFilled} />
+      <a href="/rss.xml" target="_self">
+        <FaRss />
+      </a>
+    </div>
+  );
+}
+
+export default function Footer() {
+  return (
+    <small className="block lg:mt-24 mt-16 text-[--prose-text] dark:text-[--prose-text]">
+      <time>© {YEAR}</time>{" "}
+      <a
+        className="no-underline"
+        href={socialLinks.twitter}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {metaData.title}
+      </a>
+      <style jsx>{`
+        @media screen and (max-width: 480px) {
+          article {
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+          }
+        }
+      `}</style>
+      <SocialLinks />
+    </small>
+  );
+}
+
+================
+File: components/image-grid.tsx
+================
+import React from "react";
+import Image from "next/image";
+
+interface ImageGridProps {
+  images: {
+    src: string;
+    alt: string;
+    href?: string;
+  }[];
+  columns?: 2 | 3 | 4; // Accepts 2, 3, or 4 columns
+}
+
+export const ImageGrid: React.FC<ImageGridProps> = ({
+  images,
+  columns = 3,
+}) => {
+  const gridClass = {
+    2: "grid-cols-2 sm:grid-cols-2",
+    3: "grid-cols-2 sm:grid-cols-3",
+    4: "grid-cols-2 sm:grid-cols-4",
+  }[columns];
+
+  return (
+    <section>
+      <div className={`grid ${gridClass} gap-4 my-8`}>
+        {images.map((image, index) => (
+          <div key={index} className="relative aspect-square">
+            {image.href ? (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={image.href}
+                className="block w-full h-full"
+              >
+                <Image
+                  alt={image.alt}
+                  src={image.src}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  priority
+                  className="rounded-lg object-cover"
+                />
+              </a>
+            ) : (
+              <Image
+                alt={image.alt}
+                src={image.src}
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                priority
+                className="rounded-lg object-cover"
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+================
+File: components/mdx.tsx
+================
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { highlight } from "sugar-high";
+import { TweetComponent } from "./tweet";
+import { CaptionComponent } from "./caption";
+import { YouTubeComponent } from "./youtube";
+import { ImageGrid } from "./image-grid";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import "katex/dist/katex.min.css";
+
+function CustomLink(props) {
+  let href = props.href;
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} {...props}>
+        {props.children}
+      </Link>
+    );
+  }
+  if (href.startsWith("#")) {
+    return <a {...props} />;
+  }
+  return <a target="_blank" rel="noopener noreferrer" {...props} />;
+}
+
+function RoundedImage(props) {
+  return <Image alt={props.alt} className="rounded-lg" {...props} />;
+}
+
+function Code({ children, ...props }) {
+  let codeHTML = highlight(children);
+  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+}
+
+function Table({ data }) {
+  let headers = data.headers.map((header, index) => (
+    <th key={index}>{header}</th>
+  ));
+  let rows = data.rows.map((row, index) => (
+    <tr key={index}>
+      {row.map((cell, cellIndex) => (
+        <td key={cellIndex}>{cell}</td>
+      ))}
+    </tr>
+  ));
+  return (
+    <table>
+      <thead>
+        <tr className="text-left">{headers}</tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  );
+}
+
+function Strikethrough(props) {
+  return <del {...props} />;
+}
+
+function Callout(props) {
+  return (
+    <div className="px-4 py-3 bg-[#F7F7F7] dark:bg-[#181818] rounded p-1 text-sm flex items-center text-neutral-900 dark:text-neutral-100 mb-8">
+      <div className="flex items-center w-4 mr-4">{props.emoji}</div>
+      <div className="w-full callout leading-relaxed">{props.children}</div>
+    </div>
+  );
+}
+
+function slugify(str) {
+  return str
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/&/g, "-and-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-");
+}
+
+function createHeading(level) {
+  const Heading = ({ children }) => {
+    let slug = slugify(children);
+    return React.createElement(
+      `h${level}`,
+      { id: slug },
+      [
+        React.createElement("a", {
+          href: `#${slug}`,
+          key: `link-${slug}`,
+          className: "anchor",
+        }),
+      ],
+      children
+    );
+  };
+  Heading.displayName = `Heading${level}`;
+  return Heading;
+}
+
+let components = {
+  h1: createHeading(1),
+  h2: createHeading(2),
+  h3: createHeading(3),
+  h4: createHeading(4),
+  h5: createHeading(5),
+  h6: createHeading(6),
+  Image: RoundedImage,
+  ImageGrid,
+  a: CustomLink,
+  StaticTweet: TweetComponent,
+  Caption: CaptionComponent,
+  YouTube: YouTubeComponent,
+  code: Code,
+  Table,
+  del: Strikethrough,
+  Callout,
+};
+
+export function CustomMDX(props) {
+  return (
+    <MDXRemote
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
+        },
+      }}
+    />
+  );
+}
+
+================
+File: components/nav.tsx
+================
+import React from "react";
+import Link from "next/link";
+import { ThemeSwitch } from "./theme-switch";
+import { metaData } from "../app/config";
+
+const navItems = {
+  "/about": { name: "About" },
+  "/essays": { name: "Essays" },
+  "/projects": { name: "Projects" },
+  "/work": { name: "Work" },
+};
+
+export function Navbar() {
+  return (
+    <nav className="lg:mb-16 mb-12 py-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between">
+        <div className="flex items-center">
+          <Link href="/" className="text-3xl font-semibold tracking-tight">
+            {metaData.title}
+          </Link>
+        </div>
+        <div className="flex flex-row gap-4 mt-6 md:mt-0 md:ml-auto items-center">
+          {Object.entries(navItems).map(([path, { name }]) => (
+            <Link
+              key={path}
+              href={path}
+              className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+            >
+              {name}
+            </Link>
+          ))}
+          <ThemeSwitch />
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+================
+File: components/theme-switch.tsx
+================
+"use client";
+import * as React from "react";
+import { useTheme } from "next-themes";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import type { ThemeProviderProps } from "next-themes/dist/types";
+import { FaCircleHalfStroke } from "react-icons/fa6";
+
+const storageKey = 'theme-preference';
+
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      {...props}
+    >
+      {children}
+    </NextThemesProvider>
+  );
+}
+
+export const ThemeSwitch: React.FC = () => {
+  const { setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  const [currentTheme, setCurrentTheme] = React.useState<'light' | 'dark'>('light');
+
+  const getColorPreference = (): 'light' | 'dark' => {
+    if (typeof window !== 'undefined') {
+      const storedPreference = localStorage.getItem(storageKey);
+      if (storedPreference) {
+        return storedPreference as 'light' | 'dark';
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'light'; 
+  };
+
+  const reflectPreference = (theme: 'light' | 'dark') => {
+    document.documentElement.classList.remove('bg-light', 'bg-dark');
+    document.documentElement.classList.add(`bg-${theme}`);
+    setCurrentTheme(theme);
+    setTheme(theme);
+  };
+
+  React.useEffect(() => {
+    setMounted(true);
+    const initTheme = getColorPreference();
+    reflectPreference(initTheme);
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      const newTheme = mediaQuery.matches ? 'dark' : 'light';
+      localStorage.setItem(storageKey, newTheme);
+      reflectPreference(newTheme);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [setTheme]);
+
+  const toggleTheme = () => {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem(storageKey, newTheme);
+    reflectPreference(newTheme);
+  };
+
+  if (!mounted) {
+    return (
+      <FaCircleHalfStroke
+        className="h-[14px] w-[14px] text-[#1c1c1c]"
+        aria-hidden="true"
+      />
+    );
+  }
+
+  return (
+    <button
+      id="theme-toggle"
+      aria-label={`${currentTheme} mode`}
+      onClick={toggleTheme}
+      className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90"
+    >
+      <FaCircleHalfStroke
+        className={`h-[14px] w-[14px] ${
+          currentTheme === "dark" ? "text-[#D4D4D4]" : "text-[#1c1c1c]"
+        }`}
+      />
+    </button>
+  );
+};
+
+================
+File: components/tweet.css
+================
+/* Light theme */
+.tweet .react-tweet-theme {
+  /* margin is handled by our wrappers */
+  --tweet-container-margin: 0;
+  --tweet-font-family: inherit;
+  --tweet-font-color: inherit;
+
+  /* Light colors */
+  --tweet-bg-color: #fff;
+  --tweet-bg-color-hover: var(--tweet-bg-color);
+  --tweet-color-blue-secondary: theme("colors.gray.600");
+  --tweet-color-blue-secondary-hover: theme("colors.gray.100");
+  --tweet-font-color-secondary: theme("colors.gray.500");
+
+  /* Common properties for both themes */
+  --tweet-quoted-bg-color-hover: rgba(0, 0, 0, 0.03);
+  --tweet-border: 1px solid rgb(207, 217, 222);
+  --tweet-skeleton-gradient: linear-gradient(
+    270deg,
+    #fafafa,
+    #eaeaea,
+    #eaeaea,
+    #fafafa
+  );
+  --tweet-color-red-primary: rgb(249, 24, 128);
+  --tweet-color-red-primary-hover: rgba(249, 24, 128, 0.1);
+  --tweet-color-green-primary: rgb(0, 186, 124);
+  --tweet-color-green-primary-hover: rgba(0, 186, 124, 0.1);
+  --tweet-twitter-icon-color: var(--tweet-font-color);
+  --tweet-verified-old-color: rgb(130, 154, 171);
+  --tweet-verified-blue-color: var(--tweet-color-blue-primary);
+  --tweet-actions-font-weight: 500;
+  --tweet-replies-font-weight: 500;
+}
+
+/* Dark theme */
+.dark {
+  .tweet .react-tweet-theme {
+    /* Dark theme colors */
+    --tweet-bg-color: #222;
+    --tweet-bg-color-hover: var(--tweet-bg-color);
+    --tweet-quoted-bg-color-hover: rgba(255, 255, 255, 0.03);
+    --tweet-border: 1px solid #333;
+    --tweet-color-blue-secondary: theme("colors.white");
+    --tweet-color-blue-secondary-hover: #333;
+    --tweet-font-color-secondary: theme("colors.gray.400");
+  }
+}
+
+/* Common styles for both themes */
+.tweet .react-tweet-theme p {
+  font-size: inherit;
+  line-height: 1.3rem;
+}
+
+.tweet .react-tweet-theme p a {
+  @apply border-b border-gray-300 transition-[border-color] hover:border-gray-600;
+}
+
+/* Dark theme link styles */
+@media (prefers-color-scheme: dark) {
+  .tweet .react-tweet-theme p a {
+    @apply border-gray-500 text-white hover:border-white;
+  }
+}
+
+/* Remove link underline on hover for both themes */
+.tweet .react-tweet-theme p a:hover {
+  text-decoration: none;
+}
+
+.tweet a div {
+  @apply font-medium tracking-tight;
+}
+
+.tweet div[class*="mediaWrapper"] {
+  max-height: 250px;
+}
+
+================
+File: components/tweet.tsx
+================
+import { getTweet } from 'react-tweet/api';
+import { Suspense } from 'react';
+import {
+  TweetSkeleton,
+  EmbeddedTweet,
+  TweetNotFound,
+  type TweetProps,
+} from 'react-tweet';
+import './tweet.css';
+
+const TweetContent = async ({ id, components, onError }: TweetProps) => {
+  let error;
+  const tweet = id
+    ? await getTweet(id).catch((err) => {
+        if (onError) {
+          error = onError(err);
+        } else {
+          console.error(err);
+          error = err;
+        }
+      })
+    : undefined;
+
+  if (!tweet) {
+    const NotFound = components?.TweetNotFound || TweetNotFound;
+    return <NotFound error={error} />;
+  }
+
+  return <EmbeddedTweet tweet={tweet} components={components} />;
+};
+
+export const ReactTweet = (props: TweetProps) => <TweetContent {...props} />;
+
+export async function TweetComponent({ id }: { id: string }) {
+  return (
+    <div className="tweet my-6">
+      <div className={`flex justify-center`}>
+        {/* <Suspense fallback={<TweetSkeleton />}> */}
+        <ReactTweet id={id} />
+        {/* </Suspense> */}
+      </div>
+    </div>
+  );
+}
+
+================
+File: components/youtube.tsx
+================
+"use client";
+import YT from "react-youtube";
+
+export function YouTubeComponent(props: any) {
+  return (
+    <div className="relative w-full h-0 pb-[56.25%] my-6">
+      <YT
+        opts={{
+          height: '100%',
+          width: '100%',
+        }}
+        {...props}
+        className="absolute top-0 left-0 w-full h-full"
+      />
+    </div>
+  );
+}
+
+================
+File: content/ai-future-jan-2025.mdx
+================
+---
+title: "AI: What can we do?"
+publishedAt: "2025-01-18"
+summary: "What will the future of AI and human interaction look like?"
+tags: "AI, Hypothesis, Future thinking,"
+---
+
+# What will the future for AI look like? 
+
+Nitesh Pant  
+May 28, 2024
+
+Imagine a world where AI can be accessed by drawing 
+
+So, a person draws on a mobile tablet and talks with an AI agent (partially embedded in the tablet, partially in the cloud). Instead of typing everything as we do now, people can interact with AI using a pen, touch, and digital screen.
+
+To do that, we’d need to design an AI agent for the initial processing where the AI agent takes the initial process and changes it into a prompt that the second AI agent can then use. Or maybe the graphic AI models will be 1000x better in 10 years from now?
+
+In fact, this might change the trajectory of how the second AI agent uses the prompt or is interacted with. Remeber that human-type-like design interface is rudimentary and what is always good is pure code. So, an AI GUI could really let go of the coversion of text prompt to code, and just turn human gestures into code.
+
+Either this will be true or I am just day dreaming.
+
+================
+File: content/devdash-labs-overhaul.mdx
+================
+---
+title: "Pivot: DevDash Solutions to DevDash Labs"
+publishedAt: "2025-01-07"
+summary: "How & Why we transformed DevDash Solutions to DevDash Labs."
+tags: "AI, Strategy, Pivot, Starup"
+---
+
+## What is DevDash?
+DevDash Labs is [an AI research and development](https://devdashlabs.com) company with three wings - research, product and services. DevDash Labs is the evoluion of DevDash Solutions LLC, a company project we started in 2020. During June 2024 to December 2024, we pivoted, did a complete brand overhaul and morphed into DevDash Labs. 
+
+### Why pivot?
+Before I joined, DevDash Solutions was more or less a typical IT outsourcing company. Get one or two clients, create small apps, use Nepali tech labor, arbitage the labor difference. This was, and still is, a very effective model when it comes to IT consulting. However, this isn't scalable. And, in the age of AI agents, I realized that most outsourcing companies would be out of business due to AI agents that can build similar, if not better applications, and much, much faster. I personally have been blessed to learn to code alongside AI. AI (mostly LLMs) have exponentially increased my learning speed. 
+
+So, we faced a dire turth: pivot or become obselete. Pivot.
+
+My co-founder, Tilak, had been tinkering with AI for a few years. He really wanted to go all in on this AI/ML journey. I must admit, during the start of 2024, I was very skeptical of the AI hype. However, I was naive. Perhaps when you're building slides, you don't realize how AI will take over. I remember getting access to an internal AI tool which was very clearly a simple wrapper built around ChatGPT3.5 Turbo and integrated into Teams. Everyone laughed. This was not the revolutionary future that we were promised. Was it? 
+
+But then, life happened. I had no job. I could no longer take DevDash as a side project. Life had given me an opportunity to go all in and pivot, so I did. But, first, we needed to change our branding around DevDash. How could we? 
+
+## Start with the basics
+Initially, it is all about getting together a consistent brand image. Who are you? As hard as it is for an individual to answer this question, I must admit that it is significantly harder for organizations to do so. I've had the opportunity to work with other organizational (mini) pivots before, mostly in Nepal. This gave me some confidence to pull through. 
+
+Now, DevDash Solutions LLC would metamorphasize into DevDash Labs. What does this mean? We are now an AI research and development agency. We are focus on developing agents. We are focused on doing research in-house then going about to develop agents.
+
+================
+File: content/hello-world.mdx
+================
+---
+title: "Hello World"
+publishedAt: "2025-01-05"
+summary: "First blog."
+tags: "Nitesh"
+---
+
+# HelloWorld
+
+## First Blog
+I have always wanted to create a full-stack website. This has been a dream since 2017. Creating websites from stract felt so daunting. Now, life has given me an opportunityt to pivot, and I am going all in. AI is chaning the way we work. I've been immenesly grateful for AI as it has allowed me to learn at a rapid pace. This website, although from a template, came after me building some 3 web apps using AI. 
+
+## Why I write
+
+I confess - I don’t write enough. There is a beauty in writing. Expressing ideas in a clear manner such that anyone can understand them, including oneself. Since I’ve joined DevDash, I’ve had too many ideas. Too many products to build, too many new tools and agents to experiment with, too many cool people to talk to. 
+
+Dear blog reader, 
+I will write more.
+
+Why do I like to write - this is a world of writes and write nots; writing is an expression; it’s an art, its an outlet. Plus I’m normally very introverted - this is me speaking and socializing, if you will.
+Why I hate LinkedIn writing - too much marketing fluff - from people telling how getting divorced taught them about sales to all bs - a legit Reddit out there
+
+Where can you read? Here.
+
+Until next time friends :)
+
+================
+File: content/leaving-boston.mdx
+================
+---
+title: "Reflections: Boston"
+publishedAt: "2025-01-06"
+summary: "Reflections on 493 days in Boston."
+tags: "Thoughts, Reflections"
+---
+
+On Jan 6, 2025, I boarded a 5:30 train to Metropark from South Station, Boston. This was my last ride out of Boston as a resident of the city. I'm on the train right now, thinking about change.
+Life is strange. Life is dynamic. To live is to go through change. Change that is inevitable, and at times, feels like a must.
+
+## How I came to Boston
+After I graduated from Dartmouth College in June of 2023, I hopped around the east coast for a bit, hovering between NJ and DC. Work at Roland Berger was supposed to start on July 17, it was shifted to Sept 11, 2023. This should have been a fore warning. But, on Sept 1, 2023, I made my way to Boston. A brownstone garden-level apartment in the South End was home in this foreign country. My cousin and her entire family came with me to Boston to drop me off. 
+
+I got a blank apartment, and slept the first night on the floor. It took a while until I had a bed frame or a mattress. Me and my roommate started hunting for used furniture on Facebook marketplace. We found a bio-tech cofounder moving his office from Seaport to idk where. But, he was pissed with the union workers for taking so much money just to move stuff out (he had already purchased new furniture). So, he wanted to sell away all the valuable stuff. We went in to buy a TV. The next day, we came back with a U-haul, and hauled away chairs, sofa, tables, bar stools and some other stuff. Good deal for $625 if I remember hehe
+
+I was with Roland Berger from Sept 2023 to June 2024. I got laid off. Business was bad, partners were not selling. I'm pretty sure the head of my practice didn't like me. Pro-tip: don't implicitly call your boss old, you might save your job. The job was frankly, boring. I didn't enjoy my time as a consultant. I don't think I've met anyone who has. People stay in the profession because it is good money, and consultants are the most risk-averse people in the world. Funny how life works when you are limited to giving advice, not executing it. 
+
+How do you know you've found a good place to work? First, you must be inspired by your managers. You should be able to see yourself in the manager's shoes, and be happy while in their shoes. If you are not inspired by your managers (or senior leadership), and you cannot imagine yourself happy in their shoes, you've not found a job-market-fit. Second, you must like your colleagues. You will spend upwards of 8 hours a day with them, if you can't like them, you will be miserable. You will want a divorce asap. Third (because I'm a consultant), you must be morally fulfilled by the job you are doing. I add morally because I felt that I was wasting my potential making slides while at Roland Berger. I was making 6 figures, but I was not happy. 
+
+## Moving from Boston
+
+After I lost my job, I had a few options - stay in Boston, leave Boston (move to NYC/SF), or, leave the US. I tried for a bit to find jobs. I failed. I was never good at finding jobs or interviewing for them. I tried. I failed. I moved on. Sometimes, you realize that some cities and places are just not meant for you. Boston was never meant for me, it seems. So, I decided that I must move on. After hopping between NJ and Boston for a couple of times between September - December, I left the city for good on Jan 6, 2025. Goodbye Boston, you were fun while it lasted. 
+
+## Shoutout to people who made Boston livable
+
+This is a shoutout to David, Ranjan dai, Nasthas, Iva, Harold, Emily, Pau, David, and other countless friends that made Boston memorable. Cheers mates. 
+
+
+<Image
+  src="/photos/nitesh-david.jpeg"
+  alt="Nitesh & David in Boston"
+  width={756}
+  height={1008}
+/>
+
+================
+File: content/on-design.mdx
+================
+---
+title: "On Design"
+publishedAt: "2025-01-09"
+summary: "10 principles of good design."
+tags: "Design, Web development"
+---
+
+_I wrote this as an internal memo at DevDash to emphasize why we need good design. This has been reproduced as is here._
+
+# 10 Principles of Good Design 
+### by Dieter Rams
+
+#### Nitesh Pant
+
+Dec 25, 2024
+
+What is a good design? Dieter Rams was fascinated by this question, and in the 1960s began creating principles of good design that would go on to influence industrial design, including ones at Apple.
+
+Dieter Rams “is one of the most influential industrial designers of the 20th century. He served as the chief design officer at Braun from 1961 to 1995, where he created or oversaw the design of hundreds of iconic products including radios, calculators, record players, and household appliances. His minimalist, functional aesthetic has profoundly influenced modern design, particularly visible in Apple's product design philosophy” (claude.ai).
+
+At DevDash, we, and in particular, I, truly care about good design. There is no reason to build something if it doesn’t look good, feel good, or work good. Mediocrity is not an option. Perfection is the ideal. While perfection cannot be achieved on our first try, we can iteratively lead ourselves to perfection. This is our design ethos - work consistently towards an ideal product that works, looks, and feels good for its users, iterating along the way. What guides us is Dieter Rams’s ideology - Ten principles for good design. 
+
+## 1) Good design is innovative
+	Innovation happens in technology and in the design of that technology; thus design must innovate
+## 2) Good design makes a product useful
+	Good design emphasizes the usefulness of a product whilst disregarding anything that could possibly detract from it
+## 3) Good design is aesthetic
+	The aesthetic quality of a product is integral to its usefulness because we use these products every day, and these products affect our well-being
+## 4) Good design makes a product understandable
+	Good design clarifies the product’s structure; it can make the product talk
+## 5) Good design is unobtrusive
+	Design should be both neutral and restrained, to leave room for the user’s self-expression
+## 6) Good design is honest
+	Good design doesn’t attempt to manipulate the consumer with promises that cannot be kept
+## 7) Good design is long-lasting
+	It avoids being fashionable and therefore never appears antiquated
+## 8) Good design is thorough down to the last detail
+	Nothing must be arbitrary or left to chance; care and accuracy in the design process show respect towards the user
+## 9) Good design is environmentally-friendly
+	Good design must preserve the environment, conserve resources, and minimize physical and visual pollution throughout the lifecycle of the product
+## 10) Good design is as little design as possible
+	Less, but better. Back to purity, back to simplicity
+
+
+
+
+
+Sources:
+[vitose](https://www.vitsoe.com/us/about/good-design)
+
+================
+File: content/space-oddessy.mdx
+================
+---
+title: "Space Odyssey"
+publishedAt: "2025-01-11"
+summary: "Where will we be in space in 25 years?"
+tags: "Wild thoughts, ideas, vision"
+---
+
+# Venturing into space
+
+## Where will humans be in 25 years from now? Specifically as it relates to space?
+
+There has been a lot of talk and money pouring into commercial space. The price per launch is coming down, and the success rate is going up. Capitalists, naturally, have started exploring avenues of profit from space.
+
+This is such a wild notion in multitudes. Who owns the space? Who gets to profit? If a spaceship crashes into another country, who is to blame? What if the country of origin is a bully, like the US? How do we humans share the space? Do we even have rights to the outer world?
+
+These are questions that I will revisit in due time, but for now, I am pondering hotels in space. Is it possible that in 25 years from now, some space hotel company at the price of billions of dollars puts up a hotel in space, where (very wealthy) tourists can float around? Or maybe there will be artificial gravity, and everyone is enjoying a sip of fine wine looking at the cosmos?
+
+I do not know. But, I ponder.
+
+Humans are very curious. I know this very well because I've been labelled as "extremely curious" by fellow humans, who for some reason can't seem to be excited at the idea of thinking crazy. So curious humans plus resource allocation gives _space_ to inventions. I will not be surprised if I wake up in 25 years to find a company has created plasma rockets. 
+
+But what scares me is not us petty humans going into space, but rather the indifference towards equality of the space-faring race (the rich white folks) and of us as a society to stop climate change here on our planet. Looks like we won't act until it is too late. Hopefully, we act...
+
+================
+File: content/take-more-risk.mdx
+================
+---
+title: "My classmates should take more risks"
+publishedAt: "2025-01-20"
+summary: "A lot my classmates are content - they should take more risks"
+tags: "Thoughts, Future thinking,"
+---
+
+# My classmates should take more risks
+_work in progress_
+
+I recently read an article by the economist how Ivy League graduates are being taken up by Consulting companies, finance and big tech. My classmates, overwhelming of them I must say, are in this loop. They should take more risks in life. They can do better.
+
+Link to [Economist article](https://www.economist.com/podcasts/2025/01/02/more-ivy-league-graduates-are-pursuing-corporate-jobs)
+
+So, as I look forward to a life full of risks, I wonder why do my friends not do it? At Dartmouth, there was a certain sense of pride in getting these coveted internships. You are the sum of everyone you hang around. For some reasons, by the time I arrived in Hanover, the trend had long started - everybody wanted to go in corporate America. I must confess that I felt dishearted. I came expecting everyone to be movers and shakers; most turned out to be social climbers.
+
+Social climbing, what a strange topic.
+
+Social climging: _the act of trying to improve your social position by being very friendly to people from a higher social class_ [Cambridge Dictonary](https://dictionary.cambridge.org/us/dictionary/english/social-climbing). 
+
+Dartmouth was, unfortunately, full of social climbers. A-side, B-side frats and sororities, clubs, high schools, althethes and _narps_, the list goes on. When half of the class is either white or insanely rich, how can a person differentiate oneself? Associations.
+
+Social climbing at Dartmouth was a peculiar form of social climbing, one that was done via associations with people, clubs and spaces of higher status. Freshmen year, it's whom you know. Sophomore year, it's which house you're in. Junior year, it's where you get your internship. Senior year, it's where you get your job. Now, let's be clear about one thing - not everyone was like this. There were some good people. Yet, like a common cold spreading at a pre-school, even if you don't get bedridden for a week, everyone coughs a little.
+
+================
+File: content/why-work-at-devdash.mdx
+================
+---
+title: "Why work at DevDash Labs?"
+publishedAt: "2025-01-26"
+summary: "An essay by DevDash Lab's co-founder on why one should work here."
+tags: "AI, Life, Work, Starup"
+---
+
+## दामी काम गरौं
+
+What does it take to build the future of AI? Passion, curiosity, and a relentless drive to create something extraordinary. 
+
+DevDash Labs aims to be the best-in-class, global AI research and development company. We are a global team of Nepali-origin researchers, developers, strategists, designers, and creators who share a passion for enabling AI adoption. Our mission is to make AI accessible, practical, and impactful for businesses of all sizes. We strive by our unofficial motto - दामी काम गरौं । "गरौं" because we work as a team. We strive for excellence together. 
+
+This commitment to excellence defines what it means to work at DevDash. Whether you're here for a short internship, or here as a full-time employee, I want you to do great work. Create impact every day. Strive to learn, push your boundaries, and do the best work you've done so far. This doesn't mean working insane hours. I'm a big believer that just because the co-founder works insane hours doesn't mean that every employee should as well. Such a mentality is unhealthy in the long term and leads to employee burnout. Instead, doing great work is loving what you do; it is to pursue something with passion, curiosity, and ambition, driven by a deep interest in the subject and the desire to push one's boundaries.
+
+No wonder everyone who works at DevDash has a burning passion for AI, technology, and innovation. We strive to build great products, both for ourselves and our clients. Great work often requires focused effort, but it’s fueled by intrinsic motivation–love for what you do–rather than external pressures. Doing great work entails creating amazing products that people love. At DevDash, we care deeply about good design. There is no reason to build something if it doesn’t look good, feel good, or work well. Mediocrity is not an option. Perfection is the ideal. While perfection cannot be achieved on our first try, we can iteratively lead ourselves to perfection. This is our design ethos - work consistently towards an ideal product that works, looks, and feels good for its users, iterating along the way.
+
+We value integrity and trust each other to give our best. We are a remote-first company. We take initiative and ownership of our work. Some days are shorter, some are longer. Some are easier, some are harder. Some are quick, and yet some seem to stretch space-time. Every team member is transparent in the work they do and strives to do amazing work. When we’re not working on client projects, we are experimenting with new AI technology; we produce approximately one PoC per week. We have a team-wide demo every Friday. Just because we work fast doesn’t mean we lower our standards. 
+
+At DevDash, we use AI tools to transform how we work. Our guiding principle is clear: embrace automation, minimize manual work, and maximize impact. This approach allows us to focus on what truly matters - delivering real-world solutions. Success is measured through shipped products. When we make commitments—to each other, to our projects, or to our vision—we stand by them. This isn't just about meeting deadlines; it's about supporting each other's growth, maintaining transparency in our work, and collectively pushing toward excellence.
+
+DevDash is but a small lab, yet there are those who love it. If you’re someone who thrives on challenges, loves to learn, and is passionate about AI, DevDash is the place for you. Come join us. We’d love to hear from you.
+
+**आउ, दामी काम गरौं\!**
+
+================
+File: hooks/use-outside-click.tsx
+================
+import React, { useEffect } from "react";
+
+export const useOutsideClick = (
+  ref: React.RefObject<HTMLDivElement>,
+  callback: Function
+) => {
+  useEffect(() => {
+    const listener = (event: any) => {
+      // DO NOTHING if the element being clicked is the target element or their children
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      callback(event);
+    };
+
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, callback]);
+};
+
+================
+File: lib/posts.ts
+================
+import fs from "fs";
+import path from "path";
+
+type Metadata = {
+  title: string;
+  publishedAt: string;
+  summary: string;
+  tags: string;
+  image?: string;
+};
+
+function parseFrontmatter(fileContent: string) {
+  let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
+  let match = frontmatterRegex.exec(fileContent);
+  let frontMatterBlock = match![1];
+  let content = fileContent.replace(frontmatterRegex, "").trim();
+  let frontMatterLines = frontMatterBlock.trim().split("\n");
+  let metadata: Partial<Metadata> = {};
+
+  frontMatterLines.forEach((line) => {
+    let [key, ...valueArr] = line.split(": ");
+    let value = valueArr.join(": ").trim();
+    value = value.replace(/^['"](.*)['"]$/, "$1"); 
+    metadata[key.trim() as keyof Metadata] = value;
+  });
+
+  return { metadata: metadata as Metadata, content };
+}
+
+function getMDXFiles(dir: string) {
+  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+}
+
+function readMDXFile(filePath: string) {
+  let rawContent = fs.readFileSync(filePath, "utf-8");
+  return parseFrontmatter(rawContent);
+}
+
+function getMDXData(dir: string) {
+  let mdxFiles = getMDXFiles(dir);
+  return mdxFiles.map((file) => {
+    let { metadata, content } = readMDXFile(path.join(dir, file));
+    let slug = path.basename(file, path.extname(file));
+
+    return {
+      metadata,
+      slug,
+      content,
+    };
+  });
+}
+
+export function getBlogPosts() {
+  return getMDXData(path.join(process.cwd(), "content"));
+}
+
+export function formatDate(date: string, includeRelative = false) {
+  let currentDate = new Date();
+  if (!date.includes("T")) {
+    date = `${date}T00:00:00`;
+  }
+  let targetDate = new Date(date);
+
+  let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
+  let monthsAgo = currentDate.getMonth() - targetDate.getMonth();
+  let daysAgo = currentDate.getDate() - targetDate.getDate();
+
+  let formattedDate = "";
+
+  if (yearsAgo > 0) {
+    formattedDate = `${yearsAgo}y ago`;
+  } else if (monthsAgo > 0) {
+    formattedDate = `${monthsAgo}mo ago`;
+  } else if (daysAgo > 0) {
+    formattedDate = `${daysAgo}d ago`;
+  } else {
+    formattedDate = "Today";
+  }
+
+  let fullDate = targetDate.toLocaleString("en-us", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  if (!includeRelative) {
+    return fullDate;
+  }
+
+  return `${fullDate} (${formattedDate})`;
+}
+
+================
+File: lib/utils.ts
+================
+// app/lib/utils.ts
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+================
+File: public/favicon.svg
+================
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="d195945eba"><path d="M 187.5 0 C 83.945312 0 0 83.945312 0 187.5 C 0 291.054688 83.945312 375 187.5 375 C 291.054688 375 375 291.054688 375 187.5 C 375 83.945312 291.054688 0 187.5 0 Z M 187.5 0 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#d195945eba)"><rect x="-37.5" width="450" fill="#000000" y="-37.499999" height="449.999989" fill-opacity="1"/></g><g fill="#ffffff" fill-opacity="1"><g transform="translate(19.058155, 282.198989)"><g><path d="M 129.140625 -70.765625 L 129.984375 -70.765625 L 129.984375 -197.359375 L 171.703125 -197.359375 L 171.703125 -24.25 C 171.703125 -15.789062 169.773438 -9.066406 165.921875 -4.078125 C 162.078125 0.898438 156.207031 3.390625 148.3125 3.390625 C 144.550781 3.390625 141.210938 2.914062 138.296875 1.96875 C 135.378906 1.03125 132.648438 -0.46875 130.109375 -2.53125 C 127.578125 -4.601562 125.085938 -7.425781 122.640625 -11 C 120.203125 -14.570312 117.664062 -19.082031 115.03125 -24.53125 L 58.359375 -141.546875 L 57.796875 -140.96875 L 57.796875 0 L 16.078125 0 L 16.078125 -172.84375 C 16.078125 -180.726562 18.566406 -187.347656 23.546875 -192.703125 C 28.523438 -198.066406 35.617188 -200.75 44.828125 -200.75 C 52.722656 -200.75 59.488281 -198.398438 65.125 -193.703125 C 70.769531 -189.003906 75.941406 -181.765625 80.640625 -171.984375 Z M 129.140625 -70.765625 "/></g></g></g><g fill="#ffffff" fill-opacity="1"><g transform="translate(207.120611, 282.198989)"><g><path d="M 150.84375 -133.359375 C 150.84375 -123.960938 149.195312 -115.175781 145.90625 -107 C 142.613281 -98.820312 137.960938 -91.675781 131.953125 -85.5625 C 125.941406 -79.457031 118.800781 -74.664062 110.53125 -71.1875 C 102.257812 -67.71875 93.046875 -65.984375 82.890625 -65.984375 L 67.109375 -65.984375 L 67.109375 -105.453125 C 68.609375 -105.453125 70.203125 -105.453125 71.890625 -105.453125 C 73.585938 -105.453125 75.1875 -105.546875 76.6875 -105.734375 C 88.71875 -106.484375 97.128906 -109.019531 101.921875 -113.34375 C 106.710938 -117.664062 109.109375 -124.242188 109.109375 -133.078125 C 109.109375 -142.097656 106.757812 -149.050781 102.0625 -153.9375 C 97.363281 -158.832031 90.785156 -161.28125 82.328125 -161.28125 C 73.867188 -161.28125 67.289062 -158.832031 62.59375 -153.9375 C 57.894531 -149.050781 55.546875 -142.378906 55.546875 -133.921875 L 55.546875 0 L 13.8125 0 L 13.8125 -133.921875 C 13.8125 -142.953125 15.410156 -151.503906 18.609375 -159.578125 C 21.804688 -167.660156 26.363281 -174.753906 32.28125 -180.859375 C 38.207031 -186.972656 45.398438 -191.816406 53.859375 -195.390625 C 62.316406 -198.960938 71.804688 -200.75 82.328125 -200.75 C 92.484375 -200.75 101.742188 -199.007812 110.109375 -195.53125 C 118.472656 -192.050781 125.707031 -187.253906 131.8125 -181.140625 C 137.914062 -175.035156 142.613281 -167.894531 145.90625 -159.71875 C 149.195312 -151.550781 150.84375 -142.765625 150.84375 -133.359375 Z M 150.84375 -133.359375 "/></g></g></g></svg>
+
+================
+File: .gitignore
+================
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.vscode
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+================
+File: components.json
+================
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "app/global.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@//components",
+    "utils": "@//lib/utils",
+    "ui": "@//components/ui",
+    "lib": "@//lib",
+    "hooks": "@//hooks"
+  },
+  "iconLibrary": "lucide"
+}
+
+================
+File: LICENSE
+================
+MIT License
+
+Copyright © 2024 Nextfolio
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================
+File: next.config.js
+================
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  async rewrites() {
+    return [
+      {
+        source: "/rss.xml",
+        destination: "/feed/rss.xml",
+      },
+      {
+        source: "/atom.xml",
+        destination: "/feed/atom.xml",
+      },
+      {
+        source: "/feed.json",
+        destination: "/feed/feed.json",
+      },
+      {
+        source: "/rss",
+        destination: "/feed/rss.xml",
+      },
+      {
+        source: "/feed",
+        destination: "/feed/rss.xml",
+      },
+      {
+        source: "/atom",
+        destination: "/feed/atom.xml",
+      },
+      {
+        source: "/json",
+        destination: "/feed/feed.json",
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
+
+================
+File: package.json
+================
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-label": "^2.1.2",
+    "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-switch": "^1.1.3",
+    "@radix-ui/react-tabs": "^1.1.3",
+    "@tabler/icons-react": "^3.30.0",
+    "@types/node": "22.5.0",
+    "@types/react": "18.3.4",
+    "@types/react-dom": "18.3.0",
+    "@vercel/analytics": "^1.3.1",
+    "@vercel/speed-insights": "^1.0.12",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotted-map": "^2.2.3",
+    "feed": "^4.2.2",
+    "framer-motion": "^12.4.7",
+    "geist": "1.3.1",
+    "katex": "^0.16.11",
+    "lucide-react": "^0.474.0",
+    "motion": "^12.0.6",
+    "next": "^14.2.6",
+    "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.3.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-icons": "^5.3.0",
+    "react-tweet": "^3.2.1",
+    "react-wrap-balancer": "^1.1.1",
+    "react-youtube": "^10.1.0",
+    "recharts": "^2.15.1",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sugar-high": "^0.7.0",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "5.5.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.14",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "3.4.10"
+  }
+}
+
+================
+File: postcss.config.js
+================
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+================
+File: README.md
+================
+# Nitesh Pant portfolio website
+
+Hello world. I am Nitesh, half of the duo behind DevDash Labs. Born and raised in Nepal, educated at Dartmouth, doing AI development at DevDash. 
+
+This website was built using Nextfolio. I modified it just a bit. Thank you to the people behind Nextfolio. 
+
+I updated the OG Nextfolio to be compatible with shadcnui elements. This way, I can make my website even cooler 8)
+
+================
+File: tailwind.config.js
+================
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+	darkMode: "class",
+	content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./public/**/*.svg"],
+	theme: {
+	  extend: {
+		fontFamily: {
+		  sans: ["var(--font-geist-sans)"],
+		  mono: ["var(--font-geist-mono)"],
+		},
+		typography: {
+		  quoteless: {
+			css: {
+			  "blockquote p:first-of-type::before": { content: "none" },
+			  "blockquote p:first-of-type::after": { content: "none" },
+			},
+		  },
+		},
+		borderRadius: {
+		  lg: "var(--radius)",
+		  md: "calc(var(--radius) - 2px)",
+		  sm: "calc(var(--radius) - 4px)",
+		},
+		colors: {
+		  background: "hsl(var(--background))",
+		  foreground: "hsl(var(--foreground))",
+		  card: {
+			DEFAULT: "hsl(var(--card))",
+			foreground: "hsl(var(--card-foreground))",
+		  },
+		  popover: {
+			DEFAULT: "hsl(var(--popover))",
+			foreground: "hsl(var(--popover-foreground))",
+		  },
+		  primary: {
+			DEFAULT: "hsl(var(--primary))",
+			foreground: "hsl(var(--primary-foreground))",
+		  },
+		  secondary: {
+			DEFAULT: "hsl(var(--secondary))",
+			foreground: "hsl(var(--secondary-foreground))",
+		  },
+		  muted: {
+			DEFAULT: "hsl(var(--muted))",
+			foreground: "hsl(var(--muted-foreground))",
+		  },
+		  accent: {
+			DEFAULT: "hsl(var(--accent))",
+			foreground: "hsl(var(--accent-foreground))",
+		  },
+		  destructive: {
+			DEFAULT: "hsl(var(--destructive))",
+			foreground: "hsl(var(--destructive-foreground))",
+		  },
+		  border: "hsl(var(--border))",
+		  input: "hsl(var(--input))",
+		  ring: "hsl(var(--ring))",
+		  chart: {
+			"1": "hsl(var(--chart-1))",
+			"2": "hsl(var(--chart-2))",
+			"3": "hsl(var(--chart-3))",
+			"4": "hsl(var(--chart-4))",
+			"5": "hsl(var(--chart-5))",
+		  },
+		},
+		animation: {
+		  meteor: "meteor 5s linear infinite",
+		},
+		keyframes: {
+		  meteor: {
+			"0%": {
+			  transform: "rotate(215deg) translateX(0)",
+			  opacity: "1",
+			},
+			"70%": { opacity: "1" },
+			"100%": {
+			  transform: "rotate(215deg) translateX(-500px)",
+			  opacity: "0",
+			},
+		  },
+		},
+	  },
+	},
+	plugins: [require("@tailwindcss/typography"), require("tailwindcss-animate")],
+  };
+
+================
+File: todo.mdx
+================
+# To-do
+
+'''
+## Ideas
+aiming for impact
+'''
+
+Update font to Inter hehe (or choose another one?)
+
+In work, write down all the different work I have done, the stories behind them, and what not...
+
+Change back to the classic for essays, sometimes less is more
+
+================
+File: tsconfig.json
+================
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": { // Add this section
+      "@/": [
+        "./"
+      ],
+      "@/components/*": ["components/*"]
+    },
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "/*.ts",
+    "/.tsx",
+    ".next/types/**/.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+
+
+================================================================
+End of Codebase
+================================================================
