@@ -102,8 +102,7 @@ const PricingSimulator = () => {
       practitioner,
       revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
     })),
-    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee]
-
+    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee, calculateRevenue]
   );
 
   // Generate data for breakeven analysis
