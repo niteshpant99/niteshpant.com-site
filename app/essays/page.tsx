@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import Link from "next/link";
-import { formatDate, getBlogPosts } from "../lib/posts";
+import { formatDate, getBlogPosts } from "../../lib/posts";
 import {InteractiveGrid} from "../essays/interactive-grid";
 import React from "react";
 
