@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "../../app/lib/utils";
 
 interface MeteorsProps extends React.HTMLAttributes<HTMLSpanElement> {
   number?: number;

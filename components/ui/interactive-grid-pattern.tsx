@@ -1,5 +1,5 @@
 // components/ui/interactive-grid-pattern.tsx
-import { cn } from "../../lib/utils";
+import { cn } from "../../app/lib/utils";
 import React, { useState } from "react";
 
 interface InteractiveGridPatternProps extends React.SVGProps<SVGSVGElement> {
