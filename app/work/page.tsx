@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-
+import {AppleCards} from "@/components/work/AlkemyCards"; 
+import App from "next/app";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -12,7 +13,8 @@ export default function Work() {
     <section>
       <h1 className="mb-2 text-2xl font-medium tracking-tight">Work</h1>
       <p>A selection of work I've done</p>
-      <h2 className="mb-4 pt-4 text-xl">alkemy platform for Roland Berger</h2>
+      <h2 className="pt-4 text-xl">alkemy platform for Roland Berger</h2>
+      <AppleCards />
       <p className="mb-2">alkemy is a platform that allows Roland Berger to model any chemical asset in the world based on the technology used and raw material inputs</p>
       <h2 className="mb-2 pt-4 text-xl">Hercules Transformation</h2>
       <a 
