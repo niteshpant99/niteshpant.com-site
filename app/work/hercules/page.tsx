@@ -1,13 +1,13 @@
 // app/work/hercules/page.tsx
 'use client';
 import React, { useMemo, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
-import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
-import { Switch } from '../../components/ui/switch';
-import { Button } from "../../components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog";
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
+import { Switch } from '../../../components/ui/switch';
+import { Button } from "../../../components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
 import { HelpCircle } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
@@ -102,8 +102,7 @@ const PricingSimulator = () => {
       practitioner,
       revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
     })),
-    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee]
-
+    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee, calculateRevenue]
   );
 
   // Generate data for breakeven analysis

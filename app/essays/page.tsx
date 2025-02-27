@@ -1,6 +1,6 @@
 // app/blog/page.tsx
 import Link from "next/link";
-import { formatDate, getBlogPosts } from "../lib/posts";
+import { formatDate, getBlogPosts } from "../../lib/posts";
 import {InteractiveGrid} from "../essays/interactive-grid";
 import React from "react";
 
@@ -23,8 +23,8 @@ export default function BlogPosts() {
             <h2 className="mb-6 z-10 text-l text-foreground">by Nitesh</h2>
           
 
-          <p className="z-10 text-foreground">If stuck, start here</p>
-          <p className="mb-2 z-10">
+          <p className="z-10 text-foreground italic">If stuck, start here :</p>
+          <p className="mb-4 z-10">
             My story to{" "}
             <a 
               href="/dartmouth" 

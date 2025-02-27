@@ -4,11 +4,11 @@ import React from "react";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Navbar } from "./components/nav";
+import { Navbar } from "../components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Footer from "./components/footer";
-import { ThemeProvider } from "./components/theme-switch";
+import Footer from "../components/footer";
+import { ThemeProvider } from "../components/theme-switch";
 import { metaData } from "./config";
 
 export const metadata: Metadata = {
