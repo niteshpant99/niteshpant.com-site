@@ -25,7 +25,7 @@ export default function Page() {
       <div className="prose prose-neutral dark:prose-invert">
         <p>
           I'm the half duo of <a target="blank" href="https://devdashlabs.com">DevDash Labs</a>. 
-          I'm current creating <a target="blank" href="https://arthex.io">arthex</a>, an AI powered
+          I'm current creating <a target="blank" href="https://devdashlabs.com/arthex-waitlist">arthex</a>, an AI powered
           earnings day stock analyzer to help retail traders earn on earnings.
         </p>
         <p>
