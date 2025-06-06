@@ -26,19 +26,19 @@ export default function BlogPosts() {
           <p className="z-10 text-foreground italic">If stuck, start here :</p>
           <p className="mb-4 z-10">
             My story to{" "}
-            <a 
+            <Link 
               href="/dartmouth" 
               className="text-foreground hover:underline"
             >
               Dartmouth
-            </a>
+            </Link>
             ,{" "} OR {" "}
-              <a 
+            <Link 
               href="/essays/nitesh-pant-guide-to-prompting" 
               className="text-foreground hover:underline"
             >
               Nitesh Pant guide to prompting
-            </a>
+            </Link>
           </p>
           
       </div>
