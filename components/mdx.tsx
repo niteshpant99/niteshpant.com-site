@@ -7,6 +7,8 @@ import { TweetComponent } from "./tweet";
 import { CaptionComponent } from "./caption";
 import { YouTubeComponent } from "./youtube";
 import { ImageGrid } from "./image-grid";
+import { XMLPromptEditor } from "./xml-prompt-editor";
+import { CodeBlockWithCopy } from "./code-block-with-copy";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
@@ -33,6 +35,14 @@ function RoundedImage(props) {
 function Code({ children, ...props }) {
   let codeHTML = highlight(children);
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+}
+
+function Pre({ children, ...props }) {
+  return (
+    <CodeBlockWithCopy>
+      <code {...props}>{children}</code>
+    </CodeBlockWithCopy>
+  );
 }
 
 function Table({ data }) {
@@ -113,7 +123,9 @@ let components = {
   StaticTweet: TweetComponent,
   Caption: CaptionComponent,
   YouTube: YouTubeComponent,
+  XMLPromptEditor,
   code: Code,
+  pre: Pre,
   Table,
   del: Strikethrough,
   Callout,
