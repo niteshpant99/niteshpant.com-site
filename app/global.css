@@ -201,6 +201,21 @@ html {
   color: var(--sh-entity);
 }
 
+/* XML consistency overrides - ensure all XML elements use the same color */
+.prose pre code[class*="language-xml"] .sh__token--class,
+.prose pre code[class*="language-xml"] .sh__token--property,
+.prose pre code[class*="language-xml"] .sh__token--entity,
+.prose pre code[class*="language-xml"] .sh__token--identifier,
+.prose pre code[class*="language-xml"] .sh__token--keyword {
+  color: var(--sh-entity) !important;
+}
+
+/* Generic XML-like tag styling for better consistency */
+.prose pre code .sh__token--class,
+.prose pre code .sh__token--property {
+  color: var(--sh-entity);
+}
+
 .prose img {
   @apply m-0;
 }

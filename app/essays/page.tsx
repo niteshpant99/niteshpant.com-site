@@ -32,7 +32,15 @@ export default function BlogPosts() {
             >
               Dartmouth
             </a>
+            ,{" "} OR {" "}
+              <a 
+              href="/essays/nitesh-pant-guide-to-prompting" 
+              className="text-foreground hover:underline"
+            >
+              Nitesh Pant guide to prompting
+            </a>
           </p>
+          
       </div>
       <div>
         {allBlogs
