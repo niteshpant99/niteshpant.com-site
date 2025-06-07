@@ -13,7 +13,7 @@ export interface Project {
 export const projectCategories = {
   'products': {
     label: 'Products',
-    description: 'End-to-end products and platforms I\'ve built'
+    description: 'End-to-end products and platforms I\'ve built,'
   },
   'client-solutions': {
     label: 'Client Solutions',
@@ -120,11 +120,11 @@ export const projects: Project[] = [
     technologies: ['React', 'Mobile-First', 'Healthcare', 'Open Source']
   },
   {
-    title: "Investment Deck Generation System",
+    title: "InvestLens by DevDash Labs",
     subtitle: "AWS-Powered Document Intelligence",
     year: 2024,
     description: "Automated investment deck generation using Amazon Kendra, AWS Bedrock, and S3 storage for financial document analysis and synthesis.",
-    url: "#",
+    url: "https://github.com/DevDashProducts/invest-lens",
     category: 'tools-opensource',
     status: 'open-source',
     featured: true,

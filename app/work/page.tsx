@@ -12,8 +12,8 @@ export default function Work() {
     <section>
       <h1 className="mb-2 text-2xl font-medium tracking-tight">Work</h1>
       <p>A selection of work I've done</p>
-      <h2 className="mb-4 pt-4 text-xl">alkemy platform for Roland Berger</h2>
-      <p className="mb-2">alkemy is a platform that allows Roland Berger to model any chemical asset in the world based on the technology used and raw material inputs</p>
+      {/* <h2 className="mb-4 pt-4 text-xl">alkemy platform for Roland Berger</h2>
+      <p className="mb-2">alkemy is a platform that allows Roland Berger to model any chemical asset in the world based on the technology used and raw material inputs</p> */}
       <h2 className="mb-2 pt-4 text-xl">Hercules Transformation</h2>
       <a 
             href={`/work/hercules`}
