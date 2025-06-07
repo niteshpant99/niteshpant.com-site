@@ -102,7 +102,7 @@ const PricingSimulator = () => {
       practitioner,
       revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
     })),
-    [practitioners, additionalCases, config, config.baseFee, config.caseRate, config.minimumCases, config.usePractitionerFee, calculateRevenue]
+    [practitioners, additionalCases, config, calculateRevenue]
   );
 
   // Generate data for breakeven analysis
@@ -125,7 +125,7 @@ const PricingSimulator = () => {
         requiredCasesPerPractitioner: Math.max(0, Math.round(requiredCasesPerPractitioner)),
       };
     });
-  }, [practitioners, config.usePractitionerFee, config.baseFee, config.caseRate]);
+  }, [practitioners, config]);
 
   const getRevenueColor = (result: SimulationResult) => {
     const colors = {
