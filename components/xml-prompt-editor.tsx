@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { Copy, Check, Plus, X, RotateCcw, Eraser } from 'lucide-react';
+import { Copy, Check, Plus, X, RotateCcw, Eraser, ChevronDown } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 
@@ -30,15 +30,17 @@ export function XMLPromptEditor() {
   const [editingTag, setEditingTag] = useState<string | null>(null);
   const [newTagInput, setNewTagInput] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isXmlSectionCollapsed, setIsXmlSectionCollapsed] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        const { sections: savedSections, customTags: savedCustomTags } = JSON.parse(saved);
+        const { sections: savedSections, customTags: savedCustomTags, isXmlSectionCollapsed: savedCollapsed } = JSON.parse(saved);
         setSections(savedSections || defaultSections);
         setCustomTags(savedCustomTags || []);
+        setIsXmlSectionCollapsed(savedCollapsed || false);
       }
     } catch (error) {
       console.error('Failed to load saved state:', error);
@@ -52,14 +54,15 @@ export function XMLPromptEditor() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         sections,
-        customTags
+        customTags,
+        isXmlSectionCollapsed
       }));
     } catch (error) {
       console.error('Failed to save state:', error);
     }
-  }, [sections, customTags, isLoaded]);
+  }, [sections, customTags, isXmlSectionCollapsed, isLoaded]);
 
-  const allTags = [...DEFAULT_TAG_OPTIONS, ...customTags];
+  const allTags = React.useMemo(() => [...DEFAULT_TAG_OPTIONS, ...customTags], [customTags]);
 
   const updateSection = useCallback((id: string, field: 'tag' | 'content', value: string) => {
     setSections(prev => prev.map(section => 
@@ -105,12 +108,17 @@ export function XMLPromptEditor() {
     setSections(defaultSections);
     setCustomTags([]);
     setNewTagInput('');
+    setIsXmlSectionCollapsed(false);
     // Clear localStorage
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (error) {
       console.error('Failed to clear saved state:', error);
     }
+  }, []);
+
+  const toggleXmlSection = useCallback(() => {
+    setIsXmlSectionCollapsed(prev => !prev);
   }, []);
 
   const generateXML = useCallback(() => {
@@ -145,14 +153,36 @@ export function XMLPromptEditor() {
   }, [generateXML]);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6 bg-card rounded-lg border border-border">
-      <div className="text-center space-y-2">
-        <h3 className="text-2xl font-bold text-foreground">
+    <div className="max-w-4xl mx-auto p-2 bg-card rounded-lg border border-border">
+      <div className="text-left -mt-4">
+        {/* <h3 className="text-xl font-bold text-foreground">
           Interactive XML Prompt Builder
-        </h3>
-        <p className="text-muted-foreground">
-          Build structured prompts using XML tags. Edit the sections below and copy the generated prompt.
-        </p>
+        </h3> */}
+        <div className="flex items-center justify-between">
+          <p className="text-label font-bold">
+            Write. Copy. AI.
+          </p>
+          <div className="flex gap-2">
+            <Button
+              onClick={clearAllContent}
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2"
+            >
+              <Eraser className="w-4 h-4" />
+              Clear Contents
+            </Button>
+            <Button
+              onClick={copyToClipboard}
+              variant="default"
+              size="sm"
+              className="flex items-center gap-2"
+            >
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+              COPY
+            </Button>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -163,7 +193,7 @@ export function XMLPromptEditor() {
                 <select
                   value={section.tag}
                   onChange={(e) => updateSection(section.id, 'tag', e.target.value)}
-                  className="px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground font-mono text-sm uppercase font-medium min-w-[120px]"
+                  className="px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground font-mono text-sm uppercase font-medium min-w-[90px]"
                 >
                   {DEFAULT_TAG_OPTIONS.map((tag) => (
                     <option key={tag} value={tag}>
@@ -197,7 +227,7 @@ export function XMLPromptEditor() {
               <textarea
                 value={section.content}
                 onChange={(e) => updateSection(section.id, 'content', e.target.value)}
-                rows={6}
+                rows={3}
                 className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground text-sm resize-y"
                 placeholder={`Enter your ${section.tag} content here...`}
               />
@@ -207,8 +237,8 @@ export function XMLPromptEditor() {
       </div>
 
       {/* Custom Tag Management */}
-      <div className="border-t border-border pt-4">
-        <div className="flex items-center justify-between mb-3">
+      <div className="border-t border-border pt-4 pb-4">
+        <div className="flex items-center justify-between">
           <h4 className="text-sm font-medium text-foreground">Manage Tags</h4>
         </div>
         
@@ -257,15 +287,6 @@ export function XMLPromptEditor() {
             Add Section
           </Button>
           <Button
-            onClick={clearAllContent}
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
-          >
-            <Eraser className="w-4 h-4" />
-            Clear Content
-          </Button>
-          <Button
             onClick={resetToDefault}
             variant="outline"
             size="sm"
@@ -279,9 +300,20 @@ export function XMLPromptEditor() {
 
       <div className="border-t border-border pt-6">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-lg font-semibold text-foreground">
-            Generated XML Prompt
-          </h4>
+          <div 
+              className="flex items-baseline gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={toggleXmlSection}
+            >
+              <ChevronDown 
+                className={`w-5 h-5 text-foreground transition-transform duration-200 ${
+                  isXmlSectionCollapsed ? '-rotate-90' : 'rotate-0'
+                }`}
+              />
+              <h4 className="text-lg font-semibold text-foreground leading-none">
+                Generated XML Prompt
+              </h4>
+          </div>
+
           <Button
             onClick={copyToClipboard}
             variant="default"
@@ -289,15 +321,17 @@ export function XMLPromptEditor() {
             className="flex items-center gap-2"
           >
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            {copied ? 'Copied!' : 'Copy'}
+            COPY
           </Button>
         </div>
         
-        <div className="bg-muted rounded-lg p-4 border border-border">
-          <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed">
-            {generateXML()}
-          </pre>
-        </div>
+        {!isXmlSectionCollapsed && (
+          <div className="bg-muted rounded-lg p-4 border border-border">
+            <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed">
+              {generateXML()}
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   );

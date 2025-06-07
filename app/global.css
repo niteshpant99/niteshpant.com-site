@@ -52,8 +52,8 @@
     /* Prose Theme - Light Mode */
     --prose-text: #333333;
     --prose-pre-bg: #F7F7F7;
-    --prose-link-decoration: #9CA3AF;
-    --prose-link-decoration-hover: #D4D4D4;
+    --prose-link-decoration: #64748b; /* Slate-500 */
+    --prose-link-decoration-hover: #475569; /* Slate-600 */
     --prose-anchor-after: #D4D4D4;
     --prose-dartmouth: #00693e;
   }
@@ -101,8 +101,8 @@
     /* Prose Theme - Dark Mode */
     --prose-text: #e0e0e0;
     --prose-pre-bg: #181818;
-    --prose-link-decoration: #6B7280;
-    --prose-link-decoration-hover: #9CA3AF;
+    --prose-link-decoration: #94a3b8; /* Slate-400 */
+    --prose-link-decoration-hover: #cbd5e1; /* Slate-300 */
     --prose-anchor-after: #4B5563;
     --prose-dartmouth: #00693e;
   }
