@@ -22,27 +22,27 @@ export default function BlogPosts() {
           </h1>
             <h2 className="mb-6 z-10 text-l text-foreground">by Nitesh</h2>
           
-
+        <div className="mb-2 pb-2 border-b border-border">
           <p className="z-10 text-foreground italic">If stuck, start here :</p>
-          <p className="mb-4 z-10">
+          <p className="mb-4 z-10 ]">
             My story to{" "}
             <Link 
               href="/dartmouth" 
-              className="text-foreground hover:underline"
+              className="text-italic text-[--prose-link-decoration] hover:underline"
             >
-              Dartmouth
+              <em>Dartmouth</em>
             </Link>
-            ,{" "} OR {" "}
+            ,{" "} or {" "}
             <Link 
               href="/essays/nitesh-pant-guide-to-prompting" 
-              className="text-foreground hover:underline"
+              className="text-[--prose-link-decoration] hover:underline"
             >
-              Nitesh Pant guide to prompting
+              <em>Nitesh Pant guide to prompting</em>
             </Link>
           </p>
-          
+        </div>    
       </div>
-      <div>
+      <div className="pt-4">
         {allBlogs
           .sort((a, b) => {
             if (
@@ -56,7 +56,7 @@ export default function BlogPosts() {
           .map((post) => (
             <Link
               key={post.slug}
-              className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
+              className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:underline hover:text-[--prose-link-decoration-hover]"
               href={`/essays/${post.slug}`}
             >
               <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
