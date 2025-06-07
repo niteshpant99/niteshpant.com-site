@@ -107,8 +107,10 @@ export default function Work() {
           Work
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-          Strategic product leader blending AI expertise and business acumen to transform organizations through data-driven solutions.
-        </p>
+            My journey spans from management consulting, hedge fund investing, to co-founding an AI research and development company. 
+            I've led transformative projects across healthcare, petrochemicals, and fintech—from evaluating billion-dollar 
+            M&A deals to building AI products that drive measurable business impact. Currently focused on making AI 
+            accessible and practical for businesses of all sizes at DevDash Labs.       </p>
       </div>
 
       {/* Experience Section */}
