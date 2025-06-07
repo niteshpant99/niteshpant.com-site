@@ -17,7 +17,7 @@ export default function BlogPosts() {
       
         <InteractiveGrid>
         <div>
-        <h1 className="mb-2 z-10 whitespace-pre-wrap tracking-tighter text-2xl font-medium tracking-tight text-foreground mt-2">
+        <h1 className="mb-2 z-10 whitespace-pre-wrap text-2xl font-medium tracking-tight text-foreground mt-2">
         Essays
           </h1>
             <h2 className="mb-6 z-10 text-l text-foreground">by Nitesh</h2>
