@@ -1,9 +1,24 @@
-// app/blog/[slug]/page.tsx
+// app/essays/[slug]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 import { CustomMDX } from "../../../components/mdx";
 import { formatDate, getBlogPosts } from "../../../lib/posts";
 import { metaData } from "../../config";
+
+// Dynamic import for the generative hero component
+const GenerativeEssayHero = dynamic(
+  () => import('../../../components/GenerativeEssayHero'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div 
+        className="w-full bg-background animate-pulse" 
+        style={{ aspectRatio: '4/3' }}
+      />
+    )
+  }
+);
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -39,7 +54,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${metaData.baseUrl}/blog/${post.slug}`,
+      url: `${metaData.baseUrl}/essays/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -78,7 +93,7 @@ export default function Blog({ params }) {
             image: post.metadata.image
               ? `${metaData.baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${metaData.baseUrl}/blog/${post.slug}`,
+            url: `${metaData.baseUrl}/essays/${post.slug}`,
             author: {
               "@type": "Person",
               name: metaData.name,
@@ -86,6 +101,15 @@ export default function Blog({ params }) {
           }),
         }}
       />
+      
+      {/* Generative Art Hero Section */}
+      <GenerativeEssayHero
+        title={post.metadata.title}
+        summary={post.metadata.summary}
+        tags={post.metadata.tags}
+        className="-mx-4 sm:-mx-6 lg:-mx-8 mb-12"
+      />
+      
       <h1 className="title mb-3 font-medium text-2xl tracking-tight">
         {post.metadata.title}
       </h1>
