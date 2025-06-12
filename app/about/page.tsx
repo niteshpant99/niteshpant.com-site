@@ -20,20 +20,49 @@ export default function About() {
       </span>
     </div>
 
-    <div>
+    <div className="prose prose-neutral dark:prose-invert max-w-none">
       <p className="mb-4 mt-2">
-        I am an economist by training, consultant by trade, and a technology enthusiast at heart. Born and raised in Nepal, I came to the United States in 2018 to study at Dartmouth College, where I majored in Economics. My journey from the remote Far-Western region of Nepal to the Ivy League shaped my perspective on the transformative power of opportunity and education. After graduating in 2023, I worked as a management consultant at Roland Berger, focusing on healthcare and chemical industry projects.
-        </p>
-        <p className="mb-4">
-        Currently, I lead Product, Strategy and Growth at DevDash Labs. I spearhead our pivot to becoming an AI solutions provider, developing products that enhance operational efficiency for clients across multiple states. In the process, I learned to code and sell.
-        </p>
-        <p className="mb-4">
-        My experiences span from managing oxygen supply during COVID-19 in Nepal to evaluating multi-billion dollar M&A deals in Boston. These diverse challenges have taught me adaptability and resilience. Beyond work, I’m a part-time DJ, philosophy enthusiast, and rock climber. I believe in thinking long-term, valuing knowledge over money, and daring to be different. My mission is to leverage technology and economics to drive sustainable development, particularly in emerging markets.
+        I am an economist by training, a consultant by trade, and a technology enthusiast at heart. Born and raised in Nepal, I came to the United States <a href="/dartmouth">in 2018 to study at Dartmouth College</a>, where I majored in Economics. My journey from the remote Far-Western region of Nepal to the Ivy League shaped my perspective on the transformative power of opportunity and education.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-4">The Foundation: Pearl Group</h2>
+      <p className="mb-4">
+        My operational expertise comes from Pearl Group, our family's multi-service enterprise that I've been involved with since age 16. Starting in board meetings and bank negotiations, I learned to coordinate complex operations across education, healthcare, and infrastructure simultaneously.
+      </p>
+      <p className="mb-4">Pearl Group serves our community through:</p>
+      <ul className="mb-4">
+        <li><strong>Education</strong>: 2,500+ students across multiple programs</li>
+        <li><strong>Healthcare</strong>: 30,000+ annual patients through our medical facilities</li>
+        <li><strong>Infrastructure</strong>: Construction and development projects</li>
+      </ul>
+      <p className="mb-4">
+        Managing 250+ employees across these interconnected services taught me how decisions ripple through entire ecosystems, experiences that directly inform how I approach AI implementation today.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-4">From Nepal to the Global Stage</h2>
+      <p className="mb-4">
+        After graduating from Dartmouth in 2023, I worked <a href="/work">as a management consultant at Roland Berger</a>, focusing on healthcare and chemical industry projects. In the past, I've also interned at a hedge fund.
+      </p>
+      <p className="mb-4">
+        My experiences span from managing oxygen supply during the COVID-19 health crisis in Nepal to evaluating multi-billion-dollar M&A deals in Boston, teaching me adaptability and systems thinking across vastly different contexts.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-4">Building with AI</h2>
+      <p className="mb-4">
+        I'm the co-founder of <a target="_blank" href="https://devdashlabs.com">DevDash Labs</a>. I lead Product, Design, Strategy, and Growth at DevDash Labs. I spearheaded our transformation into an AI solutions provider. I've learned to code, sell, and build products that enhance operational efficiency for clients across multiple industries.
+      </p>
+      <p className="mb-4">
+        My approach combines traditional operational wisdom with cutting-edge AI capabilities. Having managed complex, interconnected services, I understand the nuances of implementing technology in environments where failure affects real people's lives.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-4">Beyond Work</h2>
+      <p className="mb-4">
+        I'm a part-time <a target="_blank" href="https://www.instagram.com/pantakanxa/">DJ</a>, philosophy enthusiast, and rock climber. I believe in thinking long-term, valuing knowledge over money, and daring to be different. My mission is to leverage technology and economics to drive sustainable development, particularly in emerging markets.
       </p>
     </div>
 
     <div className="relative flex w-full flex-col items-center justify-center text-left">
-      <p className="font-semibold mt-2 mb-2 text-lg">My Values</p> 
+      <p className="font-semibold mt-8 mb-2 text-lg">My Values</p> 
       <ol className="list-decimal pl-5"> 
         <li className="font-medium">Knowledge over money</li> 
         <li className="font-medium">Impact over profits</li>
