@@ -4,7 +4,7 @@ export const metaData = {
   name: "Nitesh",
   ogImage: "/opengraph-image.png",
   description:
-    "Portfolio page of Nitesh Pant. Half of the duo behind DevDash Labs. Former management consultant. Dartmouth College educated political economist.",
+    "Portfolio of Nitesh Pant. Co-founder, DevDash Labs. AI Implementation and Strategic Operations Leader. Dartmouth College educated political economist.",
 };
 
 export const socialLinks = {
