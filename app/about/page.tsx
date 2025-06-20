@@ -27,16 +27,16 @@ export default function About() {
 
       <h2 className="text-xl font-semibold mt-8 mb-4">The Foundation: Pearl Group</h2>
       <p className="mb-4">
-        My operational expertise comes from Pearl Group, our family's multi-service enterprise that I've been involved with since age 16. Starting in board meetings and bank negotiations, I learned to coordinate complex operations across education, healthcare, and infrastructure simultaneously.
+        My operational expertise comes from Pearl Group, our family's multi-service enterprise that I've been involved with since age 16. Starting in operations, meetings and bank negotiations, I learned to coordinate complex operations across education, healthcare, and infrastructure simultaneously.
       </p>
-      <p className="mb-4">Pearl Group serves our community through:</p>
+      <p className="mb-4">Pearl Group serves our community in Dhangadhi, Nepal through:</p>
       <ul className="mb-4">
         <li><strong>Education</strong>: 2,500+ students across multiple programs</li>
         <li><strong>Healthcare</strong>: 30,000+ annual patients through our medical facilities</li>
-        <li><strong>Infrastructure</strong>: Construction and development projects</li>
+        <li><strong>Infrastructure</strong>: Construction and development projects, 500+ seasonal employees</li>
       </ul>
       <p className="mb-4">
-        Managing 250+ employees across these interconnected services taught me how decisions ripple through entire ecosystems, experiences that directly inform how I approach AI implementation today.
+        Managing 250+ employees across these interconnected services taught me how decisions ripple through entire ecosystems, experiences that directly inform how I approach AI implementation today. Living through our successes and failures (of which there have been many) made me resilient and adaptable.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-4">From Nepal to the Global Stage</h2>
