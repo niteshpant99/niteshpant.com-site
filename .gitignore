@@ -38,3 +38,5 @@ next-env.d.ts
 
 repomix-output.txt
 .cursor
+.claude
+CLAUDE.md
