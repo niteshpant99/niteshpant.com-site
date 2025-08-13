@@ -1,7 +1,7 @@
 import React from "react";
-import { metaData } from "../config";
+import { metaData } from "../../config";
 import { Metadata } from "next";
-import { Meteors } from "../../components/ui/meteors";
+import { Meteors } from "@/components/ui/meteors";
 
 
 export const metadata: Metadata = {

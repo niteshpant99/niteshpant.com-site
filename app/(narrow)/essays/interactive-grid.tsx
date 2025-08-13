@@ -1,8 +1,8 @@
 // app/essays/interactive-grid.tsx
 "use client";
 
-import { InteractiveGridPattern } from "../../components/ui/interactive-grid-pattern";
-import { cn } from "../../lib/utils";
+import { InteractiveGridPattern } from "../../../components/ui/interactive-grid-pattern";
+import { cn } from "../../../lib/utils";
 import React from "react";
 
 interface InteractiveGridProps {

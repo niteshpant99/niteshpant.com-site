@@ -1,7 +1,7 @@
 // app/components/dartmouth/world-map-section.tsx
 "use client";
 
-import WorldMap from "../../components/ui/world-map";
+import WorldMap from "@/components/ui/world-map";
 import { motion } from "motion/react";
 import React from "react";
 

@@ -1,5 +1,5 @@
 // app/dartmouth/page.tsx
-import WorldMapSection from "../dartmouth/world-map-section";
+import WorldMapSection from "./world-map-section";
 import type { Metadata } from "next";
 import React from "react";
 

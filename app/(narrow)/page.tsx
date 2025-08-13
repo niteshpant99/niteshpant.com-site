@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { socialLinks } from "./config";
+import { socialLinks } from "../config";
 import React from "react";
 
 export default function Page() {

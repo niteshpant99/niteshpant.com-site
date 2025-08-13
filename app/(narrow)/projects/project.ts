@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import { projects } from '../projects/project-data';
+import { projects } from './project-data';
 
 export async function getProjectContent(slug: string) {
-  const filePath = path.join(process.cwd(), 'app/projects/content', `${slug}.mdx`);
+  const filePath = path.join(process.cwd(), 'app/(narrow)/projects/content', `${slug}.mdx`);
   
   try {
     const source = fs.readFileSync(filePath, 'utf8');

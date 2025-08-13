@@ -1,7 +1,7 @@
 // app/blog/page.tsx
 import Link from "next/link";
-import { formatDate, getBlogPosts } from "../../lib/posts";
-import {InteractiveGrid} from "../essays/interactive-grid";
+import { formatDate, getBlogPosts } from "@/lib/posts";
+import {InteractiveGrid} from "./interactive-grid";
 import React from "react";
 
 export const metadata = {
