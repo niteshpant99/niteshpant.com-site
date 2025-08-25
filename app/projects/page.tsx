@@ -120,7 +120,13 @@ export default function Projects() {
           Projects
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-          A showcase of products, client solutions, and open-source tools I've built to push the boundaries of AI and automation.
+          A showcase of products, client solutions, and open-source tools I've built to push the boundaries of AI and automation. 
+        </p>
+        <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Fun fact: this website is open source (MIT license). You can find the code on <a href="https://github.com/niteshpant99/niteshpant.com-site" className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">GitHub</a>.
+        </p>
+        <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Check out the prompt builder I've built to write prompts like a pro: <a href="/prompt" className="text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Prompt Builder</a>.
         </p>
       </div>
 

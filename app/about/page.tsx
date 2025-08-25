@@ -24,7 +24,6 @@ export default function About() {
       <p className="mb-4 mt-2">
         I am an economist by training, a consultant by trade, and a technology enthusiast at heart. Born and raised in Nepal, I came to the United States <a href="/dartmouth">in 2018 to study at Dartmouth College</a>, where I majored in Economics. My journey from the remote Far-Western region of Nepal to the Ivy League shaped my perspective on the transformative power of opportunity and education.
       </p>
-
       <h2 className="text-xl font-semibold mt-8 mb-4">From Nepal to the Global Stage</h2>
       <p className="mb-4">
         After graduating from Dartmouth in 2023, I worked <a href="/work">as a management consultant at Roland Berger</a>, focusing on healthcare and chemical industry projects. In the past, I've also interned at a hedge fund.
