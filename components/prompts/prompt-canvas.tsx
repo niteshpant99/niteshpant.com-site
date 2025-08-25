@@ -6,6 +6,8 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { StatsPanel } from './stats-panel';
 import { ExportPanel } from './export-panel';
+import { PortalToSlot } from '../portal-to-slot';
+import { TagsPanel } from './tags-panel';
 import { usePromptBuilder } from '../../hooks/use-prompt-builder';
 import { useStats } from '../../hooks/use-stats';
 
@@ -75,10 +77,14 @@ export function PromptCanvas() {
         <p className="text-sm text-muted-foreground">Create structured prompts with visual hierarchy</p>
       </div>
 
-      {/* Stats Panel - Mobile First */}
-      <StatsPanel stats={stats} />
+      {/* Stats Panel (portaled to right sidebar when available) */}
+      <PortalToSlot targetId="prompt-right-slot" fallback={<StatsPanel stats={stats} />}>
+        <div className="space-y-4">
+          <StatsPanel stats={stats} />
+        </div>
+      </PortalToSlot>
 
-      {/* Controls */}
+      {/* Controls + Tags */}
       <div className="bg-card rounded-md border border-border p-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-foreground">Controls</h3>
@@ -104,47 +110,24 @@ export function PromptCanvas() {
           </div>
         </div>
 
-        {/* Tag Management */}
-        <div className="space-y-3">
-          <h4 className="text-sm font-medium text-foreground">Custom Tags</h4>
-          
-          {state.customTags.length > 0 && (
-            <div className="flex flex-wrap gap-1 mb-2">
-              {state.customTags.map((tag) => (
-                <div key={tag} className="flex items-center gap-1 bg-secondary text-secondary-foreground px-2 py-1 rounded-md text-xs">
-                  <span className="font-mono uppercase">{tag}</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => actions.removeCustomTag(tag)}
-                    className="p-0 h-auto w-auto hover:bg-transparent"
-                  >
-                    <span className="text-xs">×</span>
-                  </Button>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="flex gap-2">
-            <Input
-              value={newTagInput}
-              onChange={(e) => setNewTagInput(e.target.value)}
-              placeholder="Add custom tag..."
-              className="flex-1 text-sm h-8"
-              onKeyDown={handleKeyDown}
+        <PortalToSlot
+          targetId="prompt-right-slot"
+          fallback={
+            <TagsPanel
+              customTags={state.customTags}
+              allTags={allTags}
+              onAddTag={(t) => { setNewTagInput(''); actions.addCustomTag(t); }}
+              onRemoveTag={actions.removeCustomTag}
             />
-            <Button
-              onClick={handleAddCustomTag}
-              variant="outline"
-              size="sm"
-              className="h-8 w-8 p-0"
-              disabled={!newTagInput.trim() || allTags.includes(newTagInput.trim().toLowerCase())}
-            >
-              <Plus className="w-3 h-3" />
-            </Button>
-          </div>
-        </div>
+          }
+        >
+          <TagsPanel
+            customTags={state.customTags}
+            allTags={allTags}
+            onAddTag={(t) => { setNewTagInput(''); actions.addCustomTag(t); }}
+            onRemoveTag={actions.removeCustomTag}
+          />
+        </PortalToSlot>
       </div>
 
       {/* Quick Copy Buttons */}
@@ -199,6 +182,28 @@ export function PromptCanvas() {
                     </option>
                   ))}
                 </select>
+                <div className="flex gap-1">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="text-xs px-2"
+                    onClick={() => actions.indentBox(box.id)}
+                    title="Indent (nest under previous)"
+                  >
+                    →
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="text-xs px-2"
+                    onClick={() => actions.outdentBox(box.id)}
+                    title="Outdent"
+                  >
+                    ←
+                  </Button>
+                </div>
                 {state.boxes.length > 1 && (
                   <Button
                     variant="outline"
@@ -216,6 +221,7 @@ export function PromptCanvas() {
                 onChange={(e) => actions.updateBox(box.id, 'content', e.target.value)}
                 rows={3}
                 className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground text-sm resize-y"
+                data-box-id={box.id}
                 placeholder={`Enter your ${box.tag} content here...`}
               />
             </div>
@@ -230,8 +236,13 @@ export function PromptCanvas() {
         </div>
       </div>
 
-      {/* Export Panel */}
-      <ExportPanel exportData={exportData} onExport={actions.exportPrompt} />
+      {/* Export Panel (portaled to left sidebar when available) */}
+      <PortalToSlot
+        targetId="prompt-left-slot"
+        fallback={<ExportPanel exportData={exportData} onExport={actions.exportPrompt} />}
+      >
+        <ExportPanel exportData={exportData} onExport={actions.exportPrompt} />
+      </PortalToSlot>
     </div>
   );
 } 

@@ -7,6 +7,7 @@ import type {
   ExportFormat 
 } from '../types/prompt-builder';
 import { DEFAULT_TAGS, STORAGE_KEY } from '../types/prompt-builder';
+import { db } from '../lib/db';
 
 const DEFAULT_BOXES: PromptBox[] = [
   {
@@ -78,6 +79,35 @@ export function usePromptBuilder() {
     }
   }, [state.boxes, state.connections, state.customTags, isLoaded]);
 
+  // Debounced autosave to IndexedDB (best-effort, non-blocking)
+  useEffect(() => {
+    if (!isLoaded) return;
+    const controller = new AbortController();
+    const timeout = setTimeout(async () => {
+      if (controller.signal.aborted) return;
+      try {
+        const now = Date.now();
+        await db.prompts.put({
+          id: 0, // reserve a stable record id for autosave
+          name: 'Autosave',
+          createdAt: now,
+          updatedAt: now,
+          state: {
+            boxes: state.boxes,
+            connections: state.connections,
+            customTags: state.customTags,
+          },
+        });
+      } catch (err) {
+        console.warn('IndexedDB autosave failed (non-blocking):', err);
+      }
+    }, 800);
+    return () => {
+      controller.abort();
+      clearTimeout(timeout);
+    };
+  }, [state.boxes, state.connections, state.customTags, isLoaded]);
+
   const updateBox = useCallback((id: string, field: 'tag' | 'content', value: string) => {
     setState(prev => ({
       ...prev,
@@ -85,6 +115,67 @@ export function usePromptBuilder() {
         box.id === id ? { ...box, [field]: value } : box
       )
     }));
+  }, []);
+
+  const indentBox = useCallback((id: string) => {
+    setState(prev => {
+      const index = prev.boxes.findIndex(b => b.id === id);
+      if (index <= 0) return prev;
+      const prevBox = prev.boxes[index - 1];
+      const targetLevel = prevBox.position.level + 1;
+      const boxes = prev.boxes.map((b, i) =>
+        i === index ? { ...b, parentId: prevBox.id, position: { ...b.position, level: targetLevel } } : b
+      );
+      return { ...prev, boxes };
+    });
+  }, []);
+
+  const outdentBox = useCallback((id: string) => {
+    setState(prev => {
+      const index = prev.boxes.findIndex(b => b.id === id);
+      if (index < 0) return prev;
+      const box = prev.boxes[index];
+      const newLevel = Math.max(0, box.position.level - 1);
+      let newParentId: string | undefined = undefined;
+      if (newLevel > 0) {
+        // find an ancestor candidate whose level is newLevel - 1 by walking backwards
+        for (let i = index - 1; i >= 0; i--) {
+          const candidate = prev.boxes[i];
+          if (candidate.position.level === newLevel - 1) {
+            newParentId = candidate.id;
+            break;
+          }
+        }
+      }
+      const boxes = prev.boxes.map((b) =>
+        b.id === id ? { ...b, parentId: newParentId, position: { ...b.position, level: newLevel } } : b
+      );
+      return { ...prev, boxes };
+    });
+  }, []);
+
+  const moveBoxUp = useCallback((id: string) => {
+    setState(prev => {
+      const idx = prev.boxes.findIndex(b => b.id === id);
+      if (idx <= 0) return prev;
+      const boxes = prev.boxes.slice();
+      const tmp = boxes[idx - 1];
+      boxes[idx - 1] = boxes[idx];
+      boxes[idx] = tmp;
+      return { ...prev, boxes };
+    });
+  }, []);
+
+  const moveBoxDown = useCallback((id: string) => {
+    setState(prev => {
+      const idx = prev.boxes.findIndex(b => b.id === id);
+      if (idx < 0 || idx >= prev.boxes.length - 1) return prev;
+      const boxes = prev.boxes.slice();
+      const tmp = boxes[idx + 1];
+      boxes[idx + 1] = boxes[idx];
+      boxes[idx] = tmp;
+      return { ...prev, boxes };
+    });
   }, []);
 
   const addBox = useCallback(() => {
@@ -154,20 +245,60 @@ export function usePromptBuilder() {
   }, []);
 
   const exportPrompt = useCallback((): ExportFormat => {
-    const xml = state.boxes
-      .filter(box => box.content.trim())
-      .map(box => `<${box.tag}>\n${box.content}\n</${box.tag}>`)
-      .join('\n\n');
+    type Node = { box: PromptBox; children: Node[] };
+    const stack: Node[] = [];
+    const roots: Node[] = [];
 
-    const markdown = state.boxes
-      .filter(box => box.content.trim())
-      .map(box => `## ${box.tag.charAt(0).toUpperCase() + box.tag.slice(1)}\n\n${box.content}`)
-      .join('\n\n');
+    const contentBoxes = state.boxes.filter(b => b.content.trim());
+
+    for (const b of contentBoxes) {
+      const node: Node = { box: b, children: [] };
+      while (stack.length && stack[stack.length - 1].box.position.level >= b.position.level) {
+        stack.pop();
+      }
+      if (stack.length === 0) {
+        roots.push(node);
+      } else {
+        stack[stack.length - 1].children.push(node);
+      }
+      stack.push(node);
+    }
+
+    const renderXml = (nodes: Node[]): string => {
+      return nodes.map(n => {
+        const inner = [n.box.content, renderXml(n.children)].filter(Boolean).join('\n');
+        return `<${n.box.tag}>\n${inner}\n</${n.box.tag}>`;
+      }).join('\n\n');
+    };
+
+    const renderMd = (nodes: Node[], baseLevel = 2): string => {
+      return nodes.map(n => {
+        const heading = '#'.repeat(baseLevel + n.box.position.level) + ' ' + (n.box.tag.charAt(0).toUpperCase() + n.box.tag.slice(1));
+        const childrenMd = renderMd(n.children, baseLevel);
+        return [heading, '', n.box.content, childrenMd].filter(Boolean).join('\n');
+      }).join('\n\n');
+    };
+
+    const xml = renderXml(roots);
+    const markdown = renderMd(roots);
 
     return { xml, markdown };
   }, [state.boxes]);
 
   const allTags = [...DEFAULT_TAGS, ...state.customTags];
+
+  const replaceState = useCallback((next: {
+    boxes: PromptBox[];
+    connections: Connection[];
+    customTags: string[];
+  }) => {
+    setState(prev => ({
+      ...prev,
+      boxes: next.boxes,
+      connections: next.connections,
+      customTags: next.customTags,
+    }));
+  }, []);
 
   return {
     state,
@@ -180,7 +311,12 @@ export function usePromptBuilder() {
       removeCustomTag,
       clearAllContent,
       resetToDefault,
-      exportPrompt
+      exportPrompt,
+      indentBox,
+      outdentBox,
+      moveBoxUp,
+      moveBoxDown,
+      replaceState
     }
   };
 } 
