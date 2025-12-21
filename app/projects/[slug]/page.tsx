@@ -8,16 +8,18 @@ import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 
 const statusColors = {
   live: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
-  beta: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400", 
+  beta: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
   development: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
-  'open-source': "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400"
+  'open-source': "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400",
+  archived: "bg-muted text-muted-foreground"
 };
 
 const statusLabels = {
   live: "Live",
-  beta: "Beta", 
+  beta: "Beta",
   development: "In Development",
-  'open-source': "Open Source"
+  'open-source': "Open Source",
+  archived: "Archived"
 };
 
 interface Props {

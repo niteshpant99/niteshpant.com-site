@@ -5,7 +5,7 @@ export interface Project {
   description: string;
   url: string;
   category: 'products' | 'client-solutions' | 'tools-opensource';
-  status: 'live' | 'beta' | 'development' | 'open-source';
+  status: 'live' | 'beta' | 'development' | 'open-source' | 'archived';
   featured: boolean;
   technologies?: string[];
 }
@@ -31,10 +31,10 @@ export const projects: Project[] = [
     title: "Atlantis",
     subtitle: "Research Automation Platform",
     year: 2025,
-    description: "A sophisticated research automation platform that embeds the power of deep research directly into your existing applications and workflows.",
+    description: "A sophisticated research automation platform that embeds the power of deep research directly into your existing applications and workflows. (Beta)",
     url: "https://atlantis.devdashlabs.com",
     category: 'products',
-    status: 'beta',
+    status: 'live',
     featured: true,
     technologies: ['AI Agents', 'Research Automation', 'API Integration', 'Web Scraping']
   },
@@ -50,13 +50,24 @@ export const projects: Project[] = [
     technologies: ['CRM', 'Automation', 'AI Research', 'Lead Scoring', 'Email Automation']
   },
   {
+    title: "alkemy",
+    subtitle: "AI Operating System for Consulting Firms",
+    year: 2025,
+    description: "Never rebuild what you've already built. The first AI purpose-built for consulting firms—from M&A research to knowledge management.",
+    url: "https://alkemy.devdashlabs.com",
+    category: 'products',
+    status: 'development',
+    featured: true,
+    technologies: ['AI Agents', 'Knowledge Management', 'RAG', 'M&A Research', 'GraphRAG']
+  },
+  {
     title: "Kafka",
     subtitle: "Content Generation Platform",
     year: 2024,
     description: "A content generation platform that automates the entire research, writing, and editing pipeline using multi-agent systems.",
     url: "https://devdashlabs.com",
     category: 'products',
-    status: 'beta',
+    status: 'archived',
     featured: false,
     technologies: ['Multi-Agent Systems', 'Content AI', 'Automation', 'NLP']
   },
@@ -78,7 +89,7 @@ export const projects: Project[] = [
     description: "AI powered earnings day trading assistant - earn on earnings. Analyzes Real-Time Holdings EXpertly for part-time investors.",
     url: "https://arthex.io/",
     category: 'products',
-    status: 'development',  
+    status: 'archived',
     featured: true,
     technologies: ['AI/ML', 'Financial Data', 'Real-time Analytics', 'Next.js']
   },
@@ -91,7 +102,7 @@ export const projects: Project[] = [
     description: "AI-powered intelligence platform for global management consulting firm that transforms traditional Excel-based analysis into dynamic insights.",
     url: "#",
     category: 'client-solutions',
-    status: 'development',
+    status: 'archived',
     featured: true,
     technologies: ['AI Intelligence', 'Real-time APIs', 'Cost Modeling', 'Data Analytics']
   },
@@ -108,6 +119,17 @@ export const projects: Project[] = [
   },
   
   // Tools & Open Source
+  {
+    title: "nocaap",
+    subtitle: "Package Manager for AI Context",
+    year: 2025,
+    description: "Normalized Organizational Context-as-a-Package. A CLI that standardizes how AI agents discover and consume organizational knowledge.",
+    url: "https://github.com/niteshpant99/nocaap",
+    category: 'tools-opensource',
+    status: 'open-source',
+    featured: true,
+    technologies: ['Node.js', 'CLI', 'Git', 'AI Context', 'TypeScript']
+  },
   {
     title: "Nova Hospital Census app",
     subtitle: "Mobile Healthcare Tool",

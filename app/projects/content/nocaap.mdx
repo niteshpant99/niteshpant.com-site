@@ -1,0 +1,135 @@
+---
+title: "nocaap"
+---
+
+**Normalized Organizational Context-as-a-Package**
+
+> "No scattered docs. No inconsistent AI. No cap."
+
+nocaap is a developer-first CLI tool that standardizes how AI agents (Cursor, Copilot, Claude) discover and consume organizational knowledge. It uses a Hub-and-Spoke Git architecture to fetch documentation from various repositories into a unified, AI-optimized local index.
+
+Check out the project on [GitHub](https://github.com/niteshpant99/nocaap).
+
+## The Problem
+
+Your AI coding assistant is only as good as its context.
+
+Your Security SOPs are in one repo, Design Tokens in another, and API specs in a third. Your AI is guessing.
+
+nocaap creates a standardized `.context/` folder in your project, populated with the exact versions of the documents your team needs.
+
+## Key Features
+
+### Hub-and-Spoke Discovery
+One "Registry" file maps your entire organization's knowledge. Users just select "Engineering" or "Finance" from a menu.
+
+### Native Git Security
+We don't handle tokens. If you have SSH access to the repo via GitHub/GitLab, it works. If you don't, it skips. Zero configuration.
+
+### Lightning Fast
+Uses `git sparse-checkout` and `partial clones` to fetch *only* the specific documentation folders you need, not the entire repo history.
+
+### AI Optimized
+Auto-generates a token-conscious `INDEX.md` that guides AI agents to the right files without blowing up context windows.
+
+### Private Repo Support
+Seamlessly handles private repositories using your existing SSH keys - no tokens to manage.
+
+## Installation
+
+```bash
+# Install directly from GitHub
+npm install -g git+https://github.com/niteshpant99/nocaap.git
+
+# Or with SSH
+npm install -g git+ssh://git@github.com:niteshpant99/nocaap.git
+
+# Or run without installing
+npx github:niteshpant99/nocaap setup
+```
+
+## Usage
+
+### Setup Wizard (Recommended)
+```bash
+nocaap setup
+```
+Connects to your organization's registry and lets you interactively select contexts.
+
+### Manual Add
+```bash
+# Add a full repo
+nocaap add git@github.com:your-org/engineering-standards.git
+
+# Add a specific folder (Sparse Checkout)
+nocaap add git@github.com:your-org/monorepo.git --path docs/security --alias security-docs
+```
+
+### Update & Sync
+```bash
+nocaap update
+```
+Checks for updates, verifies file integrity, and regenerates the index.
+
+### Other Commands
+```bash
+nocaap list      # List installed packages
+nocaap remove    # Remove a package
+nocaap generate  # Regenerate INDEX.md
+```
+
+## Directory Structure
+
+nocaap manages everything inside `.context/`:
+
+```text
+project-root/
+├── .gitignore            # Should include .context/packages/
+├── .context/
+│   ├── context.config.json   # Manifest of installed contexts
+│   ├── context.lock          # Exact commit SHAs for reproducibility
+│   ├── INDEX.md              # THE file you point your AI to
+│   └── packages/             # Cloned content (Partial clones)
+│       ├── engineering/
+│       └── design-system/
+```
+
+## AI Integration
+
+To make your AI aware of the context, mention `@.context/INDEX.md` in your prompt, or configure your editor:
+
+**VS Code / Cursor:**
+```json
+{
+  "github.copilot.chat.context.additionalContextFiles": [
+    ".context/INDEX.md"
+  ]
+}
+```
+
+## Private Repository Support
+
+| Repository Type | How It Works |
+|----------------|--------------|
+| **Public** | Direct HTTP fetch (fast) |
+| **Private** | SSH clone (uses your `~/.ssh` keys) |
+
+No tokens to manage, no credentials to store - true "Zero Auth" design.
+
+## Setting Up Your Organization's Context Hub
+
+Want to create your own context registry? Use the official starter template:
+
+**[nocaap-context-template](https://github.com/niteshpant99/nocaap-context-template)**
+
+1. Fork the template
+2. Add your organization's documentation
+3. Push - the registry auto-updates via GitHub Actions
+
+Your team can then point nocaap to your new registry and start using it immediately.
+
+## Why nocaap?
+
+The name stands for "Normalized Organizational Context-as-a-Package" - treating organizational context as a versioned, shareable package that AI tools can consume.
+
+Teams don't have to keep copy-pasting the same internal information into agents like Claude or Cursor. Define your organizational identity, past projects, and delivery practices once, and reuse that context across all AI workflows.

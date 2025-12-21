@@ -8,16 +8,26 @@ import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 
 const statusColors = {
   live: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
-  beta: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400", 
+  beta: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
   development: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
-  'open-source': "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400"
+  'open-source': "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400",
+  archived: "bg-muted text-muted-foreground"
 };
 
 const statusLabels = {
   live: "Live",
-  beta: "Beta", 
+  beta: "Beta",
   development: "In Development",
-  'open-source': "Open Source"
+  'open-source': "Open Source",
+  archived: "Archived"
+};
+
+const statusPriority = {
+  live: 0,
+  beta: 1,
+  development: 2,
+  'open-source': 3,
+  archived: 4
 };
 
 interface ProjectCardProps {
@@ -111,7 +121,12 @@ export default function Projects() {
       if (activeFilter === 'all') return true;
       return project.category === activeFilter;
     })
-    .sort((a, b) => b.year - a.year); // Sort by year, newest first
+    .sort((a, b) => {
+      // Primary: year descending (newest first)
+      if (b.year !== a.year) return b.year - a.year;
+      // Secondary: status priority (live first, archived last)
+      return statusPriority[a.status] - statusPriority[b.status];
+    });
 
   return (
     <section className="space-y-8">
