@@ -22,6 +22,14 @@ const statusLabels = {
   archived: "Archived"
 };
 
+const statusPriority = {
+  live: 0,
+  beta: 1,
+  development: 2,
+  'open-source': 3,
+  archived: 4
+};
+
 interface ProjectCardProps {
   project: Project;
 }
@@ -113,7 +121,12 @@ export default function Projects() {
       if (activeFilter === 'all') return true;
       return project.category === activeFilter;
     })
-    .sort((a, b) => b.year - a.year); // Sort by year, newest first
+    .sort((a, b) => {
+      // Primary: year descending (newest first)
+      if (b.year !== a.year) return b.year - a.year;
+      // Secondary: status priority (live first, archived last)
+      return statusPriority[a.status] - statusPriority[b.status];
+    });
 
   return (
     <section className="space-y-8">

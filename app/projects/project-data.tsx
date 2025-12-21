@@ -31,10 +31,10 @@ export const projects: Project[] = [
     title: "Atlantis",
     subtitle: "Research Automation Platform",
     year: 2025,
-    description: "A sophisticated research automation platform that embeds the power of deep research directly into your existing applications and workflows.",
+    description: "A sophisticated research automation platform that embeds the power of deep research directly into your existing applications and workflows. (Beta)",
     url: "https://atlantis.devdashlabs.com",
     category: 'products',
-    status: 'beta',
+    status: 'live',
     featured: true,
     technologies: ['AI Agents', 'Research Automation', 'API Integration', 'Web Scraping']
   },
