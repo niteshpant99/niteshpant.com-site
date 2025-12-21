@@ -120,6 +120,17 @@ export const projects: Project[] = [
   
   // Tools & Open Source
   {
+    title: "nocaap",
+    subtitle: "Package Manager for AI Context",
+    year: 2025,
+    description: "Normalized Organizational Context-as-a-Package. A CLI that standardizes how AI agents discover and consume organizational knowledge.",
+    url: "https://github.com/niteshpant99/nocaap",
+    category: 'tools-opensource',
+    status: 'open-source',
+    featured: true,
+    technologies: ['Node.js', 'CLI', 'Git', 'AI Context', 'TypeScript']
+  },
+  {
     title: "Nova Hospital Census app",
     subtitle: "Mobile Healthcare Tool",
     year: 2024,
