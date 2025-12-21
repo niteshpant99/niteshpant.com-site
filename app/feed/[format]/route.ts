@@ -34,6 +34,9 @@ export async function GET(
     description: metaData.description,
     id: BaseUrl,
     link: BaseUrl,
+    language: "en",
+    image: `${BaseUrl}opengraph-image.png`,
+    favicon: `${BaseUrl}favicon.svg`,
     copyright: `All rights reserved ${new Date().getFullYear()}, ${
       metaData.title
     }`,
@@ -42,6 +45,11 @@ export async function GET(
       json: `${BaseUrl}feed.json`,
       atom: `${BaseUrl}atom.xml`,
       rss: `${BaseUrl}rss.xml`,
+    },
+    author: {
+      name: "Nitesh Pant",
+      email: "nitesh@niteshpant.com",
+      link: BaseUrl,
     },
   });
 
@@ -63,6 +71,13 @@ export async function GET(
         term: tag,
       })),
       date: new Date(post.metadata.publishedAt),
+      author: [
+        {
+          name: "Nitesh Pant",
+          email: "nitesh@niteshpant.com",
+          link: BaseUrl,
+        },
+      ],
     });
   });
 
