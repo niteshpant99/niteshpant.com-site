@@ -60,15 +60,15 @@ export default function Work() {
                 <ul className="space-y-2">
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
-                    <strong>Chemical Industry Intelligence Platform</strong>: Partnering with leading global management consulting firm to build real-time asset monitoring system, reducing analysis time from weeks to minutes
+                    <strong>Market Data Analytics Pipeline Automation</strong>: Built automated data pipeline for marketing strategy firm, processing 500+ daily signals from Meta, LinkedIn, GA4 &amp; Reddit with AI-powered insights, achieving 30 min daily savings per client project
                   </li>
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
-                    <strong>Healthcare SaaS Brand Strategy</strong>: Delivered complete brand overhaul, GTM framework, and AI-powered customer support for anesthesia management platform, positioning client for accelerated growth
+                    <strong>Architecture &amp; Design for AI Startup</strong>: Enabled pre-seed funding for service-as-a-software AI marketing platform by turning consulting IP into a scalable product with delivered prototype and technical system architecture
                   </li>
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
-                    <strong>Prescription Verification Automation</strong>: Engineered AI system for online eyewear retailer, reducing processing times from days to seconds while eliminating manual workload
+                    <strong>Market Monitoring Intelligence</strong>: Sales intelligence agent for B2B manufacturing, processing 500+ daily signals from 50+ sources in multiple languages, automating procurement intel 3-4 months before RFQ
                   </li>
                 </ul>
               </div>
@@ -78,15 +78,19 @@ export default function Work() {
                 <ul className="space-y-2">
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
-                    <strong><a href="https://atlantis.devdashlabs.com" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">Atlantis</a></strong>: Research automation platform for embedded intelligence workflows
-                  </li>
-                  <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
-                    <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
                     <strong><a href="https://devdashlabs.com/products/luna" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">Luna</a></strong>: Enterprise AI chatbot with advanced RAG capabilities
                   </li>
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
-                    <strong><a href="https://arthex.io" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">Arthex</a></strong>: AI-powered earnings analysis tool for retail investors
+                    <strong><a href="https://atlantis.devdashlabs.com" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">Atlantis</a></strong>: Research automation platform for embedded intelligence workflows
+                  </li>
+                  <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
+                    <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
+                    <strong>GrowthOS</strong>: Sales intelligence platform for B2B client acquisition—identify, engage, outreach
+                  </li>
+                  <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
+                    <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
+                    <strong><a href="https://alkemy.devdashlabs.com" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">alkemy</a></strong>: AI operating system for consulting firms—map, catalog, search
                   </li>
                 </ul>
               </div>
