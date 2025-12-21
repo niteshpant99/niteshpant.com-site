@@ -1,4 +1,4 @@
-// app/blog/page.tsx
+// app/essays/page.tsx
 import Link from "next/link";
 import { formatDate, getBlogPosts } from "../../lib/posts";
 import {InteractiveGrid} from "../essays/interactive-grid";

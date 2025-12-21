@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.tsx
+// app/essays/[slug]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
