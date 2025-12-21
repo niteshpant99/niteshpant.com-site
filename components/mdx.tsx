@@ -9,6 +9,7 @@ import { YouTubeComponent } from "./youtube";
 import { ImageGrid } from "./image-grid";
 import { XMLPromptEditor } from "./xml-prompt-editor";
 import { CodeBlockWithCopy } from "./code-block-with-copy";
+import { PhotoCarousel } from "./photo-carousel";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
@@ -124,6 +125,7 @@ let components = {
   Caption: CaptionComponent,
   YouTube: YouTubeComponent,
   XMLPromptEditor,
+  PhotoCarousel,
   code: Code,
   pre: Pre,
   Table,
