@@ -24,21 +24,6 @@ export default function About() {
       <p className="mb-4 mt-2">
         I am an economist by training, a consultant by trade, and a technology enthusiast at heart. Born and raised in Nepal, I came to the United States <a href="/dartmouth">in 2018 to study at Dartmouth College</a>, where I majored in Economics. My journey from the remote Far-Western region of Nepal to the Ivy League shaped my perspective on the transformative power of opportunity and education.
       </p>
-
-      <h2 className="text-xl font-semibold mt-8 mb-4">The Foundation: Pearl Group</h2>
-      <p className="mb-4">
-        My operational expertise comes from Pearl Group, our family's multi-service enterprise that I've been involved with since age 16. Starting in operations, meetings and bank negotiations, I learned to coordinate complex operations across education, healthcare, and infrastructure simultaneously.
-      </p>
-      <p className="mb-4">Pearl Group serves our community in Dhangadhi, Nepal through:</p>
-      <ul className="mb-4">
-        <li><strong>Education</strong>: 2,500+ students across multiple programs</li>
-        <li><strong>Healthcare</strong>: 30,000+ annual patients through our medical facilities</li>
-        <li><strong>Infrastructure</strong>: Construction and development projects, 500+ seasonal employees</li>
-      </ul>
-      <p className="mb-4">
-        Managing 250+ employees across these interconnected services taught me how decisions ripple through entire ecosystems, experiences that directly inform how I approach AI implementation today. Living through our successes and failures (of which there have been many) made me resilient and adaptable.
-      </p>
-
       <h2 className="text-xl font-semibold mt-8 mb-4">From Nepal to the Global Stage</h2>
       <p className="mb-4">
         After graduating from Dartmouth in 2023, I worked <a href="/work">as a management consultant at Roland Berger</a>, focusing on healthcare and chemical industry projects. In the past, I've also interned at a hedge fund.
