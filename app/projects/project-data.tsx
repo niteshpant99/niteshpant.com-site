@@ -50,6 +50,17 @@ export const projects: Project[] = [
     technologies: ['CRM', 'Automation', 'AI Research', 'Lead Scoring', 'Email Automation']
   },
   {
+    title: "alkemy",
+    subtitle: "AI Operating System for Consulting Firms",
+    year: 2025,
+    description: "Never rebuild what you've already built. The first AI purpose-built for consulting firms—from M&A research to knowledge management.",
+    url: "https://alkemy.devdashlabs.com",
+    category: 'products',
+    status: 'development',
+    featured: true,
+    technologies: ['AI Agents', 'Knowledge Management', 'RAG', 'M&A Research', 'GraphRAG']
+  },
+  {
     title: "Kafka",
     subtitle: "Content Generation Platform",
     year: 2024,
