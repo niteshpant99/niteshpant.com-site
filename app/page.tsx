@@ -79,19 +79,19 @@ export default function Page() {
 
       <h1 className="mb-6 text-2xl tracking-tight">
         Hello world!<br />
-        <span className="font-bold">I'm Nitesh Pant.</span>
+        <span className="font-bold">I&apos;m Nitesh Pant.</span>
       </h1>
       <h2 className="text-[#00693e] dark:text-[#a5d75f] font-bold">I seek impact.</h2>
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I'm the co-founder of <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, an applied AI research and development company. We build products to solve the hardest problems for our customers. Our mission is to ignite the AI revolution within organizations. DevDash Labs exists to do great work. This is powered by world-class Nepali talent with global ambitions.
+          I&apos;m the co-founder of <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, an applied AI research and development company. We build products to solve the hardest problems for our customers. Our mission is to ignite the AI revolution within organizations. DevDash Labs exists to do great work. This is powered by world-class Nepali talent with global ambitions.
         </p>
         <p>
           I grew up in Nepal, went to <a target="_blank" rel="noopener noreferrer" href="https://www.dartmouth.edu">Dartmouth College</a> (studied economics and government), and worked as a management consultant at <a target="_blank" rel="noopener noreferrer" href="https://www.rolandberger.com">Roland Berger</a>. 
         </p>
         <p>
-          At DevDash, we are building out products to change the knowledge industry, tools for deep research, tools for sales, and implementing client solutions. We believe in AI's potential to empower people and organizations, and we work alongside our customers to solve hard problems with our exceptional team.
+          At DevDash, we are building out products to change the knowledge industry, tools for deep research, tools for sales, and implementing client solutions. We believe in AI&apos;s potential to empower people and organizations, and we work alongside our customers to solve hard problems with our exceptional team.
         </p>
         <p>
           Connect with me <a href="mailto:nitesh.pant@devdashlabs.com">via email</a> to collaborate on projects. Plus points for fintech and AI products!

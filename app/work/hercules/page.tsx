@@ -1,6 +1,6 @@
 // app/work/hercules/page.tsx
 'use client';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
@@ -10,6 +10,51 @@ import { Button } from "../../../components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
 import { HelpCircle } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
+// Move InstructionsDialog outside the component
+function InstructionsDialog() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="secondary" size="icon" className="absolute top-4 right-4 bg-[--prose-link-decoration] hover:bg-[--prose-link-decoration-hover] shadow-lg hover:shadow-xl transition-shadow">
+          <HelpCircle className="h-10 w-10" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>How to Use This Simulator</DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-6 py-4">
+          <div className="space-y-3">
+            <h3 className="font-medium">Configuration Options:</h3>
+            <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+              <li><span className="font-medium text-foreground">Per Practitioner Fee</span>: Toggle and set a monthly fee charged per practitioner</li>
+              <li><span className="font-medium text-foreground">Price Per Case</span>: Set the fee charged for each anesthesia case</li>
+              <li><span className="font-medium text-foreground">Minimum Cases</span>: Set the minimum number of cases included in the base price</li>
+            </ul>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="font-medium">Understanding the Views:</h3>
+            <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
+              <li>
+                <span className="font-medium text-foreground">Revenue Matrix</span>: Shows total monthly revenue and margins for different combinations of:
+                <ul className="list-circle pl-4 mt-1 space-y-1">
+                  <li>Number of practitioners (rows)</li>
+                  <li>Additional cases beyond minimum (columns)</li>
+                </ul>
+              </li>
+              <li>
+                <span className="font-medium text-foreground">Breakeven Analysis</span>: Shows how many cases per practitioner are needed to reach the breakeven point ($29,781) at different practice sizes
+              </li>
+            </ul>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 const MONTHLY_COSTS = 29780.51;
 const MIN_PRACTITIONERS = 10;
@@ -64,18 +109,18 @@ const PricingSimulator = () => {
   );
 
   // Calculate revenue for a given scenario
-  const calculateRevenue = (numPractitioners: number, extraCasesPerPractitioner: number): SimulationResult => {
+  const calculateRevenue = useCallback((numPractitioners: number, extraCasesPerPractitioner: number): SimulationResult => {
     const totalCases = numPractitioners * (config.minimumCases + extraCasesPerPractitioner);
-    
+
     let baseRevenue = 0;
     if (config.usePractitionerFee) {
       baseRevenue = numPractitioners * config.baseFee;
     }
-    
+
     const caseRevenue = totalCases * config.caseRate;
     const totalRevenue = baseRevenue + caseRevenue;
     const margin = ((totalRevenue - MONTHLY_COSTS) / totalRevenue) * 100;
-    
+
     const profitability = (() => {
       const profit = totalRevenue - MONTHLY_COSTS;
       if (profit < -MONTHLY_COSTS * 0.5) return 'high-loss';
@@ -94,15 +139,15 @@ const PricingSimulator = () => {
       breaksEven: totalRevenue >= MONTHLY_COSTS,
       profitability
     };
-  };
+  }, [config]);
 
   // Generate data for matrix view
-  const matrixData = useMemo(() => 
+  const matrixData = useMemo(() =>
     practitioners.map(practitioner => ({
       practitioner,
       revenues: additionalCases.map(cases => calculateRevenue(practitioner, cases))
     })),
-    [practitioners, additionalCases, config, calculateRevenue]
+    [practitioners, additionalCases, calculateRevenue]
   );
 
   // Generate data for breakeven analysis
@@ -154,50 +199,6 @@ const PricingSimulator = () => {
       maximumFractionDigits: 1,
     }).format(value / 100);
   };
-
-  const InstructionsDialog = () => {
-    return (
-        <Dialog>
-        <DialogTrigger asChild>
-            <Button variant="secondary" size="icon" className="absolute top-4 right-4 bg-[--prose-link-decoration] hover:bg-[--prose-link-decoration-hover] shadow-lg hover:shadow-xl transition-shadow">
-            <HelpCircle className="h-10 w-10" />
-            </Button>
-        </DialogTrigger>
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-            <DialogHeader>
-            <DialogTitle>How to Use This Simulator</DialogTitle>
-            </DialogHeader>
-            
-            <div className="space-y-6 py-4">
-            <div className="space-y-3">
-                <h3 className="font-medium">Configuration Options:</h3>
-                <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
-                <li><span className="font-medium text-foreground">Per Practitioner Fee</span>: Toggle and set a monthly fee charged per practitioner</li>
-                <li><span className="font-medium text-foreground">Price Per Case</span>: Set the fee charged for each anesthesia case</li>
-                <li><span className="font-medium text-foreground">Minimum Cases</span>: Set the minimum number of cases included in the base price</li>
-                </ul>
-            </div>
-
-            <div className="space-y-3">
-                <h3 className="font-medium">Understanding the Views:</h3>
-                <ul className="list-disc pl-6 space-y-2 text-sm text-muted-foreground">
-                <li>
-                    <span className="font-medium text-foreground">Revenue Matrix</span>: Shows total monthly revenue and margins for different combinations of:
-                    <ul className="list-circle pl-4 mt-1 space-y-1">
-                    <li>Number of practitioners (rows)</li>
-                    <li>Additional cases beyond minimum (columns)</li>
-                    </ul>
-                </li>
-                <li>
-                    <span className="font-medium text-foreground">Breakeven Analysis</span>: Shows how many cases per practitioner are needed to reach the breakeven point ($29,781) at different practice sizes
-                </li>
-                </ul>
-            </div>
-            </div>
-        </DialogContent>
-        </Dialog>
-    );
-    };
 
   return (
        
