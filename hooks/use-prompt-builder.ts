@@ -1,10 +1,9 @@
 import { useState, useCallback, useEffect } from 'react';
-import type { 
-  PromptBox, 
-  PromptBuilderState, 
-  Position,
+import type {
+  PromptBox,
+  PromptBuilderState,
   Connection,
-  ExportFormat 
+  ExportFormat
 } from '../types/prompt-builder';
 import { DEFAULT_TAGS, STORAGE_KEY } from '../types/prompt-builder';
 
@@ -37,37 +36,49 @@ const DEFAULT_BOXES: PromptBox[] = [
 
 const DEFAULT_CONNECTIONS: Connection[] = [];
 
-export function usePromptBuilder() {
-  const [state, setState] = useState<PromptBuilderState>({
-    boxes: DEFAULT_BOXES,
-    connections: DEFAULT_CONNECTIONS,
-    customTags: [],
-    stats: { characterCount: 0, wordCount: 0, estimatedTokens: 0, boxCount: 0 }
-  });
+const DEFAULT_STATE: PromptBuilderState = {
+  boxes: DEFAULT_BOXES,
+  connections: DEFAULT_CONNECTIONS,
+  customTags: [],
+  stats: { characterCount: 0, wordCount: 0, estimatedTokens: 0, boxCount: 0 }
+};
 
-  const [isLoaded, setIsLoaded] = useState(false);
+// Cache loaded state at module level to avoid re-reading during re-renders
+let cachedState: PromptBuilderState | null = null;
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const savedState = JSON.parse(saved);
-        setState(prev => ({
-          ...prev,
-          ...savedState
-        }));
-      }
-    } catch (error) {
-      console.error('Failed to load saved state:', error);
+function getStoredState(): PromptBuilderState {
+  if (cachedState) return cachedState;
+
+  if (typeof window === 'undefined') {
+    return DEFAULT_STATE;
+  }
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const savedState = JSON.parse(saved);
+      const loadedState: PromptBuilderState = {
+        ...DEFAULT_STATE,
+        ...savedState
+      };
+      cachedState = loadedState;
+      return loadedState;
     }
-    setIsLoaded(true);
-  }, []);
+  } catch (error) {
+    console.error('Failed to load saved state:', error);
+  }
+
+  cachedState = DEFAULT_STATE;
+  return DEFAULT_STATE;
+}
+
+export function usePromptBuilder() {
+  const [state, setState] = useState<PromptBuilderState>(getStoredState());
 
   // Save to localStorage whenever state changes
   useEffect(() => {
-    if (!isLoaded) return;
     try {
+      cachedState = state;
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         boxes: state.boxes,
         connections: state.connections,
@@ -76,7 +87,7 @@ export function usePromptBuilder() {
     } catch (error) {
       console.error('Failed to save state:', error);
     }
-  }, [state.boxes, state.connections, state.customTags, isLoaded]);
+  }, [state]);
 
   const updateBox = useCallback((id: string, field: 'tag' | 'content', value: string) => {
     setState(prev => ({

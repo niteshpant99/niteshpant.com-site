@@ -1,15 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Connection } from '../../types/prompt-builder';
 
 interface ConnectionLinesProps {
   connections: Connection[];
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export function ConnectionLines({ connections, containerRef }: ConnectionLinesProps) {
-  if (!containerRef.current || connections.length === 0) {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(containerRef.current !== null);
+  }, [containerRef]);
+
+  if (!isReady || connections.length === 0) {
     return null;
   }
 

@@ -1,4 +1,4 @@
-// app/blog/page.tsx
+// app/essays/page.tsx
 import Link from "next/link";
 import { formatDate, getBlogPosts } from "../../lib/posts";
 import {InteractiveGrid} from "../essays/interactive-grid";
@@ -6,7 +6,7 @@ import React from "react";
 
 export const metadata = {
   title: "Essays",
-  description: "Essasy by Nitesh Pant",
+  description: "Essays and writings by Nitesh Pant on AI, technology, entrepreneurship, and political economy.",
 };
 
 export default function BlogPosts() {

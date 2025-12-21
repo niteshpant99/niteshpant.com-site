@@ -71,7 +71,7 @@ export function PromptCanvas() {
     <div className="w-full space-y-4">
       {/* Header */}
       <div className="text-center space-y-1">
-        <h1 className="text-2xl font-bold text-foreground">Nitesh's Power Prompt Tool</h1>
+        <h1 className="text-2xl font-bold text-foreground">Nitesh&apos;s Power Prompt Tool</h1>
         <p className="text-sm text-muted-foreground">Create structured prompts with visual hierarchy</p>
       </div>
 
@@ -224,7 +224,7 @@ export function PromptCanvas() {
           {state.boxes.length === 0 && (
             <div className="text-center text-muted-foreground py-8">
               <div className="text-sm font-medium mb-1">No prompt sections yet</div>
-              <div className="text-xs">Click "Add Section" to get started</div>
+              <div className="text-xs">Click &quot;Add Section&quot; to get started</div>
             </div>
           )}
         </div>

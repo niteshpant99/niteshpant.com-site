@@ -15,7 +15,7 @@ export default function Work() {
           Work
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-          My journey spans from management consulting and hedge fund investing to co-founding an applied AI research and development company. I've led transformative projects across healthcare, petrochemicals, and fintech, from evaluating billion-dollar M&A deals to building AI products that drive measurable business impact. Currently focused on making AI accessible and practical for businesses of all sizes at DevDash Labs.
+          My journey spans from management consulting and hedge fund investing to co-founding an applied AI research and development company. I&apos;ve led transformative projects across healthcare, petrochemicals, and fintech, from evaluating billion-dollar M&amp;A deals to building AI products that drive measurable business impact. Currently focused on making AI accessible and practical for businesses of all sizes at DevDash Labs.
         </p>
       </div>
 
@@ -47,12 +47,12 @@ export default function Work() {
                   DevDash Labs
                 </h3>
                 <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Co-founder, Product, Design & Growth Lead
+                  Co-founder & CEO
                 </p>
               </div>
               
               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                I design great products and experiences for people, solve complex problems for businesses as a forward-deployed engineer and strategist working onsite with clients, and manage this emerging applied AI research and development company. If you're in Nepal, and are an ambitious recent graduate, come work with us!
+                Product, Design &amp; Growth Lead. I design great products and experiences for people, solve complex problems for businesses as a forward-deployed engineer and strategist working onsite with clients, and manage this emerging applied AI research and development company. If you&apos;re in Nepal, and are an ambitious recent graduate, come work with us!
               </p>
 
               <div className="space-y-3">
@@ -119,7 +119,7 @@ export default function Work() {
               </div>
               
               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                Contributing to strategic operations for our family's community-focused enterprise serving Far-West Nepal, a multi-service enterprise with NPR 500M+ annual turnover (~$3.75M USD). I've supported coordination across education, healthcare, and infrastructure divisions while managing 250+ employees across interconnected service lines affecting 30,000+ people annually.
+                Contributing to strategic operations for our family&apos;s community-focused enterprise serving Far-West Nepal, a multi-service enterprise with NPR 500M+ annual turnover (~$3.75M USD). I&apos;ve supported coordination across education, healthcare, and infrastructure divisions while managing 250+ employees across interconnected service lines affecting 30,000+ people annually.
               </p>
 
               <div className="space-y-3">
@@ -127,7 +127,7 @@ export default function Work() {
                 <ul className="space-y-2">
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>
-                    <strong>Axis Vidyashram</strong>: Educating 2,500+ students annually, providing quality education access in a region with limited educational opportunities—grown from 150 students under my mother's visionary leadership
+                    <strong>Axis Vidyashram</strong>: Educating 2,500+ students annually, providing quality education access in a region with limited educational opportunities—grown from 150 students under my mother&apos;s visionary leadership
                   </li>
                   <li className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-4 relative">
                     <span className="absolute left-0 top-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-600 rounded-full"></span>

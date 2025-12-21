@@ -12,6 +12,12 @@ interface PromptSection {
   isCustom?: boolean;
 }
 
+interface StoredState {
+  sections: PromptSection[];
+  customTags: string[];
+  isXmlSectionCollapsed: boolean;
+}
+
 const DEFAULT_TAG_OPTIONS = ['persona', 'task', 'context', 'output'] as const;
 
 const defaultSections: PromptSection[] = [
@@ -23,44 +29,58 @@ const defaultSections: PromptSection[] = [
 
 const STORAGE_KEY = 'xml-prompt-editor-state';
 
-export function XMLPromptEditor() {
-  const [sections, setSections] = useState<PromptSection[]>(defaultSections);
-  const [copied, setCopied] = useState(false);
-  const [customTags, setCustomTags] = useState<string[]>([]);
-  const [editingTag, setEditingTag] = useState<string | null>(null);
-  const [newTagInput, setNewTagInput] = useState('');
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isXmlSectionCollapsed, setIsXmlSectionCollapsed] = useState(false);
+// Cache loaded state at module level to avoid re-reading during re-renders
+let cachedStoredState: StoredState | null = null;
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const { sections: savedSections, customTags: savedCustomTags, isXmlSectionCollapsed: savedCollapsed } = JSON.parse(saved);
-        setSections(savedSections || defaultSections);
-        setCustomTags(savedCustomTags || []);
-        setIsXmlSectionCollapsed(savedCollapsed || false);
-      }
-    } catch (error) {
-      console.error('Failed to load saved state:', error);
+function getStoredState(): StoredState {
+  if (cachedStoredState) return cachedStoredState;
+
+  const defaultState: StoredState = {
+    sections: defaultSections,
+    customTags: [],
+    isXmlSectionCollapsed: false
+  };
+
+  if (typeof window === 'undefined') {
+    return defaultState;
+  }
+
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      cachedStoredState = {
+        sections: parsed.sections || defaultSections,
+        customTags: parsed.customTags || [],
+        isXmlSectionCollapsed: parsed.isXmlSectionCollapsed || false
+      };
+      return cachedStoredState;
     }
-    setIsLoaded(true);
-  }, []);
+  } catch (error) {
+    console.error('Failed to load saved state:', error);
+  }
+
+  cachedStoredState = defaultState;
+  return defaultState;
+}
+
+export function XMLPromptEditor() {
+  const [sections, setSections] = useState<PromptSection[]>(getStoredState().sections);
+  const [copied, setCopied] = useState(false);
+  const [customTags, setCustomTags] = useState<string[]>(getStoredState().customTags);
+  const [newTagInput, setNewTagInput] = useState('');
+  const [isXmlSectionCollapsed, setIsXmlSectionCollapsed] = useState(getStoredState().isXmlSectionCollapsed);
 
   // Save to localStorage whenever sections or customTags change
   useEffect(() => {
-    if (!isLoaded) return; // Don't save until we've loaded
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        sections,
-        customTags,
-        isXmlSectionCollapsed
-      }));
+      const newState = { sections, customTags, isXmlSectionCollapsed };
+      cachedStoredState = newState;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
     } catch (error) {
       console.error('Failed to save state:', error);
     }
-  }, [sections, customTags, isXmlSectionCollapsed, isLoaded]);
+  }, [sections, customTags, isXmlSectionCollapsed]);
 
   const allTags = React.useMemo(() => [...DEFAULT_TAG_OPTIONS, ...customTags], [customTags]);
 

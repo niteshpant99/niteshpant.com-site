@@ -3,6 +3,8 @@ import { getBlogPosts } from "../../../lib/posts";
 import { metaData } from "../../config";
 import { NextResponse } from "next/server";
 
+type Params = Promise<{ format: string }>;
+
 export async function generateStaticParams() {
   return [
     { format: "rss.xml" },
@@ -13,9 +15,9 @@ export async function generateStaticParams() {
 
 export async function GET(
   _: Request,
-  { params }: { params: { format: string } }
+  { params }: { params: Params }
 ) {
-  const { format } = params;
+  const { format } = await params;
   const validFormats = ["rss.xml", "atom.xml", "feed.json"];
 
   if (!validFormats.includes(format)) {
@@ -34,6 +36,9 @@ export async function GET(
     description: metaData.description,
     id: BaseUrl,
     link: BaseUrl,
+    language: "en",
+    image: `${BaseUrl}opengraph-image.png`,
+    favicon: `${BaseUrl}favicon.svg`,
     copyright: `All rights reserved ${new Date().getFullYear()}, ${
       metaData.title
     }`,
@@ -43,12 +48,17 @@ export async function GET(
       atom: `${BaseUrl}atom.xml`,
       rss: `${BaseUrl}rss.xml`,
     },
+    author: {
+      name: "Nitesh Pant",
+      email: "nitesh@niteshpant.com",
+      link: BaseUrl,
+    },
   });
 
   const allPosts = await getBlogPosts();
 
   allPosts.forEach((post) => {
-    const postUrl = `${BaseUrl}blog/${post.slug}`;
+    const postUrl = `${BaseUrl}essays/${post.slug}`;
     const categories = post.metadata.tags
       ? post.metadata.tags.split(",").map((tag) => tag.trim())
       : [];
@@ -63,6 +73,13 @@ export async function GET(
         term: tag,
       })),
       date: new Date(post.metadata.publishedAt),
+      author: [
+        {
+          name: "Nitesh Pant",
+          email: "nitesh@niteshpant.com",
+          link: BaseUrl,
+        },
+      ],
     });
   });
 

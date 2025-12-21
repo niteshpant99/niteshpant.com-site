@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 
 import { cn } from "../../lib/utils";
@@ -8,20 +8,22 @@ import { cn } from "../../lib/utils";
 interface MeteorsProps extends React.HTMLAttributes<HTMLSpanElement> {
   number?: number;
 }
-export const Meteors = ({ number = 20, ...props }: MeteorsProps) => {
-  const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>(
-    [],
-  );
 
-  useEffect(() => {
-    const styles = [...new Array(number)].map(() => ({
-      top: -5,
-      left: Math.floor(Math.random() * window.innerWidth) + "px",
-      animationDelay: Math.random() * 1 + 0.2 + "s",
-      animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
-    }));
-    setMeteorStyles(styles);
-  }, [number]);
+// Generate meteor styles outside component to avoid impure function calls during render
+function generateMeteorStyles(count: number): Array<React.CSSProperties> {
+  return [...new Array(count)].map((_, index) => ({
+    top: -5,
+    // Use deterministic pseudo-random values based on index
+    left: `${((index * 37) % 100)}%`,
+    animationDelay: `${(((index * 13) % 10) / 10 + 0.2).toFixed(1)}s`,
+    animationDuration: `${((index * 7) % 8) + 2}s`,
+  }));
+}
+
+export const Meteors = ({ number = 20, ...props }: MeteorsProps) => {
+  const [meteorStyles] = useState<Array<React.CSSProperties>>(() =>
+    generateMeteorStyles(number)
+  );
 
   return (
     <>

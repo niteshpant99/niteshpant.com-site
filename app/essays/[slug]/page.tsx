@@ -1,10 +1,12 @@
-// app/blog/[slug]/page.tsx
+// app/essays/[slug]/page.tsx
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomMDX } from "../../../components/mdx";
 import { formatDate, getBlogPosts } from "../../../lib/posts";
 import { metaData } from "../../config";
 import React from "react";
+
+type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -16,8 +18,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+}: {
+  params: Params;
 }): Promise<Metadata | undefined> {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  const { slug } = await params;
+  let post = getBlogPosts().find((post) => post.slug === slug);
   if (!post) {
     return;
   }
@@ -40,7 +45,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${metaData.baseUrl}/blog/${post.slug}`,
+      url: `${metaData.baseUrl}/essays/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -56,12 +61,61 @@ export async function generateMetadata({
   };
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }: { params: Params }) {
+  const { slug } = await params;
+  let post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
   }
+
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.metadata.title,
+    datePublished: post.metadata.publishedAt,
+    dateModified: post.metadata.publishedAt,
+    description: post.metadata.summary,
+    image: post.metadata.image
+      ? `${metaData.baseUrl}${post.metadata.image}`
+      : `${metaData.baseUrl}og?title=${encodeURIComponent(post.metadata.title)}`,
+    url: `${metaData.baseUrl}essays/${post.slug}`,
+    author: {
+      "@type": "Person",
+      name: "Nitesh Pant",
+      url: metaData.baseUrl,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Nitesh Pant",
+      url: metaData.baseUrl,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: metaData.baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Essays",
+        item: `${metaData.baseUrl}essays`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.metadata.title,
+        item: `${metaData.baseUrl}essays/${post.slug}`,
+      },
+    ],
+  };
 
   return (
     <section>
@@ -69,22 +123,14 @@ export default function Blog({ params }) {
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${metaData.baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${metaData.baseUrl}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: metaData.name,
-            },
-          }),
+          __html: JSON.stringify(blogPostingSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
       <h1 className="title mb-3 font-medium text-2xl tracking-tight">

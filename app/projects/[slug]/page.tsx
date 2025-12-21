@@ -5,6 +5,7 @@ import { getProjectContent } from "../project";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
+import { metaData } from "../../config";
 
 const statusColors = {
   live: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
@@ -22,15 +23,16 @@ const statusLabels = {
   archived: "Archived"
 };
 
+type Params = Promise<{ slug: string }>;
+
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Params;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const project = projects.find(
-    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === slug
   );
 
   if (!project) {
@@ -39,22 +41,45 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const ogImage = `${metaData.baseUrl}og?title=${encodeURIComponent(project.title)}`;
+
   return {
     title: project.title,
     description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      type: "article",
+      url: `${metaData.baseUrl}projects/${slug}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: [ogImage],
+    },
   };
 }
 
 export default async function ProjectPage({ params }: Props) {
+  const { slug } = await params;
   const project = projects.find(
-    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === slug
   );
 
   if (!project) {
     notFound();
   }
 
-  const content = await getProjectContent(params.slug);
+  const content = await getProjectContent(slug);
 
   if (!content) {
     notFound();
@@ -62,9 +87,63 @@ export default async function ProjectPage({ params }: Props) {
 
   const categoryInfo = projectCategories[project.category];
 
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.title,
+    description: project.description,
+    url: project.url !== "#" ? project.url : `${metaData.baseUrl}projects/${slug}`,
+    applicationCategory: project.category === 'products' ? "BusinessApplication" : "DeveloperApplication",
+    author: {
+      "@type": "Person",
+      name: "Nitesh Pant",
+      url: metaData.baseUrl,
+    },
+    datePublished: `${project.year}-01-01`,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: metaData.baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Projects",
+        item: `${metaData.baseUrl}projects`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: project.title,
+        item: `${metaData.baseUrl}projects/${slug}`,
+      },
+    ],
+  };
+
   return (
     <article className="space-y-8">
-      <Link 
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(projectSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <Link
         href="/projects"
         className="inline-flex items-center text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
       >
