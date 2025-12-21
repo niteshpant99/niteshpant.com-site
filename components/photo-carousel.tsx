@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -25,7 +26,44 @@ interface PhotoCarouselProps {
 }
 
 export function PhotoCarousel({ photos }: PhotoCarouselProps) {
-  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const selectedPhoto = selectedIndex !== null ? photos[selectedIndex] : null;
+  const isOpen = selectedIndex !== null;
+
+  const goToPrev = useCallback(() => {
+    if (selectedIndex !== null && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+    }
+  }, [selectedIndex]);
+
+  const goToNext = useCallback(() => {
+    if (selectedIndex !== null && selectedIndex < photos.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
+    }
+  }, [selectedIndex, photos.length]);
+
+  const handleClose = () => setSelectedIndex(null);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goToPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        goToNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, goToPrev, goToNext]);
+
+  const canGoPrev = selectedIndex !== null && selectedIndex > 0;
+  const canGoNext = selectedIndex !== null && selectedIndex < photos.length - 1;
 
   return (
     <>
@@ -42,7 +80,7 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
               >
                 <div
                   className="cursor-pointer group"
-                  onClick={() => setSelectedPhoto(photo)}
+                  onClick={() => setSelectedIndex(index)}
                 >
                   <div className="relative h-[280px] overflow-hidden">
                     <Image
@@ -73,10 +111,25 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
       </div>
 
       {/* Lightbox Dialog */}
-      <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 border-0 bg-transparent shadow-none">
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 border-0 bg-transparent shadow-none [&>button]:hidden">
           {selectedPhoto && (
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
+              {/* Previous button */}
+              {canGoPrev && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToPrev();
+                  }}
+                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/50 hover:bg-black/70 text-white transition-colors"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+              )}
+
+              {/* Image */}
               <Image
                 src={selectedPhoto.src}
                 alt={selectedPhoto.alt}
@@ -84,11 +137,32 @@ export function PhotoCarousel({ photos }: PhotoCarouselProps) {
                 height={800}
                 className="w-full h-auto max-h-[85vh] object-contain"
               />
+
+              {/* Next button */}
+              {canGoNext && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goToNext();
+                  }}
+                  className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/50 hover:bg-black/70 text-white transition-colors"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              )}
+
+              {/* Caption */}
               {selectedPhoto.caption && (
                 <p className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-sm p-3 text-center">
                   {selectedPhoto.caption}
                 </p>
               )}
+
+              {/* Photo counter */}
+              <p className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1">
+                {selectedIndex! + 1} / {photos.length}
+              </p>
             </div>
           )}
         </DialogContent>
