@@ -19,6 +19,19 @@ export const metadata: Metadata = {
     template: `%s | ${metaData.title}`,
   },
   description: metaData.description,
+  authors: [{ name: "Nitesh Pant", url: metaData.baseUrl }],
+  creator: "Nitesh Pant",
+  publisher: "Nitesh Pant",
+  keywords: [
+    "Nitesh Pant",
+    "DevDash Labs",
+    "AI Implementation",
+    "AI Consulting",
+    "Dartmouth",
+    "Political Economy",
+    "Technology",
+    "Entrepreneurship",
+  ],
   openGraph: {
     images: metaData.ogImage,
     title: metaData.title,
@@ -40,8 +53,10 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: metaData.name,
+    title: metaData.title,
     card: "summary_large_image",
+    creator: "@niteshpant56",
+    description: metaData.description,
   },
   icons: {
     icon: "/favicon.svg",
