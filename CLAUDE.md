@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio and blog website for Nitesh Pant built with Next.js 14 (App Router), TypeScript, and Tailwind CSS. Features essays, projects, and an interactive prompt builder tool.
+Personal portfolio and blog website for Nitesh Pant built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS. Features essays, projects, and an interactive prompt builder tool.
 
 **Live site:** https://niteshpant.com/
 
@@ -38,6 +38,13 @@ pnpm typecheck    # TypeScript type checking
 - Dynamic routes: `[slug]` for essays and projects
 - Layout grouping: `(narrow)` for layout variants
 - Feed routes: `/rss.xml`, `/atom.xml`, `/feed.json` via rewrites in next.config.js
+- **Async params**: Dynamic route params must be awaited (Next.js 15+ pattern):
+  ```typescript
+  type Params = Promise<{ slug: string }>;
+  export default async function Page({ params }: { params: Params }) {
+    const { slug } = await params;
+  }
+  ```
 
 ### Styling
 - Tailwind CSS with CSS variables for theming
@@ -81,3 +88,5 @@ Key files: `components/xml-prompt-editor.tsx`, `hooks/use-prompt-builder.ts`, `t
 - No database; all content is file-based
 - Rebuilding regenerates RSS/Atom/JSON feeds
 - Site metadata configured in `app/config.ts`
+- ESLint uses flat config format (`eslint.config.mjs`)
+- Build uses webpack (`next build --webpack`) for compatibility
