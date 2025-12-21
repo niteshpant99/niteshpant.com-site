@@ -38,3 +38,6 @@ next-env.d.ts
 
 repomix-output.txt
 .cursor
+
+# context
+.context/
