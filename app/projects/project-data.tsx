@@ -5,7 +5,7 @@ export interface Project {
   description: string;
   url: string;
   category: 'products' | 'client-solutions' | 'tools-opensource';
-  status: 'live' | 'beta' | 'development' | 'open-source';
+  status: 'live' | 'beta' | 'development' | 'open-source' | 'archived';
   featured: boolean;
   technologies?: string[];
 }
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     description: "A content generation platform that automates the entire research, writing, and editing pipeline using multi-agent systems.",
     url: "https://devdashlabs.com",
     category: 'products',
-    status: 'beta',
+    status: 'archived',
     featured: false,
     technologies: ['Multi-Agent Systems', 'Content AI', 'Automation', 'NLP']
   },
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     description: "AI powered earnings day trading assistant - earn on earnings. Analyzes Real-Time Holdings EXpertly for part-time investors.",
     url: "https://arthex.io/",
     category: 'products',
-    status: 'development',  
+    status: 'archived',
     featured: true,
     technologies: ['AI/ML', 'Financial Data', 'Real-time Analytics', 'Next.js']
   },
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     description: "AI-powered intelligence platform for global management consulting firm that transforms traditional Excel-based analysis into dynamic insights.",
     url: "#",
     category: 'client-solutions',
-    status: 'development',
+    status: 'archived',
     featured: true,
     technologies: ['AI Intelligence', 'Real-time APIs', 'Cost Modeling', 'Data Analytics']
   },
