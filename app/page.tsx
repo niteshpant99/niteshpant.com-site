@@ -1,10 +1,71 @@
 import Image from "next/image";
-import { socialLinks } from "./config";
+import { socialLinks, metaData } from "./config";
 import React from "react";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Nitesh Pant",
+  url: metaData.baseUrl,
+  image: `${metaData.baseUrl}profile.jpg`,
+  jobTitle: "Co-founder",
+  worksFor: {
+    "@type": "Organization",
+    name: "DevDash Labs",
+    url: "https://devdashlabs.com",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Dartmouth College",
+    url: "https://www.dartmouth.edu",
+  },
+  sameAs: [
+    socialLinks.twitter,
+    socialLinks.github,
+    socialLinks.linkedin,
+  ],
+  knowsAbout: [
+    "Artificial Intelligence",
+    "AI Implementation",
+    "Political Economy",
+    "Management Consulting",
+    "Product Development",
+  ],
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "DevDash Labs",
+  url: "https://devdashlabs.com",
+  logo: "https://devdashlabs.com/logo.png",
+  description: "Applied AI research and development company building products to solve the hardest problems.",
+  founder: {
+    "@type": "Person",
+    name: "Nitesh Pant",
+  },
+  foundingDate: "2024",
+  areaServed: "Worldwide",
+  knowsAbout: ["AI Solutions", "Research Automation", "Enterprise AI"],
+};
 
 export default function Page() {
   return (
     <section>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema),
+        }}
+      />
       <a href={socialLinks.twitter} target="_blank">
         <Image
           src="/profile.jpg"
