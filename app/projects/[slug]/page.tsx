@@ -23,15 +23,16 @@ const statusLabels = {
   archived: "Archived"
 };
 
+type Params = Promise<{ slug: string }>;
+
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Params;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const project = projects.find(
-    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === slug
   );
 
   if (!project) {
@@ -40,7 +41,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const slug = project.title.toLowerCase().replace(/\s+/g, '-');
   const ogImage = `${metaData.baseUrl}og?title=${encodeURIComponent(project.title)}`;
 
   return {
@@ -70,22 +70,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProjectPage({ params }: Props) {
+  const { slug } = await params;
   const project = projects.find(
-    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === params.slug
+    (p) => p.title.toLowerCase().replace(/\s+/g, '-') === slug
   );
 
   if (!project) {
     notFound();
   }
 
-  const content = await getProjectContent(params.slug);
+  const content = await getProjectContent(slug);
 
   if (!content) {
     notFound();
   }
 
   const categoryInfo = projectCategories[project.category];
-  const slug = project.title.toLowerCase().replace(/\s+/g, '-');
 
   const projectSchema = {
     "@context": "https://schema.org",

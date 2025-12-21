@@ -6,6 +6,8 @@ import { formatDate, getBlogPosts } from "../../../lib/posts";
 import { metaData } from "../../config";
 import React from "react";
 
+type Params = Promise<{ slug: string }>;
+
 export async function generateStaticParams() {
   let posts = getBlogPosts();
 
@@ -16,8 +18,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+}: {
+  params: Params;
 }): Promise<Metadata | undefined> {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  const { slug } = await params;
+  let post = getBlogPosts().find((post) => post.slug === slug);
   if (!post) {
     return;
   }
@@ -56,8 +61,9 @@ export async function generateMetadata({
   };
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }: { params: Params }) {
+  const { slug } = await params;
+  let post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();

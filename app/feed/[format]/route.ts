@@ -3,6 +3,8 @@ import { getBlogPosts } from "../../../lib/posts";
 import { metaData } from "../../config";
 import { NextResponse } from "next/server";
 
+type Params = Promise<{ format: string }>;
+
 export async function generateStaticParams() {
   return [
     { format: "rss.xml" },
@@ -13,9 +15,9 @@ export async function generateStaticParams() {
 
 export async function GET(
   _: Request,
-  { params }: { params: { format: string } }
+  { params }: { params: Params }
 ) {
-  const { format } = params;
+  const { format } = await params;
   const validFormats = ["rss.xml", "atom.xml", "feed.json"];
 
   if (!validFormats.includes(format)) {

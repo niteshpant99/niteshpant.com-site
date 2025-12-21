@@ -47,12 +47,12 @@ export default function Work() {
                   DevDash Labs
                 </h3>
                 <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Co-founder, Product, Design & Growth Lead
+                  Co-founder & CEO
                 </p>
               </div>
               
               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                I design great products and experiences for people, solve complex problems for businesses as a forward-deployed engineer and strategist working onsite with clients, and manage this emerging applied AI research and development company. If you're in Nepal, and are an ambitious recent graduate, come work with us!
+                Product, Design & Growth Lead.I design great products and experiences for people, solve complex problems for businesses as a forward-deployed engineer and strategist working onsite with clients, and manage this emerging applied AI research and development company. If you're in Nepal, and are an ambitious recent graduate, come work with us!
               </p>
 
               <div className="space-y-3">
