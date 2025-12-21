@@ -71,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
+    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
       <head>
         <link
           rel="alternate"
