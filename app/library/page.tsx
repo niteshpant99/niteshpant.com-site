@@ -81,26 +81,10 @@ export default function LibraryPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <StatCard
-          label="Read"
-          value={stats.read}
-          color="bg-green-100 dark:bg-green-900/20"
-        />
-        <StatCard
-          label="Reading"
-          value={stats.reading}
-          color="bg-blue-100 dark:bg-blue-900/20"
-        />
-        <StatCard
-          label="Want to Read"
-          value={stats.wantToRead}
-          color="bg-neutral-100 dark:bg-neutral-800"
-        />
-        <StatCard
-          label="Pages Read"
-          value={stats.totalPages.toLocaleString()}
-          color="bg-purple-100 dark:bg-purple-900/20"
-        />
+        <StatCard label="Read" value={stats.read} />
+        <StatCard label="Reading" value={stats.reading} />
+        <StatCard label="Want to Read" value={stats.wantToRead} />
+        <StatCard label="Pages Read" value={stats.totalPages.toLocaleString()} />
       </div>
 
       {/* Controls */}
@@ -111,26 +95,26 @@ export default function LibraryPage() {
             {filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}
           </span>
 
-          <div className="flex items-center gap-2 p-1 bg-neutral-100 dark:bg-neutral-800 rounded-md">
+          <div className="flex items-center gap-0 border border-neutral-200 dark:border-neutral-800">
             <button
               onClick={() => setViewMode('shelf')}
-              className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium transition-colors ${
                 viewMode === 'shelf'
-                  ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 shadow-sm'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
+                  ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
+                  : 'bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
               }`}
             >
-              📚 Shelf
+              Shelf
             </button>
             <button
               onClick={() => setViewMode('stack')}
-              className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium transition-colors border-l border-neutral-200 dark:border-neutral-800 ${
                 viewMode === 'stack'
-                  ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 shadow-sm'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
+                  ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
+                  : 'bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
               }`}
             >
-              📖 Stack
+              Stack
             </button>
           </div>
         </div>
@@ -161,7 +145,7 @@ export default function LibraryPage() {
           <select
             value={genreFilter}
             onChange={(e) => setGenreFilter(e.target.value)}
-            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
           >
             <option value="all">All Genres</option>
             {availableGenres.map((genre) => (
@@ -175,7 +159,7 @@ export default function LibraryPage() {
           <select
             value={ratingFilter}
             onChange={(e) => setRatingFilter(Number(e.target.value))}
-            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
           >
             <option value={0}>Any Rating</option>
             <option value={5}>★★★★★ only</option>
@@ -208,16 +192,12 @@ export default function LibraryPage() {
 function StatCard({
   label,
   value,
-  color,
 }: {
   label: string;
   value: string | number;
-  color: string;
 }) {
   return (
-    <div
-      className={`p-4 rounded-lg ${color} border border-neutral-200 dark:border-neutral-800`}
-    >
+    <div className="p-4 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
       <div className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
         {value}
       </div>
@@ -240,7 +220,7 @@ function FilterButton({
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1.5 text-sm font-medium transition-colors border rounded ${
+      className={`px-3 py-1.5 text-sm font-medium transition-colors border ${
         active
           ? 'bg-neutral-900 text-white border-neutral-900 dark:bg-neutral-100 dark:text-neutral-900 dark:border-neutral-100'
           : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300 dark:bg-neutral-950 dark:text-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700'

@@ -73,24 +73,17 @@ export function BookSpine({ book, index }: BookSpineProps) {
 
           {/* Vertical text */}
           <div
-            className="absolute inset-2 flex flex-col items-center justify-center gap-2 overflow-hidden"
-            style={{
-              writingMode: 'vertical-rl',
-              textOrientation: 'mixed',
-            }}
+            className="absolute inset-x-0 top-4 bottom-4 flex items-center justify-center overflow-hidden"
           >
-            {/* Author - smaller, at top */}
             <span
-              className="text-xs font-normal opacity-80 truncate max-h-24"
-              style={{ color: book.textColor }}
-            >
-              {book.author}
-            </span>
-
-            {/* Title - larger, main text */}
-            <span
-              className="text-sm font-medium truncate max-h-48"
-              style={{ color: book.textColor }}
+              className="font-medium whitespace-nowrap"
+              style={{
+                color: book.textColor,
+                writingMode: 'vertical-rl',
+                textOrientation: 'mixed',
+                fontSize: spineWidth < 35 ? '10px' : '12px',
+                letterSpacing: '0.5px',
+              }}
             >
               {book.title}
             </span>

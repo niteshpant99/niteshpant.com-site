@@ -18,7 +18,7 @@ export function Bookshelf({ books, viewMode }: BookshelfProps) {
 
   if (books.length === 0) {
     return (
-      <div className="text-center py-16 border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50">
+      <div className="text-center py-12 border border-neutral-200 dark:border-neutral-800">
         <p className="text-neutral-500 dark:text-neutral-400">
           No books found matching your filters.
         </p>

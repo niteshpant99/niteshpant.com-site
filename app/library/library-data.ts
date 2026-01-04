@@ -298,6 +298,6 @@ export function getUniqueYears(): number[] {
 }
 
 export function calculateSpineWidth(pageCount: number): number {
-  // Normalize: 100 pages = 24px, 700+ pages = 72px
-  return Math.max(24, Math.min(72, pageCount / 10 + 14));
+  // Normalize: 100 pages = 30px min, 700+ pages = 70px max
+  return Math.max(30, Math.min(70, pageCount / 8 + 18));
 }
