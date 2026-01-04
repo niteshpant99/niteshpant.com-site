@@ -42,18 +42,17 @@ function ShelfView({
 }) {
   return (
     <div className="relative">
-      {/* Full-width breakout container */}
+      {/* Constrained to parent width (640px) */}
       <div
         ref={containerRef}
         className={cn(
-          'relative w-screen left-1/2 right-1/2 -mx-[50vw]',
           'overflow-x-auto overflow-y-visible',
           'scrollbar-thin scrollbar-track-neutral-100 scrollbar-thumb-neutral-300',
           'dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600'
         )}
       >
         {/* Bookshelf container */}
-        <div className="min-w-max px-8 md:px-16 lg:px-24 pt-44 pb-8">
+        <div className="min-w-max pt-44 pb-8 px-2">
           {/* Books row */}
           <div className="flex items-end gap-0.5">
             {books.map((book, index) => (
@@ -70,8 +69,8 @@ function ShelfView({
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-0 right-0 left-0 flex justify-center pb-2">
-        <p className="text-xs text-neutral-400 dark:text-neutral-500 bg-white/80 dark:bg-neutral-950/80 px-3 py-1 rounded-full">
+      <div className="flex justify-center mt-2">
+        <p className="text-xs text-neutral-400 dark:text-neutral-500">
           ← Scroll to browse →
         </p>
       </div>
