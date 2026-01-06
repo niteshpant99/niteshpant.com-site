@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect, useState, useMemo } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import type { Book } from '../../app/library/library-data';
+import { calculateSpineWidth } from '../../app/library/library-data';
 import { BookSpine } from './book-spine';
 import { BookCoverImage } from './book-cover-image';
 import Link from 'next/link';
@@ -14,8 +15,6 @@ interface BookshelfProps {
 }
 
 export function Bookshelf({ books, viewMode }: BookshelfProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   if (books.length === 0) {
     return (
       <div className="text-center py-12 border border-neutral-200 dark:border-neutral-800">
@@ -30,135 +29,212 @@ export function Bookshelf({ books, viewMode }: BookshelfProps) {
     return <StackView books={books} />;
   }
 
-  return <ShelfView books={books} containerRef={containerRef} />;
+  return <ShelfView books={books} />;
 }
 
-function ShelfView({
-  books,
-  containerRef,
-}: {
-  books: Book[];
-  containerRef: React.RefObject<HTMLDivElement | null>;
-}) {
+function ShelfView({ books }: { books: Book[] }) {
+  // Group books by status
+  const reading = books.filter((b) => b.status === 'reading');
+  const wantToRead = books.filter((b) => b.status === 'want-to-read');
+  const read = books.filter((b) => b.status === 'read');
+
   return (
-    <div className="relative">
-      {/* Constrained to parent width (640px) */}
+    <div className="space-y-12">
+      {reading.length > 0 && (
+        <ShelfSection title="Currently Reading" books={reading} />
+      )}
+      {wantToRead.length > 0 && (
+        <ShelfSection title="Want to Read" books={wantToRead} />
+      )}
+      {read.length > 0 && <ShelfSection title="Read" books={read} />}
+    </div>
+  );
+}
+
+function ShelfSection({ title, books }: { title: string; books: Book[] }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(800);
+
+  // Use motion value for scroll position - this doesn't trigger re-renders
+  const scrollX = useMotionValue(0);
+
+  // Pre-calculate each book's X offset (cumulative position from start)
+  // This avoids getBoundingClientRect calls during animation
+  const bookOffsets = useMemo(() => {
+    const gap = 4; // gap-1 = 0.25rem = 4px
+    const offsets: number[] = [];
+    let cumulative = 0;
+
+    for (const book of books) {
+      offsets.push(cumulative);
+      cumulative += calculateSpineWidth(book.pageCount) + gap;
+    }
+    return offsets;
+  }, [books]);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    // Set initial container width
+    setContainerWidth(container.clientWidth);
+
+    // Update motion value on scroll (no re-renders!)
+    const handleScroll = () => {
+      scrollX.set(container.scrollLeft);
+    };
+
+    // Update container width on resize
+    const handleResize = () => {
+      setContainerWidth(container.clientWidth);
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [scrollX]);
+
+  return (
+    <div>
+      <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
+        {title}
+      </h3>
       <div
-        ref={containerRef}
+        ref={scrollContainerRef}
         className={cn(
-          'overflow-x-auto overflow-y-visible',
+          'overflow-x-auto overflow-y-visible pb-2',
           'scrollbar-thin scrollbar-track-neutral-100 scrollbar-thumb-neutral-300',
           'dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600'
         )}
       >
-        {/* Bookshelf container */}
-        <div className="min-w-max pt-44 pb-8 px-2">
-          {/* Books row - perspective container for 3D effect */}
-          <div className="flex items-end gap-0.5" style={{ perspective: '1000px' }}>
+        {/* Books container with extra padding for hover/tilt effects */}
+        <div className="min-w-max pt-16 pb-4 px-4">
+          {/* Books row with perspective - high value = subtle 3D, low distortion */}
+          <div
+            className="flex items-end gap-1"
+            style={{ perspective: '2500px', perspectiveOrigin: 'center center' }}
+          >
             {books.map((book, index) => (
-              <BookSpine key={book.slug} book={book} index={index} />
+              <BookSpine
+                key={book.slug}
+                book={book}
+                index={index}
+                scrollX={scrollX}
+                offsetX={bookOffsets[index]}
+                containerWidth={containerWidth}
+              />
             ))}
           </div>
 
-          {/* Shelf surface */}
-          <div className="mt-2 h-4 bg-gradient-to-b from-neutral-400 to-neutral-500 dark:from-neutral-600 dark:to-neutral-700 shadow-lg" />
+          {/* Shelf surface - warm wood tone */}
+          <div className="mt-2 h-4 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 dark:from-amber-800 dark:via-amber-900 dark:to-amber-950 shadow-lg rounded-sm" />
 
-          {/* Shelf bracket/support */}
-          <div className="h-2 bg-gradient-to-b from-neutral-500 to-neutral-600 dark:from-neutral-700 dark:to-neutral-800" />
+          {/* Shelf bracket/edge */}
+          <div className="h-2 bg-gradient-to-b from-amber-900 to-amber-950 dark:from-amber-950 dark:to-black rounded-b-sm" />
         </div>
-      </div>
-
-      {/* Scroll hint */}
-      <div className="flex justify-center mt-2">
-        <p className="text-xs text-neutral-400 dark:text-neutral-500">
-          ← Scroll to browse →
-        </p>
       </div>
     </div>
   );
 }
 
 function StackView({ books }: { books: Book[] }) {
+  // Group books by status
+  const reading = books.filter((b) => b.status === 'reading');
+  const wantToRead = books.filter((b) => b.status === 'want-to-read');
+  const read = books.filter((b) => b.status === 'read');
+
   return (
-    <div className="space-y-3">
-      {books.map((book, index) => (
-        <motion.div
-          key={book.slug}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.05 }}
-        >
-          <Link href={`/library/${book.slug}`}>
-            <div
-              className="group relative overflow-hidden transition-all duration-200 hover:translate-x-1"
-              style={{
-                marginLeft: `${(index % 5) * 8}px`,
-              }}
-            >
-              {/* Card with spine color background */}
+    <div className="space-y-10">
+      {reading.length > 0 && (
+        <StackSection title="Currently Reading" books={reading} />
+      )}
+      {wantToRead.length > 0 && (
+        <StackSection title="Want to Read" books={wantToRead} />
+      )}
+      {read.length > 0 && <StackSection title="Read" books={read} />}
+    </div>
+  );
+}
+
+function StackSection({ title, books }: { title: string; books: Book[] }) {
+  return (
+    <div>
+      <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
+        {title}
+      </h3>
+      <div className="space-y-2">
+        {books.map((book, index) => (
+          <motion.div
+            key={book.slug}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.03, duration: 0.2 }}
+          >
+            <Link href={`/library/${book.slug}`}>
               <div
-                className="flex items-center gap-4 p-4 pr-6"
+                className="group relative overflow-hidden"
                 style={{
-                  backgroundColor: book.dominantColor,
+                  marginLeft: `${(index % 4) * 6}px`,
                 }}
               >
-                {/* Cover thumbnail */}
-                <div className="flex-shrink-0 shadow-lg">
-                  <BookCoverImage
-                    book={book}
-                    width={60}
-                    height={90}
-                    className="rounded-sm"
-                  />
-                </div>
+                {/* Card with spine color background */}
+                <div
+                  className="flex items-center gap-4 p-3 pr-5 transition-all duration-200 group-hover:brightness-110"
+                  style={{
+                    backgroundColor: book.dominantColor,
+                  }}
+                >
+                  {/* Cover thumbnail */}
+                  <div className="flex-shrink-0 shadow-md">
+                    <BookCoverImage
+                      book={book}
+                      width={50}
+                      height={75}
+                      className="rounded-sm"
+                    />
+                  </div>
 
-                {/* Book info */}
-                <div className="flex-1 min-w-0">
-                  <h3
-                    className="font-medium truncate"
-                    style={{ color: book.textColor }}
-                  >
-                    {book.title}
-                  </h3>
-                  <p
-                    className="text-sm opacity-80 truncate"
-                    style={{ color: book.textColor }}
-                  >
-                    {book.author}
-                  </p>
-
-                  {/* Rating */}
-                  {book.rating && (
-                    <div
-                      className="mt-1 text-xs opacity-70"
+                  {/* Book info */}
+                  <div className="flex-1 min-w-0">
+                    <h3
+                      className="font-medium truncate text-sm"
                       style={{ color: book.textColor }}
                     >
-                      {'★'.repeat(book.rating)}
-                      {'☆'.repeat(5 - book.rating)}
-                    </div>
-                  )}
+                      {book.title}
+                    </h3>
+                    <p
+                      className="text-xs opacity-80 truncate"
+                      style={{ color: book.textColor }}
+                    >
+                      {book.author}
+                    </p>
+                  </div>
+
+                  {/* Arrow indicator */}
+                  <div
+                    className="opacity-0 group-hover:opacity-70 transition-opacity text-sm"
+                    style={{ color: book.textColor }}
+                  >
+                    →
+                  </div>
                 </div>
 
-                {/* Arrow indicator */}
+                {/* Book spine edge effect */}
                 <div
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ color: book.textColor }}
-                >
-                  →
-                </div>
+                  className="absolute left-0 top-0 bottom-0 w-1"
+                  style={{
+                    background: `linear-gradient(to right, rgba(0,0,0,0.3), transparent)`,
+                  }}
+                />
               </div>
-
-              {/* Book spine edge effect */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-1"
-                style={{
-                  background: `linear-gradient(to right, rgba(0,0,0,0.3), transparent)`,
-                }}
-              />
-            </div>
-          </Link>
-        </motion.div>
-      ))}
+            </Link>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
