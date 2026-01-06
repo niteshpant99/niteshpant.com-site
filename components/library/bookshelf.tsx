@@ -53,8 +53,8 @@ function ShelfView({
       >
         {/* Bookshelf container */}
         <div className="min-w-max pt-44 pb-8 px-2">
-          {/* Books row */}
-          <div className="flex items-end gap-0.5">
+          {/* Books row - perspective container for 3D effect */}
+          <div className="flex items-end gap-0.5" style={{ perspective: '1000px' }}>
             {books.map((book, index) => (
               <BookSpine key={book.slug} book={book} index={index} />
             ))}

@@ -19,11 +19,12 @@ export function BookCoverImage({
   className = '',
   priority = false,
 }: BookCoverImageProps) {
-  const [imgSrc, setImgSrc] = useState<string>(
-    book.coverImage || getOpenLibraryUrl(book.isbn)
-  );
+  // Determine initial image source - only use valid URLs
+  const initialSrc = book.coverImage || (book.isbn ? getOpenLibraryUrl(book.isbn) : null);
+
+  const [imgSrc, setImgSrc] = useState<string | null>(initialSrc);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(!initialSrc); // Start with error if no valid source
 
   const handleError = () => {
     if (book.coverImage && imgSrc === book.coverImage && book.isbn) {
@@ -35,7 +36,7 @@ export function BookCoverImage({
     }
   };
 
-  if (hasError) {
+  if (hasError || !imgSrc) {
     return (
       <div
         className={`flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 ${className}`}
@@ -75,7 +76,6 @@ export function BookCoverImage({
   );
 }
 
-function getOpenLibraryUrl(isbn?: string): string {
-  if (!isbn) return '/covers/placeholder.jpg';
+function getOpenLibraryUrl(isbn: string): string {
   return `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
 }

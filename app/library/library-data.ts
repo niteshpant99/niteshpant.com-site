@@ -93,6 +93,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 320,
     status: 'read',
+    isbn: '9780066620992',
     dateFinished: { date: '2025-01-01', isEstimate: true },
     genres: ['Business', 'Leadership'],
     summary: 'Read in 2025',
@@ -105,6 +106,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 336,
     status: 'read',
+    isbn: '9780806501000',
     genres: ['Fiction', 'Classic'],
     summary: 'Russian author',
   },
@@ -116,6 +118,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 518,
     status: 'read',
+    isbn: '9780374530716',
     genres: ['Philosophy', 'Fiction'],
     summary: 'Philosophy book',
   },
@@ -127,6 +130,7 @@ export const books: Book[] = [
     textColor: '#d4af37',
     pageCount: 352,
     status: 'read',
+    isbn: '9780670024964',
     genres: ['Self-Help', 'Psychology'],
     summary: 'Had an influence',
   },
@@ -138,6 +142,7 @@ export const books: Book[] = [
     textColor: '#00d4ff',
     pageCount: 256,
     status: 'read',
+    isbn: '9780593802628',
     genres: ['Technology', 'Politics'],
     summary: 'Palantir CEO',
   },
@@ -149,6 +154,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 336,
     status: 'read',
+    isbn: '9780307887894',
     genres: ['Business', 'Startup'],
   },
   {
@@ -159,6 +165,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 443,
     status: 'read',
+    isbn: '9780062316097',
     genres: ['History', 'Non-Fiction', 'Philosophy'],
     summary: 'Classic',
     hasReview: true,
@@ -171,6 +178,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 400,
     status: 'read',
+    isbn: '9781098166304',
     genres: ['Technology', 'Non-Fiction'],
   },
   {
@@ -181,6 +189,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 320,
     status: 'read',
+    isbn: '9781982190309',
     genres: ['Business', 'Investing'],
   },
   {
@@ -191,6 +200,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 272,
     status: 'read',
+    isbn: '9780273710516',
     genres: ['Business', 'Communication'],
     summary: 'Classic consulting book',
   },
@@ -202,6 +212,7 @@ export const books: Book[] = [
     textColor: '#d4af37',
     pageCount: 140,
     status: 'read',
+    isbn: '9780140449150',
     genres: ['Philosophy', 'Politics', 'Classic'],
   },
   {
@@ -212,6 +223,7 @@ export const books: Book[] = [
     textColor: '#a8a8a8',
     pageCount: 287,
     status: 'read',
+    isbn: '9780307387899',
     genres: ['Fiction', 'Classic'],
   },
   {
@@ -222,6 +234,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 320,
     status: 'read',
+    isbn: '9781610390934',
     genres: ['Economics', 'Non-Fiction'],
   },
   {
@@ -232,6 +245,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 228,
     status: 'read',
+    isbn: '9781976182198',
     genres: ['Technology', 'Business'],
   },
   {
@@ -242,6 +256,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 224,
     status: 'read',
+    isbn: '9780804139298',
     dateFinished: { date: '2025-01-01', isEstimate: true },
     genres: ['Business', 'Startup'],
     summary: 'Read in 2025',
@@ -254,6 +269,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 272,
     status: 'read',
+    isbn: '9781594631900',
     dateFinished: { date: '2025-01-01', isEstimate: true },
     genres: ['Business', 'Psychology'],
     summary: 'Read in 2025',
@@ -266,6 +282,7 @@ export const books: Book[] = [
     textColor: '#d4af37',
     pageCount: 4100,
     status: 'read',
+    isbn: '9780545162074',
     genres: ['Fiction'],
   },
   {
@@ -276,6 +293,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 274,
     status: 'read',
+    isbn: '9780486400778',
     genres: ['Fiction', 'Classic'],
   },
   {
@@ -286,6 +304,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 288,
     status: 'read',
+    isbn: '9780671027032',
     genres: ['Self-Help', 'Communication'],
     summary: 'Read at age 16',
   },
@@ -297,6 +316,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 288,
     status: 'read',
+    isbn: '9781476764665',
     genres: ['Self-Help'],
     summary: 'Read at age 15',
   },
@@ -310,6 +330,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 368,
     status: 'reading',
+    isbn: '9780465050659',
     genres: ['Design', 'Psychology'],
   },
   {
@@ -320,6 +341,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 336,
     status: 'reading',
+    isbn: '9780061339202',
     genres: ['Psychology', 'Self-Help'],
   },
   {
@@ -330,6 +352,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 499,
     status: 'reading',
+    isbn: '9780374533557',
     genres: ['Psychology', 'Non-Fiction', 'Economics'],
     hasReview: true,
   },
@@ -341,6 +364,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 216,
     status: 'reading',
+    isbn: '9780321965516',
     genres: ['Design', 'Technology'],
   },
   {
@@ -351,6 +375,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 286,
     status: 'reading',
+    isbn: '9780062060242',
     genres: ['Business', 'Technology'],
     summary: 'Classic',
   },
@@ -362,6 +387,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 320,
     status: 'reading',
+    isbn: '9781625274496',
     genres: ['Business'],
   },
   {
@@ -372,6 +398,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 240,
     status: 'reading',
+    isbn: '9780814438039',
     genres: ['Business', 'Design'],
   },
   {
@@ -382,6 +409,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 272,
     status: 'reading',
+    isbn: '9780307888907',
     genres: ['Business', 'Self-Help'],
   },
   {
@@ -392,6 +420,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 304,
     status: 'reading',
+    isbn: '9781119594826',
     genres: ['Business', 'Startup', 'Investing'],
   },
   {
@@ -402,6 +431,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 368,
     status: 'reading',
+    isbn: '9780394740676',
     genres: ['History', 'Politics', 'Philosophy'],
     summary: 'Half read',
   },
@@ -415,6 +445,7 @@ export const books: Book[] = [
     textColor: '#e74c3c',
     pageCount: 288,
     status: 'want-to-read',
+    isbn: '9780062407801',
     genres: ['Business', 'Psychology', 'Communication'],
   },
   {
@@ -425,6 +456,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 336,
     status: 'want-to-read',
+    isbn: '9780062937650',
     genres: ['Psychology', 'Business'],
   },
   {
@@ -435,6 +467,7 @@ export const books: Book[] = [
     textColor: '#d4af37',
     pageCount: 466,
     status: 'want-to-read',
+    isbn: '9780142001196',
     genres: ['Psychology', 'Self-Help'],
   },
   {
@@ -445,6 +478,7 @@ export const books: Book[] = [
     textColor: '#e74c3c',
     pageCount: 260,
     status: 'want-to-read',
+    isbn: '9781463750350',
     genres: ['Self-Help'],
   },
   {
@@ -455,6 +489,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 288,
     status: 'want-to-read',
+    isbn: '9781591845942',
     genres: ['Self-Help', 'Psychology'],
   },
   {
@@ -465,6 +500,7 @@ export const books: Book[] = [
     textColor: '#f1c40f',
     pageCount: 272,
     status: 'want-to-read',
+    isbn: '9780061438295',
     genres: ['Psychology', 'Communication'],
   },
   {
@@ -475,6 +511,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 208,
     status: 'want-to-read',
+    isbn: '9780878301171',
     genres: ['Non-Fiction', 'Communication'],
   },
   {
@@ -485,6 +522,7 @@ export const books: Book[] = [
     textColor: '#c0392b',
     pageCount: 480,
     status: 'want-to-read',
+    isbn: '9780140280197',
     genres: ['Psychology', 'Self-Help', 'History'],
   },
   {
@@ -495,6 +533,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 186,
     status: 'want-to-read',
+    isbn: '9781544667874',
     genres: ['Self-Help', 'Communication'],
   },
   {
@@ -505,6 +544,7 @@ export const books: Book[] = [
     textColor: '#27ae60',
     pageCount: 624,
     status: 'want-to-read',
+    isbn: '9780525428145',
     genres: ['Psychology', 'Self-Help'],
   },
   {
@@ -515,6 +555,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 291,
     status: 'want-to-read',
+    isbn: '9781400064281',
     genres: ['Business', 'Communication'],
   },
   {
@@ -525,6 +566,7 @@ export const books: Book[] = [
     textColor: '#2c3e50',
     pageCount: 336,
     status: 'want-to-read',
+    isbn: '9780060891541',
     genres: ['Non-Fiction', 'Communication'],
   },
   {
@@ -535,6 +577,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 391,
     status: 'want-to-read',
+    isbn: '9780393316049',
     genres: ['Biography', 'Science'],
   },
   {
@@ -545,6 +588,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 256,
     status: 'want-to-read',
+    isbn: '9780140449334',
     genres: ['Philosophy', 'Classic'],
   },
   {
@@ -555,6 +599,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 372,
     status: 'want-to-read',
+    isbn: '9780525512172',
     genres: ['Non-Fiction', 'Philosophy', 'History'],
   },
   {
@@ -565,6 +610,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 416,
     status: 'want-to-read',
+    isbn: '9780307465351',
     genres: ['Business', 'Self-Help'],
   },
   {
@@ -575,6 +621,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 328,
     status: 'want-to-read',
+    isbn: '9780451524935',
     genres: ['Fiction', 'Classic', 'Science Fiction'],
   },
   {
@@ -585,6 +632,7 @@ export const books: Book[] = [
     textColor: '#d4af37',
     pageCount: 68,
     status: 'want-to-read',
+    isbn: '9781503250932',
     genres: ['Self-Help', 'Philosophy', 'Classic'],
   },
   {
@@ -595,6 +643,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 325,
     status: 'want-to-read',
+    isbn: '9780451163967',
     genres: ['Fiction', 'Classic'],
   },
   {
@@ -605,6 +654,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 336,
     status: 'want-to-read',
+    isbn: '9780525429562',
     genres: ['Business', 'Psychology'],
   },
   {
@@ -615,6 +665,7 @@ export const books: Book[] = [
     textColor: '#1a1a1a',
     pageCount: 244,
     status: 'want-to-read',
+    isbn: '9781544514215',
     genres: ['Self-Help', 'Philosophy', 'Business'],
   },
   {
@@ -625,6 +676,7 @@ export const books: Book[] = [
     textColor: '#ffffff',
     pageCount: 304,
     status: 'want-to-read',
+    isbn: '9780062273208',
     genres: ['Business', 'Startup', 'Memoir'],
   },
 ];

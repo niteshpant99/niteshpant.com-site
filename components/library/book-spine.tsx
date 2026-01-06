@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { Book } from '../../app/library/library-data';
 import { calculateSpineWidth } from '../../app/library/library-data';
 import { BookCoverImage } from './book-cover-image';
@@ -14,51 +14,87 @@ interface BookSpineProps {
 
 export function BookSpine({ book, index }: BookSpineProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
 
-  // Scroll-based tilt animation using motion values (no React state)
+  // Scroll-based subtle tilt (kept for natural shelf feel)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
+  const scrollRotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-2, 0, 2]);
+  const smoothScrollRotateY = useSpring(scrollRotateY, {
+    stiffness: 100,
+    damping: 20,
+  });
 
-  // Create smooth spring-based tilt
-  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-3, 0, 3]);
-  const smoothRotateY = useSpring(rotateY, { stiffness: 100, damping: 20 });
-
-  // Scale on hover
-  const scale = useSpring(isHovered ? 1.02 : 1, {
+  // Pull out toward viewer on hover (like grabbing a book)
+  const translateZ = useSpring(isFlipping ? 60 : isHovered ? 25 : 0, {
     stiffness: 300,
     damping: 25,
   });
 
+  // Tilt top forward on hover (natural grab motion)
+  const rotateX = useSpring(isFlipping ? 0 : isHovered ? -6 : 0, {
+    stiffness: 300,
+    damping: 25,
+  });
+
+  // Flip to show cover on click
+  const flipRotateY = useSpring(isFlipping ? -180 : 0, {
+    stiffness: 100,
+    damping: 20,
+  });
+
   const spineWidth = calculateSpineWidth(book.pageCount);
 
+  const handleClick = () => {
+    if (isFlipping) return;
+    setIsFlipping(true);
+    setTimeout(() => {
+      router.push(`/library/${book.slug}`);
+    }, 600);
+  };
+
   return (
-    <Link href={`/library/${book.slug}`} className="focus:outline-none">
+    <motion.div
+      ref={ref}
+      onClick={handleClick}
+      className="relative cursor-pointer flex-shrink-0"
+      style={{
+        width: spineWidth,
+        height: 288,
+        transformStyle: 'preserve-3d',
+        translateZ,
+        rotateX,
+        rotateY: smoothScrollRotateY,
+      }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.03, duration: 0.4 }}
+      onHoverStart={() => !isFlipping && setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      {/* Rotating container for flip effect */}
       <motion.div
-        ref={ref}
-        className="group relative cursor-pointer flex-shrink-0"
+        className="relative w-full h-full"
         style={{
-          width: spineWidth,
-          rotateY: smoothRotateY,
           transformStyle: 'preserve-3d',
-          scale,
+          rotateY: flipRotateY,
         }}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.03, duration: 0.4 }}
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
       >
-        {/* Spine body */}
+        {/* FRONT: Spine */}
         <div
-          className="relative h-72 md:h-80 flex items-center justify-center overflow-hidden transition-shadow duration-200"
+          className="absolute inset-0 flex items-center justify-center overflow-hidden"
           style={{
             backgroundColor: book.dominantColor,
-            boxShadow: isHovered
-              ? '4px 4px 12px rgba(0,0,0,0.3)'
-              : '2px 2px 6px rgba(0,0,0,0.2)',
+            backfaceVisibility: 'hidden',
+            boxShadow:
+              isHovered || isFlipping
+                ? '8px 8px 20px rgba(0,0,0,0.35), 0 0 40px rgba(0,0,0,0.1)'
+                : '2px 2px 6px rgba(0,0,0,0.2)',
+            transition: 'box-shadow 0.2s ease',
           }}
         >
           {/* Left edge shadow */}
@@ -71,10 +107,9 @@ export function BookSpine({ book, index }: BookSpineProps) {
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-b from-black/20 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-t from-black/20 to-transparent" />
 
-          {/* Vertical text */}
-          <div
-            className="absolute inset-x-0 top-4 bottom-4 flex items-center justify-center overflow-hidden"
-          >
+          {/* Vertical text - Title always visible, Author on hover */}
+          <div className="absolute inset-x-0 top-4 bottom-4 flex flex-col items-center justify-center gap-1 overflow-hidden">
+            {/* Title */}
             <span
               className="font-medium whitespace-nowrap"
               style={{
@@ -87,42 +122,43 @@ export function BookSpine({ book, index }: BookSpineProps) {
             >
               {book.title}
             </span>
-          </div>
 
-          {/* Hover shine effect */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
-            initial={{ x: '-100%' }}
-            animate={{ x: isHovered ? '100%' : '-100%' }}
-            transition={{ duration: 0.5 }}
-          />
+            {/* Author - fades in on hover */}
+            <motion.span
+              className="whitespace-nowrap"
+              style={{
+                color: book.textColor,
+                writingMode: 'vertical-rl',
+                textOrientation: 'mixed',
+                fontSize: spineWidth < 35 ? '8px' : '10px',
+                letterSpacing: '0.3px',
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isHovered ? 0.7 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {book.author}
+            </motion.span>
+          </div>
         </div>
 
-        {/* Floating cover thumbnail on hover */}
-        <motion.div
-          className="absolute -top-40 left-1/2 z-50 pointer-events-none"
-          initial={{ opacity: 0, y: 20, x: '-50%' }}
-          animate={{
-            opacity: isHovered ? 1 : 0,
-            y: isHovered ? 0 : 20,
-            x: '-50%',
+        {/* BACK: Cover (pre-rotated 180° so it shows correctly when flipped) */}
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)',
+            boxShadow: '8px 8px 20px rgba(0,0,0,0.35)',
           }}
-          transition={{ duration: 0.2 }}
         >
-          <div className="shadow-2xl rounded-sm overflow-hidden border-2 border-white dark:border-neutral-700 bg-white dark:bg-neutral-900">
-            <BookCoverImage book={book} width={100} height={150} />
-          </div>
-          {/* Arrow pointing down */}
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white dark:bg-neutral-900 rotate-45 border-r border-b border-white dark:border-neutral-700" />
-        </motion.div>
-
-        {/* Rating indicator (if rated) */}
-        {book.rating && (
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-neutral-500 dark:text-neutral-400 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            {'★'.repeat(book.rating)}
-          </div>
-        )}
+          <BookCoverImage
+            book={book}
+            width={spineWidth * 2.5}
+            height={288}
+            className="w-full h-full object-cover"
+          />
+        </div>
       </motion.div>
-    </Link>
+    </motion.div>
   );
 }
