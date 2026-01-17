@@ -112,6 +112,7 @@ export const books: Book[] = [
     dateFinished: { date: '2025-01-01', isEstimate: true },
     genres: ['Business', 'Leadership'],
     summary: 'Read in 2025',
+    hasReview: true,
   },
   {
     slug: 'mother',
@@ -124,6 +125,7 @@ export const books: Book[] = [
     isbn: '9788179920220',
     genres: ['Fiction', 'Classic'],
     summary: 'Russian author',
+    hasReview: true,
   },
   {
     slug: 'sophies-world',
@@ -136,6 +138,7 @@ export const books: Book[] = [
     isbn: '9780374530716',
     genres: ['Philosophy', 'Fiction'],
     summary: 'Philosophy book',
+    hasReview: true,
   },
   {
     slug: 'mastery',
@@ -148,6 +151,7 @@ export const books: Book[] = [
     isbn: '9780670024964',
     genres: ['Self-Help', 'Psychology'],
     summary: 'Had an influence',
+    hasReview: true,
   },
   {
     slug: 'the-technological-republic',
@@ -160,6 +164,7 @@ export const books: Book[] = [
     isbn: '9780593798690',
     genres: ['Technology', 'Politics'],
     summary: 'Palantir CEO',
+    hasReview: true,
   },
   {
     slug: 'the-lean-startup',
@@ -171,6 +176,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9780307887894',
     genres: ['Business', 'Startup'],
+    hasReview: true,
   },
   {
     slug: 'sapiens',
@@ -195,6 +201,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9781098166304',
     genres: ['Technology', 'Non-Fiction'],
+    hasReview: true,
   },
   {
     slug: 'how-to-invest',
@@ -206,6 +213,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9781982190309',
     genres: ['Business', 'Investing'],
+    hasReview: true,
   },
   {
     slug: 'the-pyramid-principle',
@@ -218,6 +226,7 @@ export const books: Book[] = [
     isbn: '9781292372266',
     genres: ['Business', 'Communication'],
     summary: 'Classic consulting book',
+    hasReview: true,
   },
   {
     slug: 'the-prince',
@@ -229,6 +238,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9780140449150',
     genres: ['Philosophy', 'Politics', 'Classic'],
+    hasReview: true,
   },
   {
     slug: 'the-road',
@@ -240,6 +250,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9780307387899',
     genres: ['Fiction', 'Classic'],
+    hasReview: true,
   },
   {
     slug: 'poor-economics',
@@ -251,6 +262,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9781610390934',
     genres: ['Economics', 'Non-Fiction'],
+    hasReview: true,
   },
   {
     slug: 'swipe-to-unlock',
@@ -262,6 +274,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9781976182198',
     genres: ['Technology', 'Business'],
+    hasReview: true,
   },
   {
     slug: 'zero-to-one',
@@ -275,6 +288,7 @@ export const books: Book[] = [
     dateFinished: { date: '2025-01-01', isEstimate: true },
     genres: ['Business', 'Startup'],
     summary: 'Read in 2025',
+    hasReview: true,
   },
   {
     slug: 'to-sell-is-human',
@@ -288,6 +302,7 @@ export const books: Book[] = [
     dateFinished: { date: '2025-01-01', isEstimate: true },
     genres: ['Business', 'Psychology'],
     summary: 'Read in 2025',
+    hasReview: true,
   },
   {
     slug: 'harry-potter-series',
@@ -299,6 +314,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9780545162074',
     genres: ['Fiction'],
+    hasReview: true,
   },
   {
     slug: 'the-adventures-of-tom-sawyer',
@@ -310,6 +326,7 @@ export const books: Book[] = [
     status: 'read',
     isbn: '9780486400778',
     genres: ['Fiction', 'Classic'],
+    hasReview: true,
   },
   {
     slug: 'how-to-win-friends-and-influence-people',
@@ -322,6 +339,7 @@ export const books: Book[] = [
     isbn: '9780671027032',
     genres: ['Self-Help', 'Communication'],
     summary: 'Read at age 16',
+    hasReview: true,
   },
   {
     slug: 'the-7-habits-of-highly-effective-teenagers',
@@ -334,6 +352,7 @@ export const books: Book[] = [
     isbn: '9781476764665',
     genres: ['Self-Help'],
     summary: 'Read at age 15',
+    hasReview: true,
   },
 
   // ==================== READING ====================
@@ -347,6 +366,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9780465050659',
     genres: ['Design', 'Psychology'],
+    hasReview: true,
   },
   {
     slug: 'flow',
@@ -358,6 +378,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9780061339202',
     genres: ['Psychology', 'Self-Help'],
+    hasReview: true,
   },
   {
     slug: 'thinking-fast-and-slow',
@@ -381,6 +402,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9780321965516',
     genres: ['Design', 'Technology'],
+    hasReview: true,
   },
   {
     slug: 'the-innovators-dilemma',
@@ -393,6 +415,7 @@ export const books: Book[] = [
     isbn: '9780062060242',
     genres: ['Business', 'Technology'],
     summary: 'Classic',
+    hasReview: true,
   },
   {
     slug: 'blue-ocean-strategy',
@@ -404,6 +427,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9781625274496',
     genres: ['Business'],
+    hasReview: true,
   },
   {
     slug: 'jobs-to-be-done',
@@ -415,6 +439,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9780814438039',
     genres: ['Business', 'Design'],
+    hasReview: true,
   },
   {
     slug: 'the-startup-of-you',
@@ -426,6 +451,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9780307888907',
     genres: ['Business', 'Self-Help'],
+    hasReview: true,
   },
   {
     slug: 'venture-deals',
@@ -437,6 +463,7 @@ export const books: Book[] = [
     status: 'reading',
     isbn: '9781119594826',
     genres: ['Business', 'Startup', 'Investing'],
+    hasReview: true,
   },
   {
     slug: 'orientalism',
@@ -449,6 +476,7 @@ export const books: Book[] = [
     isbn: '9780394740676',
     genres: ['History', 'Politics', 'Philosophy'],
     summary: 'Half read',
+    hasReview: true,
   },
 
   // ==================== WANT TO READ ====================
@@ -462,6 +490,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780062407801',
     genres: ['Business', 'Psychology', 'Communication'],
+    hasReview: true,
   },
   {
     slug: 'influence-the-psychology-of-persuasion',
@@ -473,6 +502,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780062937650',
     genres: ['Psychology', 'Business'],
+    hasReview: true,
   },
   {
     slug: 'the-art-of-seduction',
@@ -484,6 +514,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780142001196',
     genres: ['Psychology', 'Self-Help'],
+    hasReview: true,
   },
   {
     slug: 'models-attract-women-through-honesty',
@@ -495,6 +526,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9781463750350',
     genres: ['Self-Help'],
+    hasReview: true,
   },
   {
     slug: 'the-charisma-myth',
@@ -506,6 +538,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9781591845942',
     genres: ['Self-Help', 'Psychology'],
+    hasReview: true,
   },
   {
     slug: 'what-every-body-is-saying',
@@ -517,6 +550,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780061438295',
     genres: ['Psychology', 'Communication'],
+    hasReview: true,
   },
   {
     slug: 'impro-improvisation-and-the-theatre',
@@ -528,6 +562,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780878301171',
     genres: ['Non-Fiction', 'Communication'],
+    hasReview: true,
   },
   {
     slug: 'the-48-laws-of-power',
@@ -539,6 +574,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780140280197',
     genres: ['Psychology', 'Self-Help', 'History'],
+    hasReview: true,
   },
   {
     slug: 'the-art-of-witty-banter',
@@ -550,6 +586,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9781540552631',
     genres: ['Self-Help', 'Communication'],
+    hasReview: true,
   },
   {
     slug: 'the-laws-of-human-nature',
@@ -561,6 +598,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780525428145',
     genres: ['Psychology', 'Self-Help'],
+    hasReview: true,
   },
   {
     slug: 'made-to-stick',
@@ -572,6 +610,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9781400064281',
     genres: ['Business', 'Communication'],
+    hasReview: true,
   },
   {
     slug: 'on-writing-well',
@@ -583,6 +622,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780060891541',
     genres: ['Non-Fiction', 'Communication'],
+    hasReview: true,
   },
   {
     slug: 'surely-youre-joking-mr-feynman',
@@ -594,6 +634,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780393316049',
     genres: ['Biography', 'Science'],
+    hasReview: true,
   },
   {
     slug: 'meditations',
@@ -605,6 +646,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780140449334',
     genres: ['Philosophy', 'Classic'],
+    hasReview: true,
   },
   {
     slug: '21-lessons-for-the-21st-century',
@@ -616,6 +658,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780525512172',
     genres: ['Non-Fiction', 'Philosophy', 'History'],
+    hasReview: true,
   },
   {
     slug: 'the-4-hour-workweek',
@@ -627,6 +670,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780307465351',
     genres: ['Business', 'Self-Help'],
+    hasReview: true,
   },
   {
     slug: '1984',
@@ -638,6 +682,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780451524935',
     genres: ['Fiction', 'Classic', 'Science Fiction'],
+    hasReview: true,
   },
   {
     slug: 'as-a-man-thinketh',
@@ -649,6 +694,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9781585426386',
     genres: ['Self-Help', 'Philosophy', 'Classic'],
+    hasReview: true,
   },
   {
     slug: 'one-flew-over-the-cuckoos-nest',
@@ -660,6 +706,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780451163967',
     genres: ['Fiction', 'Classic'],
+    hasReview: true,
   },
   {
     slug: 'originals',
@@ -671,6 +718,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780525429562',
     genres: ['Business', 'Psychology'],
+    hasReview: true,
   },
   {
     slug: 'the-almanack-of-naval-ravikant',
@@ -682,6 +730,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9781544514215',
     genres: ['Self-Help', 'Philosophy', 'Business'],
+    hasReview: true,
   },
   {
     slug: 'the-hard-thing-about-hard-things',
@@ -693,6 +742,7 @@ export const books: Book[] = [
     status: 'want-to-read',
     isbn: '9780062273208',
     genres: ['Business', 'Startup', 'Memoir'],
+    hasReview: true,
   },
 ];
 
