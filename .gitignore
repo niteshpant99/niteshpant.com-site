@@ -41,3 +41,6 @@ repomix-output.txt
 
 # context
 .context/
+
+# Claude skills
+.claude/
