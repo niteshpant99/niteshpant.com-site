@@ -39,8 +39,9 @@ next-env.d.ts
 repomix-output.txt
 .cursor
 
-# context
-.context/
-
 # Claude skills
 .claude/
+
+# nocaap packages (auto-generated)
+.context/packages/
+.context/

@@ -100,9 +100,9 @@ function ShelfSection({ title, books }: { title: string; books: Book[] }) {
 
   return (
     <div>
-      <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
+      <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
         {title}
-      </h3>
+      </h2>
       <div
         ref={scrollContainerRef}
         className={cn(
@@ -163,9 +163,9 @@ function StackView({ books }: { books: Book[] }) {
 function StackSection({ title, books }: { title: string; books: Book[] }) {
   return (
     <div>
-      <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
+      <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
         {title}
-      </h3>
+      </h2>
       <div className="space-y-2">
         {books.map((book, index) => (
           <motion.div

@@ -125,11 +125,22 @@ export function BookSpine({
     }, 700);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
     <motion.div
       ref={spineRef}
+      role="button"
+      tabIndex={0}
+      aria-label={`${book.title} by ${book.author}`}
       onClick={handleClick}
-      className="relative cursor-pointer flex-shrink-0"
+      onKeyDown={handleKeyDown}
+      className="relative cursor-pointer flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded-sm"
       style={{
         width: spineWidth,
         height: spineHeight,

@@ -88,10 +88,15 @@ export default function LibraryPage() {
             {filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}
           </span>
 
-          <div className="flex items-center gap-0 border border-neutral-200 dark:border-neutral-800">
+          <div
+            role="group"
+            aria-label="View mode"
+            className="flex items-center gap-0 border border-neutral-200 dark:border-neutral-800"
+          >
             <button
               onClick={() => setViewMode('shelf')}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+              aria-pressed={viewMode === 'shelf'}
+              className={`px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950 ${
                 viewMode === 'shelf'
                   ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
                   : 'bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
@@ -101,7 +106,8 @@ export default function LibraryPage() {
             </button>
             <button
               onClick={() => setViewMode('stack')}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors border-l border-neutral-200 dark:border-neutral-800 ${
+              aria-pressed={viewMode === 'stack'}
+              className={`px-3 py-1.5 text-sm font-medium transition-colors border-l border-neutral-200 dark:border-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950 ${
                 viewMode === 'stack'
                   ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
                   : 'bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
@@ -138,7 +144,8 @@ export default function LibraryPage() {
           <select
             value={genreFilter}
             onChange={(e) => setGenreFilter(e.target.value)}
-            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
+            aria-label="Filter by genre"
+            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-950"
           >
             <option value="all">All Genres</option>
             {availableGenres.map((genre) => (
@@ -200,7 +207,8 @@ function FilterButton({
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1.5 text-sm font-medium transition-colors border ${
+      aria-pressed={active}
+      className={`px-3 py-1.5 text-sm font-medium transition-colors border focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950 ${
         active
           ? 'bg-neutral-900 text-white border-neutral-900 dark:bg-neutral-100 dark:text-neutral-900 dark:border-neutral-100'
           : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300 dark:bg-neutral-950 dark:text-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700'
