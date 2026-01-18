@@ -20,7 +20,6 @@ export default function LibraryPage() {
     'all'
   );
   const [genreFilter, setGenreFilter] = useState<string>('all');
-  const [ratingFilter, setRatingFilter] = useState<number>(0);
 
   // Filter and sort books
   const filteredBooks = useMemo(() => {
@@ -29,7 +28,6 @@ export default function LibraryPage() {
         if (statusFilter !== 'all' && book.status !== statusFilter) return false;
         if (genreFilter !== 'all' && !book.genres.includes(genreFilter))
           return false;
-        if (ratingFilter > 0 && (book.rating || 0) < ratingFilter) return false;
         return true;
       })
       .sort((a, b) => {
@@ -42,17 +40,14 @@ export default function LibraryPage() {
         const dateB = b.dateFinished?.date || b.dateStarted?.date || '0000';
         return dateB.localeCompare(dateA);
       });
-  }, [statusFilter, genreFilter, ratingFilter]);
+  }, [statusFilter, genreFilter]);
 
   // Stats
   const stats = useMemo(() => {
     const read = books.filter((b) => b.status === 'read').length;
     const reading = books.filter((b) => b.status === 'reading').length;
     const wantToRead = books.filter((b) => b.status === 'want-to-read').length;
-    const totalPages = books
-      .filter((b) => b.status === 'read')
-      .reduce((sum, b) => sum + b.pageCount, 0);
-    return { read, reading, wantToRead, totalPages };
+    return { read, reading, wantToRead };
   }, []);
 
   // Get unique genres that exist in current books
@@ -62,8 +57,7 @@ export default function LibraryPage() {
     return Array.from(genreSet).sort();
   }, []);
 
-  const hasActiveFilters =
-    statusFilter !== 'all' || genreFilter !== 'all' || ratingFilter > 0;
+  const hasActiveFilters = statusFilter !== 'all' || genreFilter !== 'all';
 
   return (
     <section className="space-y-8">
@@ -80,11 +74,10 @@ export default function LibraryPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <StatCard label="Read" value={stats.read} />
         <StatCard label="Reading" value={stats.reading} />
         <StatCard label="Want to Read" value={stats.wantToRead} />
-        <StatCard label="Pages Read" value={stats.totalPages.toLocaleString()} />
       </div>
 
       {/* Controls */}
@@ -155,25 +148,12 @@ export default function LibraryPage() {
             ))}
           </select>
 
-          {/* Rating filter */}
-          <select
-            value={ratingFilter}
-            onChange={(e) => setRatingFilter(Number(e.target.value))}
-            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors"
-          >
-            <option value={0}>Any Rating</option>
-            <option value={5}>★★★★★ only</option>
-            <option value={4}>★★★★☆ & up</option>
-            <option value={3}>★★★☆☆ & up</option>
-          </select>
-
           {/* Clear filters */}
           {hasActiveFilters && (
             <button
               onClick={() => {
                 setStatusFilter('all');
                 setGenreFilter('all');
-                setRatingFilter(0);
               }}
               className="px-3 py-1.5 text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
             >

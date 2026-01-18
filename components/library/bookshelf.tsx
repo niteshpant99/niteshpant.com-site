@@ -131,7 +131,7 @@ function ShelfSection({ title, books }: { title: string; books: Book[] }) {
           </div>
 
           {/* Shelf surface - warm wood tone */}
-          <div className="mt-2 h-4 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 dark:from-amber-800 dark:via-amber-900 dark:to-amber-950 shadow-lg rounded-sm" />
+          <div className="h-4 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 dark:from-amber-800 dark:via-amber-900 dark:to-amber-950 shadow-lg rounded-sm" />
 
           {/* Shelf bracket/edge */}
           <div className="h-2 bg-gradient-to-b from-amber-900 to-amber-950 dark:from-amber-950 dark:to-black rounded-b-sm" />

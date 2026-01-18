@@ -292,7 +292,7 @@ export default async function BookPage({ params }: Props) {
       {/* Review Content */}
       {content && (
         <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <h2>My Notes</h2>
+          <h2>Notes</h2>
           {content}
         </div>
       )}
