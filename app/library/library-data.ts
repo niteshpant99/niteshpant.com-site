@@ -82,33 +82,55 @@ export const statusConfig = {
   },
 } as const;
 
-// Muted, sophisticated genre-based color palette
-// Modern library aesthetic - purposeful colors that work in light/dark mode
-const genreColors: Record<string, { bg: string; text: string }> = {
-  // Core genres
-  Philosophy: { bg: '#4a5568', text: '#e2e8f0' }, // Slate
-  Business: { bg: '#3d4852', text: '#e2e8f0' }, // Cool charcoal
-  Fiction: { bg: '#5a4a42', text: '#faf5f0' }, // Warm taupe
-  Technology: { bg: '#374151', text: '#e2e8f0' }, // Gray
-  Psychology: { bg: '#4a4a5a', text: '#e2e8f0' }, // Blue-gray
-  History: { bg: '#4d4539', text: '#faf5f0' }, // Brown-gray
-  Science: { bg: '#3a4a4a', text: '#e2e8f0' }, // Teal-gray
-  'Non-Fiction': { bg: '#44403c', text: '#faf5f0' }, // Stone
-  Biography: { bg: '#525252', text: '#e2e8f0' }, // Neutral gray
-  'Self-Help': { bg: '#4b5563', text: '#e2e8f0' }, // Cool gray
-  Economics: { bg: '#3f3f46', text: '#e2e8f0' }, // Zinc
-  Politics: { bg: '#404040', text: '#e2e8f0' }, // Dark neutral
-  Memoir: { bg: '#57534e', text: '#faf5f0' }, // Warm stone
-  'Science Fiction': { bg: '#334155', text: '#e2e8f0' }, // Slate blue
-  Classic: { bg: '#4a4540', text: '#faf5f0' }, // Warm neutral
-  Design: { bg: '#3b3b3b', text: '#e2e8f0' }, // Near black
-  Investing: { bg: '#374151', text: '#e2e8f0' }, // Gray
-  Leadership: { bg: '#3d3d3d', text: '#e2e8f0' }, // Charcoal
-  Startup: { bg: '#404040', text: '#e2e8f0' }, // Dark gray
-  Communication: { bg: '#4b4b4b', text: '#e2e8f0' }, // Mid gray
+// Warm library palette: Dartmouth greens + autumn browns
+// Old leather books, wooden desks, fall foliage
+const colors = {
+  // Greens - Dartmouth inspired
+  forest: { bg: '#1E3A2F', text: '#FFFFFF' }, // Deep, dark Dartmouth green
+  evergreen: { bg: '#2D4A3E', text: '#FFFFFF' }, // Rich pine green
+  sage: { bg: '#3D5A4A', text: '#FFFFFF' }, // Softer green with warmth
+
+  // Browns - Fall/leather inspired
+  espresso: { bg: '#3B2820', text: '#FFFFFF' }, // Deep coffee brown
+  cognac: { bg: '#6B4226', text: '#FFFFFF' }, // Rich leather
+  sienna: { bg: '#8B5A2B', text: '#FFFFFF' }, // Warm tan, dried leaves
 };
 
-const defaultColor = { bg: '#4a4a4a', text: '#e2e8f0' };
+const genreColors: Record<string, { bg: string; text: string }> = {
+  // Forest - Deep thought, timeless
+  Philosophy: colors.forest,
+  Psychology: colors.forest,
+  Classic: colors.forest,
+
+  // Evergreen - Stories that endure
+  History: colors.evergreen,
+  Biography: colors.evergreen,
+  Memoir: colors.evergreen,
+
+  // Sage - Growth, creativity
+  Fiction: colors.sage,
+  'Self-Help': colors.sage,
+  Design: colors.sage,
+  Startup: colors.sage,
+
+  // Espresso - Precision, depth
+  Technology: colors.espresso,
+  Science: colors.espresso,
+  'Science Fiction': colors.espresso,
+
+  // Cognac - Professional, trusted
+  Business: colors.cognac,
+  Economics: colors.cognac,
+  Investing: colors.cognac,
+  Leadership: colors.cognac,
+
+  // Sienna - Grounded, accessible
+  'Non-Fiction': colors.sienna,
+  Communication: colors.sienna,
+  Politics: colors.sienna,
+};
+
+const defaultColor = colors.cognac;
 
 // Helper to get color based on book's primary genre
 const getGenreColor = (genres: string[]) => {
