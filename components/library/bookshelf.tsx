@@ -9,18 +9,39 @@ import { BookCoverImage } from './book-cover-image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
+// Hoisted static JSX - avoids recreation on every render
+const shelfSurface = (
+  <div className="h-4 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 dark:from-amber-800 dark:via-amber-900 dark:to-amber-950 shadow-lg rounded-sm" />
+);
+
+const shelfBracket = (
+  <div className="h-2 bg-gradient-to-b from-amber-900 to-amber-950 dark:from-amber-950 dark:to-black rounded-b-sm" />
+);
+
 interface BookshelfProps {
   books: Book[];
   viewMode: 'shelf' | 'stack';
 }
 
-export function Bookshelf({ books, viewMode }: BookshelfProps) {
+export function Bookshelf({
+  books,
+  viewMode,
+  onClearFilters,
+}: BookshelfProps & { onClearFilters?: () => void }) {
   if (books.length === 0) {
     return (
       <div className="text-center py-12 border border-neutral-200 dark:border-neutral-800">
-        <p className="text-neutral-500 dark:text-neutral-400">
+        <p className="text-neutral-500 dark:text-neutral-400 mb-4">
           No books found matching your filters.
         </p>
+        {onClearFilters && (
+          <button
+            onClick={onClearFilters}
+            className="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950"
+          >
+            Clear filters
+          </button>
+        )}
       </div>
     );
   }
@@ -33,10 +54,18 @@ export function Bookshelf({ books, viewMode }: BookshelfProps) {
 }
 
 function ShelfView({ books }: { books: Book[] }) {
-  // Group books by status
-  const reading = books.filter((b) => b.status === 'reading');
-  const wantToRead = books.filter((b) => b.status === 'want-to-read');
-  const read = books.filter((b) => b.status === 'read');
+  // Group books by status - single iteration
+  const { reading, wantToRead, read } = useMemo(() => {
+    const reading: Book[] = [];
+    const wantToRead: Book[] = [];
+    const read: Book[] = [];
+    for (const book of books) {
+      if (book.status === 'reading') reading.push(book);
+      else if (book.status === 'want-to-read') wantToRead.push(book);
+      else if (book.status === 'read') read.push(book);
+    }
+    return { reading, wantToRead, read };
+  }, [books]);
 
   return (
     <div className="space-y-12">
@@ -100,7 +129,7 @@ function ShelfSection({ title, books }: { title: string; books: Book[] }) {
 
   return (
     <div>
-      <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
+      <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase">
         {title}
       </h2>
       <div
@@ -131,10 +160,10 @@ function ShelfSection({ title, books }: { title: string; books: Book[] }) {
           </div>
 
           {/* Shelf surface - warm wood tone */}
-          <div className="h-4 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 dark:from-amber-800 dark:via-amber-900 dark:to-amber-950 shadow-lg rounded-sm" />
+          {shelfSurface}
 
           {/* Shelf bracket/edge */}
-          <div className="h-2 bg-gradient-to-b from-amber-900 to-amber-950 dark:from-amber-950 dark:to-black rounded-b-sm" />
+          {shelfBracket}
         </div>
       </div>
     </div>
@@ -142,10 +171,18 @@ function ShelfSection({ title, books }: { title: string; books: Book[] }) {
 }
 
 function StackView({ books }: { books: Book[] }) {
-  // Group books by status
-  const reading = books.filter((b) => b.status === 'reading');
-  const wantToRead = books.filter((b) => b.status === 'want-to-read');
-  const read = books.filter((b) => b.status === 'read');
+  // Group books by status - single iteration
+  const { reading, wantToRead, read } = useMemo(() => {
+    const reading: Book[] = [];
+    const wantToRead: Book[] = [];
+    const read: Book[] = [];
+    for (const book of books) {
+      if (book.status === 'reading') reading.push(book);
+      else if (book.status === 'want-to-read') wantToRead.push(book);
+      else if (book.status === 'read') read.push(book);
+    }
+    return { reading, wantToRead, read };
+  }, [books]);
 
   return (
     <div className="space-y-10">
@@ -163,7 +200,7 @@ function StackView({ books }: { books: Book[] }) {
 function StackSection({ title, books }: { title: string; books: Book[] }) {
   return (
     <div>
-      <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase tracking-wider">
+      <h2 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4 uppercase">
         {title}
       </h2>
       <div className="space-y-2">

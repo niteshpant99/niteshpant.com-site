@@ -42,19 +42,29 @@ export default function LibraryPage() {
       });
   }, [statusFilter, genreFilter]);
 
-  // Stats
-  const stats = useMemo(() => {
-    const read = books.filter((b) => b.status === 'read').length;
-    const reading = books.filter((b) => b.status === 'reading').length;
-    const wantToRead = books.filter((b) => b.status === 'want-to-read').length;
-    return { read, reading, wantToRead };
-  }, []);
-
-  // Get unique genres that exist in current books
-  const availableGenres = useMemo(() => {
+  // Stats and available genres - single iteration over books
+  const { stats, availableGenres } = useMemo(() => {
+    let read = 0,
+      reading = 0,
+      wantToRead = 0;
     const genreSet = new Set<string>();
-    books.forEach((book) => book.genres.forEach((g) => genreSet.add(g)));
-    return Array.from(genreSet).sort();
+
+    for (const book of books) {
+      // Count by status
+      if (book.status === 'read') read++;
+      else if (book.status === 'reading') reading++;
+      else if (book.status === 'want-to-read') wantToRead++;
+
+      // Collect genres
+      for (const genre of book.genres) {
+        genreSet.add(genre);
+      }
+    }
+
+    return {
+      stats: { read, reading, wantToRead },
+      availableGenres: Array.from(genreSet).sort(),
+    };
   }, []);
 
   const hasActiveFilters = statusFilter !== 'all' || genreFilter !== 'all';
@@ -63,10 +73,10 @@ export default function LibraryPage() {
     <section className="space-y-8">
       {/* Header */}
       <div className="space-y-4">
-        <h1 className="text-3xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-3xl font-medium text-neutral-900 dark:text-neutral-100 text-balance">
           Library
         </h1>
-        <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-pretty">
           Books that have shaped my thinking on technology, business, philosophy,
           and life. A personal collection of reads, current explorations, and
           future adventures.
@@ -171,7 +181,14 @@ export default function LibraryPage() {
       </div>
 
       {/* Bookshelf */}
-      <Bookshelf books={filteredBooks} viewMode={viewMode} />
+      <Bookshelf
+        books={filteredBooks}
+        viewMode={viewMode}
+        onClearFilters={() => {
+          setStatusFilter('all');
+          setGenreFilter('all');
+        }}
+      />
     </section>
   );
 }

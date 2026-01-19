@@ -215,7 +215,6 @@ export function BookSpine({
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
                 fontSize: spineWidth < 35 ? '10px' : '12px',
-                letterSpacing: '0.5px',
                 textShadow: '0 1px 2px rgba(0,0,0,0.3)',
               }}
             >
@@ -230,7 +229,6 @@ export function BookSpine({
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
                 fontSize: spineWidth < 35 ? '8px' : '10px',
-                letterSpacing: '0.3px',
                 textShadow: '0 1px 2px rgba(0,0,0,0.3)',
               }}
               initial={{ opacity: 0 }}
