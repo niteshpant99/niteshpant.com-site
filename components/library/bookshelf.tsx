@@ -15,7 +15,7 @@ const shelfLine = (
 );
 
 const shelfShadow = (
-  <div className="h-3 bg-gradient-to-b from-black/5 to-transparent dark:from-black/20" />
+  <div className="h-3 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_2px_4px_rgba(0,0,0,0.15)]" />
 );
 
 interface BookshelfProps {
