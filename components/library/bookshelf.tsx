@@ -9,13 +9,13 @@ import { BookCoverImage } from './book-cover-image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-// Hoisted static JSX - avoids recreation on every render
-const shelfSurface = (
-  <div className="h-4 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 dark:from-amber-800 dark:via-amber-900 dark:to-amber-950 shadow-lg rounded-sm" />
+// Hoisted static JSX - minimal modern shelf
+const shelfLine = (
+  <div className="h-px bg-neutral-300 dark:bg-neutral-700" />
 );
 
-const shelfBracket = (
-  <div className="h-2 bg-gradient-to-b from-amber-900 to-amber-950 dark:from-amber-950 dark:to-black rounded-b-sm" />
+const shelfShadow = (
+  <div className="h-3 bg-gradient-to-b from-black/5 to-transparent dark:from-black/20" />
 );
 
 interface BookshelfProps {
@@ -159,11 +159,11 @@ function ShelfSection({ title, books }: { title: string; books: Book[] }) {
             ))}
           </div>
 
-          {/* Shelf surface - warm wood tone */}
-          {shelfSurface}
+          {/* Minimal shelf line */}
+          {shelfLine}
 
-          {/* Shelf bracket/edge */}
-          {shelfBracket}
+          {/* Subtle shadow below shelf */}
+          {shelfShadow}
         </div>
       </div>
     </div>

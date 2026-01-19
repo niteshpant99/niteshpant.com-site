@@ -33,101 +33,47 @@ export function BookSpine({
   const spineRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
-  const [isFlipping, setIsFlipping] = useState(false);
 
   const spineWidth = calculateSpineWidth(book.pageCount);
   const spineHeight = calculateSpineHeight(book.pageCount);
 
   // Font sizes based on spine width (thickness), not title length
-  // Thicker spines (more pages) can accommodate slightly larger text
   const titleFontSize = spineWidth < 30 ? 10 : spineWidth < 45 ? 11 : 12;
   const authorFontSize = titleFontSize - 2;
 
-  // Calculate scroll-based tilt using PURE MATH - no DOM queries!
-  // Books tilt based on their position relative to the viewport center
-  // This creates a smooth wave effect as you scroll
+  // Subtle scroll-based tilt - 4° max for modern, refined look
   const scrollBasedRotateY = useTransform(scrollX, (scroll) => {
-    // Book's center position relative to what's currently visible
-    // offsetX is the book's position from start of row
-    // scroll is how far we've scrolled
-    // So (offsetX - scroll) is the book's position in the visible area
     const bookCenterInView = offsetX + spineWidth / 2 - scroll;
-
-    // Distance from center of visible container
     const viewCenter = containerWidth / 2;
     const distanceFromCenter = bookCenterInView - viewCenter;
-
-    // Normalize distance: -1 (far left) to +1 (far right)
-    // Use half container width as the range for full tilt
     const normalizedDistance = distanceFromCenter / (containerWidth / 2);
-
-    // Clamp to -1 to 1 range
     const clamped = Math.max(-1, Math.min(1, normalizedDistance));
-
-    // Map to rotation angle - 12 degrees for subtle, elegant tilt without distortion
-    // Negative because books on the right should tilt left (toward center)
-    return clamped * -12;
+    // Reduced from 12° to 4° for subtle, modern feel
+    return clamped * -4;
   });
 
-  // Smooth the scroll-based rotation with a SOFTER spring for fluid motion
+  // Snappy spring - less bouncy, more refined
   const smoothRotateY = useSpring(scrollBasedRotateY, {
-    stiffness: 80, // Lower = slower, smoother
-    damping: 15, // Lower = more bouncy
-    mass: 0.8, // Higher = more momentum
+    stiffness: 150,
+    damping: 25,
+    mass: 0.5,
   });
 
-  // Hover: pull book toward viewer (translateZ)
-  const hoverTranslateZ = useSpring(isHovered ? 30 : 0, {
-    stiffness: 200,
-    damping: 20,
+  // Hover: gentle lift (translateY) instead of dramatic 3D pull
+  const hoverTranslateY = useSpring(isHovered ? -4 : 0, {
+    stiffness: 300,
+    damping: 30,
   });
-
-  // Subtle backward tilt on hover (like pulling book toward you)
-  const hoverRotateX = useSpring(isHovered ? -5 : 0, {
-    stiffness: 200,
-    damping: 20,
-  });
-
-  // Flip animation for click
-  const flipRotateY = useSpring(isFlipping ? -180 : 0, {
-    stiffness: 80,
-    damping: 15,
-  });
-
-  const flipTranslateZ = useSpring(isFlipping ? 100 : 0, {
-    stiffness: 80,
-    damping: 15,
-  });
-
-  // Combine all transforms into final values
-  // When flipping, ignore scroll rotation
-  const finalRotateY = useTransform(
-    [smoothRotateY, flipRotateY],
-    ([scrollRot, flipRot]) => {
-      if (isFlipping) return flipRot as number;
-      // When hovering, reduce scroll rotation so the book faces forward more
-      if (isHovered) return (scrollRot as number) * 0.3;
-      return scrollRot as number;
-    }
-  );
-
-  const finalTranslateZ = useTransform(
-    [hoverTranslateZ, flipTranslateZ],
-    ([hover, flip]) => Math.max(hover as number, flip as number)
-  );
 
   // Floating cover opacity - shows on hover
-  const coverOpacity = useSpring(isHovered && !isFlipping ? 1 : 0, {
+  const coverOpacity = useSpring(isHovered ? 1 : 0, {
     stiffness: 300,
     damping: 25,
   });
 
+  // Direct navigation - no flip animation (honest about digital)
   const handleClick = () => {
-    if (isFlipping) return;
-    setIsFlipping(true);
-    setTimeout(() => {
-      router.push(`/library/${book.slug}`);
-    }, 700);
+    router.push(`/library/${book.slug}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -145,19 +91,17 @@ export function BookSpine({
       aria-label={`${book.title} by ${book.author}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className="relative cursor-pointer flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 rounded-sm"
+      className="relative cursor-pointer flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 rounded-sm"
       style={{
         width: spineWidth,
         height: spineHeight,
-        transformStyle: 'preserve-3d',
-        rotateY: finalRotateY,
-        rotateX: hoverRotateX,
-        translateZ: finalTranslateZ,
+        rotateY: smoothRotateY,
+        translateY: hoverTranslateY,
       }}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.02, duration: 0.3 }}
-      onHoverStart={() => !isFlipping && setIsHovered(true)}
+      transition={{ delay: index * 0.015, duration: 0.2 }}
+      onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
       {/* Floating cover thumbnail - appears on hover above the spine */}
@@ -177,40 +121,22 @@ export function BookSpine({
         </div>
       </motion.div>
 
-      {/* Book spine container with 3D effect */}
-      <motion.div
-        className="relative w-full h-full"
+      {/* Book spine - clean, modern design */}
+      <div
+        className="relative w-full h-full rounded-sm overflow-hidden"
         style={{
-          transformStyle: 'preserve-3d',
-          rotateY: isFlipping ? flipRotateY : 0,
+          backgroundColor: book.dominantColor,
+          // Single refined box-shadow instead of multiple gradients
+          boxShadow: isHovered
+            ? '0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)'
+            : '0 2px 8px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.05)',
+          transition: 'box-shadow 0.2s ease',
         }}
       >
-        {/* FRONT: Spine */}
-        <div
-          className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-sm"
-          style={{
-            backgroundColor: book.dominantColor,
-            backfaceVisibility: 'hidden',
-            boxShadow:
-              isHovered || isFlipping
-                ? '8px 8px 24px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.05)'
-                : '3px 3px 10px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.03)',
-            transition: 'box-shadow 0.3s ease',
-          }}
-        >
-          {/* Left edge shadow - book binding effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+        {/* Subtle left edge for depth */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-black/20" />
 
-          {/* Right edge highlight - page edge effect */}
-          <div className="absolute right-0 top-0 bottom-0 w-1 bg-gradient-to-l from-white/10 via-white/5 to-transparent" />
-
-          {/* Top edge shadow */}
-          <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-black/25 via-black/10 to-transparent" />
-
-          {/* Bottom edge shadow */}
-          <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-black/25 via-black/10 to-transparent" />
-
-          {/* Vertical text - Title always visible, Author reveals on hover */}
+        {/* Vertical text - Title always visible, Author reveals on hover */}
           <motion.div
             layout
             className="absolute inset-x-0 top-4 bottom-4 flex flex-col items-center justify-center overflow-hidden"
@@ -253,25 +179,7 @@ export function BookSpine({
               {book.author}
             </motion.span>
           </motion.div>
-        </div>
-
-        {/* BACK: Cover (pre-rotated 180 deg so it shows correctly when flipped) */}
-        <div
-          className="absolute inset-0 overflow-hidden rounded-sm"
-          style={{
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-            boxShadow: '8px 8px 24px rgba(0,0,0,0.5)',
-          }}
-        >
-          <BookCoverImage
-            book={book}
-            width={spineWidth * 2.5}
-            height={spineHeight}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

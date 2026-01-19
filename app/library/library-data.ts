@@ -82,30 +82,53 @@ export const statusConfig = {
   },
 } as const;
 
-// Classic leather-bound color palette
-const classicColors = [
-  { bg: '#722F37', text: '#D4AF37' }, // Deep burgundy
-  { bg: '#1B365D', text: '#C9B037' }, // Navy blue
-  { bg: '#2D4A3E', text: '#D4AF37' }, // Forest green
-  { bg: '#5C4033', text: '#FFFDD0' }, // Warm brown
-  { bg: '#4A0E0E', text: '#D4AF37' }, // Dark mahogany
-  { bg: '#36454F', text: '#F5F5DC' }, // Charcoal
-  { bg: '#1D4E5F', text: '#C9B037' }, // Dark teal
-  { bg: '#4A3043', text: '#D4AF37' }, // Deep plum
-];
+// Muted, sophisticated genre-based color palette
+// Modern library aesthetic - purposeful colors that work in light/dark mode
+const genreColors: Record<string, { bg: string; text: string }> = {
+  // Core genres
+  Philosophy: { bg: '#4a5568', text: '#e2e8f0' }, // Slate
+  Business: { bg: '#3d4852', text: '#e2e8f0' }, // Cool charcoal
+  Fiction: { bg: '#5a4a42', text: '#faf5f0' }, // Warm taupe
+  Technology: { bg: '#374151', text: '#e2e8f0' }, // Gray
+  Psychology: { bg: '#4a4a5a', text: '#e2e8f0' }, // Blue-gray
+  History: { bg: '#4d4539', text: '#faf5f0' }, // Brown-gray
+  Science: { bg: '#3a4a4a', text: '#e2e8f0' }, // Teal-gray
+  'Non-Fiction': { bg: '#44403c', text: '#faf5f0' }, // Stone
+  Biography: { bg: '#525252', text: '#e2e8f0' }, // Neutral gray
+  'Self-Help': { bg: '#4b5563', text: '#e2e8f0' }, // Cool gray
+  Economics: { bg: '#3f3f46', text: '#e2e8f0' }, // Zinc
+  Politics: { bg: '#404040', text: '#e2e8f0' }, // Dark neutral
+  Memoir: { bg: '#57534e', text: '#faf5f0' }, // Warm stone
+  'Science Fiction': { bg: '#334155', text: '#e2e8f0' }, // Slate blue
+  Classic: { bg: '#4a4540', text: '#faf5f0' }, // Warm neutral
+  Design: { bg: '#3b3b3b', text: '#e2e8f0' }, // Near black
+  Investing: { bg: '#374151', text: '#e2e8f0' }, // Gray
+  Leadership: { bg: '#3d3d3d', text: '#e2e8f0' }, // Charcoal
+  Startup: { bg: '#404040', text: '#e2e8f0' }, // Dark gray
+  Communication: { bg: '#4b4b4b', text: '#e2e8f0' }, // Mid gray
+};
 
-// Helper to get color by index
-const getColor = (index: number) => classicColors[index % classicColors.length];
+const defaultColor = { bg: '#4a4a4a', text: '#e2e8f0' };
 
-// Book collection with classic colors
-export const books: Book[] = [
+// Helper to get color based on book's primary genre
+const getGenreColor = (genres: string[]) => {
+  for (const genre of genres) {
+    if (genreColors[genre]) {
+      return genreColors[genre];
+    }
+  }
+  return defaultColor;
+};
+
+// Book data without colors (colors computed from genres)
+type BookData = Omit<Book, 'dominantColor' | 'textColor'>;
+
+const booksData: BookData[] = [
   // ==================== READ ====================
   {
     slug: 'good-to-great',
     title: 'Good to Great',
     author: 'Jim Collins',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 320,
     status: 'read',
     isbn: '9780066620992',
@@ -118,8 +141,6 @@ export const books: Book[] = [
     slug: 'mother',
     title: 'Mother',
     author: 'Maxim Gorky',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 336,
     status: 'read',
     isbn: '9788179920220',
@@ -131,8 +152,6 @@ export const books: Book[] = [
     slug: 'sophies-world',
     title: "Sophie's World",
     author: 'Jostein Gaarder',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 518,
     status: 'read',
     isbn: '9780374530716',
@@ -144,8 +163,6 @@ export const books: Book[] = [
     slug: 'mastery',
     title: 'Mastery',
     author: 'Robert Greene',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 352,
     status: 'read',
     isbn: '9780670024964',
@@ -157,8 +174,6 @@ export const books: Book[] = [
     slug: 'the-technological-republic',
     title: 'The Technological Republic',
     author: 'Alex Karp',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 256,
     status: 'read',
     isbn: '9780593798690',
@@ -170,8 +185,6 @@ export const books: Book[] = [
     slug: 'the-lean-startup',
     title: 'The Lean Startup',
     author: 'Eric Ries',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 336,
     status: 'read',
     isbn: '9780307887894',
@@ -182,8 +195,6 @@ export const books: Book[] = [
     slug: 'sapiens',
     title: 'Sapiens',
     author: 'Yuval Noah Harari',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 443,
     status: 'read',
     isbn: '9780062316097',
@@ -195,8 +206,6 @@ export const books: Book[] = [
     slug: 'ai-engineering',
     title: 'AI Engineering',
     author: 'Chip Huyen',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 400,
     status: 'read',
     isbn: '9781098166304',
@@ -207,8 +216,6 @@ export const books: Book[] = [
     slug: 'how-to-invest',
     title: 'How to Invest',
     author: 'David Rubenstein',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 320,
     status: 'read',
     isbn: '9781982190309',
@@ -219,8 +226,6 @@ export const books: Book[] = [
     slug: 'the-pyramid-principle',
     title: 'The Pyramid Principle',
     author: 'Barbara Minto',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 272,
     status: 'read',
     isbn: '9781292372266',
@@ -232,8 +237,6 @@ export const books: Book[] = [
     slug: 'the-prince',
     title: 'The Prince',
     author: 'Niccolò Machiavelli',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 140,
     status: 'read',
     isbn: '9780140449150',
@@ -244,8 +247,6 @@ export const books: Book[] = [
     slug: 'the-road',
     title: 'The Road',
     author: 'Cormac McCarthy',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 287,
     status: 'read',
     isbn: '9780307387899',
@@ -256,8 +257,6 @@ export const books: Book[] = [
     slug: 'poor-economics',
     title: 'Poor Economics',
     author: 'Abhijit Banerjee & Esther Duflo',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 320,
     status: 'read',
     isbn: '9781610390934',
@@ -268,8 +267,6 @@ export const books: Book[] = [
     slug: 'swipe-to-unlock',
     title: 'Swipe to Unlock',
     author: 'Parth Detroja, Aditya Agashe & Neel Mehta',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 228,
     status: 'read',
     isbn: '9781976182198',
@@ -280,8 +277,6 @@ export const books: Book[] = [
     slug: 'zero-to-one',
     title: 'Zero to One',
     author: 'Peter Thiel',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 224,
     status: 'read',
     isbn: '9780804139298',
@@ -294,8 +289,6 @@ export const books: Book[] = [
     slug: 'to-sell-is-human',
     title: 'To Sell Is Human',
     author: 'Daniel H. Pink',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 272,
     status: 'read',
     isbn: '9781594631900',
@@ -308,8 +301,6 @@ export const books: Book[] = [
     slug: 'harry-potter-series',
     title: 'Harry Potter (series)',
     author: 'J.K. Rowling',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 4100,
     status: 'read',
     isbn: '9780545162074',
@@ -320,8 +311,6 @@ export const books: Book[] = [
     slug: 'the-adventures-of-tom-sawyer',
     title: 'The Adventures of Tom Sawyer',
     author: 'Mark Twain',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 274,
     status: 'read',
     isbn: '9780486400778',
@@ -332,8 +321,6 @@ export const books: Book[] = [
     slug: 'how-to-win-friends-and-influence-people',
     title: 'How to Win Friends and Influence People',
     author: 'Dale Carnegie',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 288,
     status: 'read',
     isbn: '9780671027032',
@@ -345,8 +332,6 @@ export const books: Book[] = [
     slug: 'the-7-habits-of-highly-effective-teenagers',
     title: 'The 7 Habits of Highly Effective Teenagers',
     author: 'Sean Covey',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 288,
     status: 'read',
     isbn: '9781476764665',
@@ -360,8 +345,6 @@ export const books: Book[] = [
     slug: 'the-design-of-everyday-things',
     title: 'The Design of Everyday Things',
     author: 'Don Norman',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 368,
     status: 'reading',
     isbn: '9780465050659',
@@ -372,8 +355,6 @@ export const books: Book[] = [
     slug: 'flow',
     title: 'Flow',
     author: 'Mihaly Csikszentmihalyi',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 336,
     status: 'reading',
     isbn: '9780061339202',
@@ -384,8 +365,6 @@ export const books: Book[] = [
     slug: 'thinking-fast-and-slow',
     title: 'Thinking, Fast and Slow',
     author: 'Daniel Kahneman',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 499,
     status: 'reading',
     isbn: '9780374533557',
@@ -396,8 +375,6 @@ export const books: Book[] = [
     slug: 'dont-make-me-think-revisited',
     title: "Don't Make Me Think Revisited",
     author: 'Steve Krug',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 216,
     status: 'reading',
     isbn: '9780321965516',
@@ -408,8 +385,6 @@ export const books: Book[] = [
     slug: 'the-innovators-dilemma',
     title: "The Innovator's Dilemma",
     author: 'Clayton Christensen',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 286,
     status: 'reading',
     isbn: '9780062060242',
@@ -421,8 +396,6 @@ export const books: Book[] = [
     slug: 'blue-ocean-strategy',
     title: 'Blue Ocean Strategy',
     author: 'W. Chan Kim & Renée Mauborgne',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 320,
     status: 'reading',
     isbn: '9781625274496',
@@ -433,8 +406,6 @@ export const books: Book[] = [
     slug: 'jobs-to-be-done',
     title: 'Jobs to Be Done',
     author: 'Stephen Wunker',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 240,
     status: 'reading',
     isbn: '9780814438039',
@@ -445,8 +416,6 @@ export const books: Book[] = [
     slug: 'the-startup-of-you',
     title: 'The Startup of You',
     author: 'Reid Hoffman',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 272,
     status: 'reading',
     isbn: '9780307888907',
@@ -457,8 +426,6 @@ export const books: Book[] = [
     slug: 'venture-deals',
     title: 'Venture Deals',
     author: 'Brad Feld & Jason Mendelson',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 304,
     status: 'reading',
     isbn: '9781119594826',
@@ -469,8 +436,6 @@ export const books: Book[] = [
     slug: 'orientalism',
     title: 'Orientalism',
     author: 'Edward Said',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 368,
     status: 'reading',
     isbn: '9780394740676',
@@ -484,8 +449,6 @@ export const books: Book[] = [
     slug: 'never-split-the-difference',
     title: 'Never Split the Difference',
     author: 'Chris Voss',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 288,
     status: 'want-to-read',
     isbn: '9780062407801',
@@ -496,8 +459,6 @@ export const books: Book[] = [
     slug: 'influence-the-psychology-of-persuasion',
     title: 'Influence: The Psychology of Persuasion',
     author: 'Robert Cialdini',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 336,
     status: 'reading',
     isbn: '9780062937650',
@@ -508,8 +469,6 @@ export const books: Book[] = [
     slug: 'the-art-of-seduction',
     title: 'The Art of Seduction',
     author: 'Robert Greene',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 466,
     status: 'want-to-read',
     isbn: '9780142001196',
@@ -520,8 +479,6 @@ export const books: Book[] = [
     slug: 'models-attract-women-through-honesty',
     title: 'Models: Attract Women Through Honesty',
     author: 'Mark Manson',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 260,
     status: 'want-to-read',
     isbn: '9781463750350',
@@ -532,8 +489,6 @@ export const books: Book[] = [
     slug: 'the-charisma-myth',
     title: 'The Charisma Myth',
     author: 'Olivia Fox Cabane',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 288,
     status: 'want-to-read',
     isbn: '9781591845942',
@@ -544,8 +499,6 @@ export const books: Book[] = [
     slug: 'what-every-body-is-saying',
     title: 'What Every BODY is Saying',
     author: 'Joe Navarro',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 272,
     status: 'want-to-read',
     isbn: '9780061438295',
@@ -556,8 +509,6 @@ export const books: Book[] = [
     slug: 'impro-improvisation-and-the-theatre',
     title: 'Impro: Improvisation and the Theatre',
     author: 'Keith Johnstone',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 208,
     status: 'want-to-read',
     isbn: '9780878301171',
@@ -568,8 +519,6 @@ export const books: Book[] = [
     slug: 'the-48-laws-of-power',
     title: 'The 48 Laws of Power',
     author: 'Robert Greene',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 480,
     status: 'want-to-read',
     isbn: '9780140280197',
@@ -580,8 +529,6 @@ export const books: Book[] = [
     slug: 'the-art-of-witty-banter',
     title: 'The Art of Witty Banter',
     author: 'Patrick King',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 186,
     status: 'want-to-read',
     isbn: '9781540552631',
@@ -592,8 +539,6 @@ export const books: Book[] = [
     slug: 'the-laws-of-human-nature',
     title: 'The Laws of Human Nature',
     author: 'Robert Greene',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 624,
     status: 'want-to-read',
     isbn: '9780525428145',
@@ -604,8 +549,6 @@ export const books: Book[] = [
     slug: 'made-to-stick',
     title: 'Made to Stick',
     author: 'Chip Heath & Dan Heath',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 291,
     status: 'want-to-read',
     isbn: '9781400064281',
@@ -616,8 +559,6 @@ export const books: Book[] = [
     slug: 'on-writing-well',
     title: 'On Writing Well',
     author: 'William Zinsser',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 336,
     status: 'want-to-read',
     isbn: '9780060891541',
@@ -628,8 +569,6 @@ export const books: Book[] = [
     slug: 'surely-youre-joking-mr-feynman',
     title: "Surely You're Joking, Mr. Feynman!",
     author: 'Richard P. Feynman',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 391,
     status: 'want-to-read',
     isbn: '9780393316049',
@@ -640,8 +579,6 @@ export const books: Book[] = [
     slug: 'meditations',
     title: 'Meditations',
     author: 'Marcus Aurelius',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 256,
     status: 'want-to-read',
     isbn: '9780140449334',
@@ -652,8 +589,6 @@ export const books: Book[] = [
     slug: '21-lessons-for-the-21st-century',
     title: '21 Lessons for the 21st Century',
     author: 'Yuval Noah Harari',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 372,
     status: 'want-to-read',
     isbn: '9780525512172',
@@ -664,8 +599,6 @@ export const books: Book[] = [
     slug: 'the-4-hour-workweek',
     title: 'The 4-Hour Workweek',
     author: 'Tim Ferriss',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 416,
     status: 'want-to-read',
     isbn: '9780307465351',
@@ -676,8 +609,6 @@ export const books: Book[] = [
     slug: '1984',
     title: '1984',
     author: 'George Orwell',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 328,
     status: 'want-to-read',
     isbn: '9780451524935',
@@ -688,8 +619,6 @@ export const books: Book[] = [
     slug: 'as-a-man-thinketh',
     title: 'As a Man Thinketh',
     author: 'James Allen',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 68,
     status: 'want-to-read',
     isbn: '9781585426386',
@@ -700,8 +629,6 @@ export const books: Book[] = [
     slug: 'one-flew-over-the-cuckoos-nest',
     title: "One Flew Over the Cuckoo's Nest",
     author: 'Ken Kesey',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 325,
     status: 'want-to-read',
     isbn: '9780451163967',
@@ -712,8 +639,6 @@ export const books: Book[] = [
     slug: 'originals',
     title: 'Originals',
     author: 'Adam Grant',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 336,
     status: 'want-to-read',
     isbn: '9780525429562',
@@ -724,8 +649,6 @@ export const books: Book[] = [
     slug: 'the-almanack-of-naval-ravikant',
     title: 'The Almanack of Naval Ravikant',
     author: 'Eric Jorgenson',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 244,
     status: 'want-to-read',
     isbn: '9781544514215',
@@ -736,8 +659,6 @@ export const books: Book[] = [
     slug: 'the-hard-thing-about-hard-things',
     title: 'The Hard Thing About Hard Things',
     author: 'Ben Horowitz',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 304,
     status: 'want-to-read',
     isbn: '9780062273208',
@@ -748,8 +669,6 @@ export const books: Book[] = [
     slug: 'the-7-habits-of-highly-effective-people',
     title: 'The 7 Habits of Highly Effective People',
     author: 'Stephen R. Covey',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 432,
     status: 'want-to-read',
     isbn: '9781982137137',
@@ -760,8 +679,6 @@ export const books: Book[] = [
     slug: 'built-to-last',
     title: 'Built to Last',
     author: 'Jim Collins & Jerry Porras',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 368,
     status: 'reading',
     isbn: '9780060516406',
@@ -772,8 +689,6 @@ export const books: Book[] = [
     slug: 'extreme-ownership',
     title: 'Extreme Ownership',
     author: 'Jocko Willink & Leif Babin',
-    dominantColor: getColor(6).bg,
-    textColor: getColor(6).text,
     pageCount: 320,
     status: 'want-to-read',
     isbn: '9781250183866',
@@ -784,8 +699,6 @@ export const books: Book[] = [
     slug: 'steve-jobs',
     title: 'Steve Jobs',
     author: 'Walter Isaacson',
-    dominantColor: getColor(7).bg,
-    textColor: getColor(7).text,
     pageCount: 656,
     status: 'want-to-read',
     isbn: '9781451648539',
@@ -796,8 +709,6 @@ export const books: Book[] = [
     slug: 'outliers',
     title: 'Outliers',
     author: 'Malcolm Gladwell',
-    dominantColor: getColor(0).bg,
-    textColor: getColor(0).text,
     pageCount: 336,
     status: 'want-to-read',
     isbn: '9780316017930',
@@ -808,8 +719,6 @@ export const books: Book[] = [
     slug: 'hooked',
     title: 'Hooked',
     author: 'Nir Eyal',
-    dominantColor: getColor(1).bg,
-    textColor: getColor(1).text,
     pageCount: 256,
     status: 'want-to-read',
     isbn: '9781591847786',
@@ -820,8 +729,6 @@ export const books: Book[] = [
     slug: 'the-psychology-of-money',
     title: 'The Psychology of Money',
     author: 'Morgan Housel',
-    dominantColor: getColor(2).bg,
-    textColor: getColor(2).text,
     pageCount: 256,
     status: 'want-to-read',
     isbn: '9780857197689',
@@ -832,8 +739,6 @@ export const books: Book[] = [
     slug: 'founders-at-work',
     title: 'Founders at Work',
     author: 'Jessica Livingston',
-    dominantColor: getColor(3).bg,
-    textColor: getColor(3).text,
     pageCount: 512,
     status: 'want-to-read',
     isbn: '9781430210788',
@@ -844,8 +749,6 @@ export const books: Book[] = [
     slug: 'the-intelligent-investor',
     title: 'The Intelligent Investor',
     author: 'Benjamin Graham',
-    dominantColor: getColor(4).bg,
-    textColor: getColor(4).text,
     pageCount: 640,
     status: 'want-to-read',
     isbn: '9780060555665',
@@ -856,8 +759,6 @@ export const books: Book[] = [
     slug: 'project-hail-mary',
     title: 'Project Hail Mary',
     author: 'Andy Weir',
-    dominantColor: getColor(5).bg,
-    textColor: getColor(5).text,
     pageCount: 496,
     status: 'want-to-read',
     isbn: '9780593135204',
@@ -865,6 +766,16 @@ export const books: Book[] = [
     hasReview: true,
   },
 ];
+
+// Map book data to full Book objects with genre-based colors
+export const books: Book[] = booksData.map((book) => {
+  const colors = getGenreColor(book.genres);
+  return {
+    ...book,
+    dominantColor: colors.bg,
+    textColor: colors.text,
+  };
+});
 
 // Utility functions
 export function getBookBySlug(slug: string): Book | undefined {
@@ -888,12 +799,9 @@ export function calculateSpineWidth(pageCount: number): number {
 }
 
 export function calculateSpineHeight(pageCount: number): number {
-  // Variable height based on page count for visual variety
-  // Short books: ~240px, Average books: ~300px, Long books: ~380px
-  // This creates the varied shelf look like a real bookcase
-  const baseHeight = 240;
-  const heightVariation = Math.min(140, pageCount / 5);
-  // Add slight random variation based on page count to avoid uniformity
-  const jitter = (pageCount % 17) * 2 - 17; // -17 to +17 px variation
-  return Math.round(baseHeight + heightVariation + jitter);
+  // Reduced variation for cleaner, more orderly appearance
+  // Range: 280px - 340px (60px variation vs previous 157px)
+  const baseHeight = 280;
+  const heightVariation = Math.min(60, pageCount / 8);
+  return Math.round(baseHeight + heightVariation);
 }
