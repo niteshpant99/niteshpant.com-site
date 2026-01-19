@@ -38,6 +38,11 @@ export function BookSpine({
   const spineWidth = calculateSpineWidth(book.pageCount);
   const spineHeight = calculateSpineHeight(book.pageCount);
 
+  // Font sizes based on spine width (thickness), not title length
+  // Thicker spines (more pages) can accommodate slightly larger text
+  const titleFontSize = spineWidth < 30 ? 10 : spineWidth < 45 ? 11 : 12;
+  const authorFontSize = titleFontSize - 2;
+
   // Calculate scroll-based tilt using PURE MATH - no DOM queries!
   // Books tilt based on their position relative to the viewport center
   // This creates a smooth wave effect as you scroll
@@ -157,7 +162,7 @@ export function BookSpine({
     >
       {/* Floating cover thumbnail - appears on hover above the spine */}
       <motion.div
-        className="absolute -top-14 left-1/2 -translate-x-1/2 pointer-events-none z-10"
+        className="absolute -top-14 left-1/2 -translate-x-1/2 pointer-events-none"
         style={{
           opacity: coverOpacity,
         }}
@@ -205,39 +210,49 @@ export function BookSpine({
           {/* Bottom edge shadow */}
           <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-black/25 via-black/10 to-transparent" />
 
-          {/* Vertical text - Title always visible, Author on hover */}
-          <div className="absolute inset-x-0 top-4 bottom-4 flex flex-col items-center justify-center gap-2 overflow-hidden">
-            {/* Title */}
-            <span
-              className="font-medium whitespace-nowrap"
+          {/* Vertical text - Title always visible, Author reveals on hover */}
+          <motion.div
+            layout
+            className="absolute inset-x-0 top-4 bottom-4 flex flex-col items-center justify-center overflow-hidden"
+          >
+            {/* Title - allows line breaks for long titles */}
+            <motion.span
+              layout
+              className="font-medium text-center"
               style={{
                 color: book.textColor,
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
-                fontSize: spineWidth < 35 ? '10px' : '12px',
+                fontSize: `${titleFontSize}px`,
                 textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                lineHeight: 1.3,
+                wordBreak: 'break-word',
               }}
             >
               {book.title}
-            </span>
+            </motion.span>
 
-            {/* Author - fades in on hover */}
+            {/* Author - height-based reveal on hover */}
             <motion.span
-              className="whitespace-nowrap"
+              className="whitespace-nowrap overflow-hidden"
               style={{
                 color: book.textColor,
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
-                fontSize: spineWidth < 35 ? '8px' : '10px',
+                fontSize: `${authorFontSize}px`,
                 textShadow: '0 1px 2px rgba(0,0,0,0.3)',
               }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 0.8 : 0 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{
+                opacity: isHovered ? 0.8 : 0,
+                height: isHovered ? 'auto' : 0,
+                marginTop: isHovered ? 8 : 0,
+              }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
             >
               {book.author}
             </motion.span>
-          </div>
+          </motion.div>
         </div>
 
         {/* BACK: Cover (pre-rotated 180 deg so it shows correctly when flipped) */}

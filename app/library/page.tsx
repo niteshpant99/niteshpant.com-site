@@ -94,7 +94,7 @@ export default function LibraryPage() {
       <div className="space-y-4">
         {/* View Toggle + Book Count */}
         <div className="flex items-center justify-between">
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">
+          <span className="text-sm tabular-nums text-neutral-500 dark:text-neutral-400">
             {filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}
           </span>
 
@@ -202,7 +202,7 @@ function StatCard({
 }) {
   return (
     <div className="p-4 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
-      <div className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+      <div className="text-2xl font-semibold tabular-nums text-neutral-900 dark:text-neutral-100">
         {value}
       </div>
       <div className="text-sm text-neutral-600 dark:text-neutral-400">
