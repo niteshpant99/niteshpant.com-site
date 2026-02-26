@@ -143,6 +143,7 @@ export function CustomMDX(props) {
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },
+        blockJS: false,
       }}
     />
   );
