@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { socialLinks, metaData } from "./config";
-import React from "react";
 
 const personSchema = {
   "@context": "https://schema.org",
