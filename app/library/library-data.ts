@@ -82,8 +82,8 @@ export const statusConfig = {
   },
 } as const;
 
-// Warm library palette: Dartmouth greens + autumn browns
-// Old leather books, wooden desks, fall foliage
+// Warm library palette: Dartmouth greens + autumn browns + collegiate navy
+// Old leather books, wooden desks, fall foliage, Ivy League feel
 const colors = {
   // Greens - Dartmouth inspired
   forest: { bg: '#1E3A2F', text: '#FFFFFF' }, // Deep, dark Dartmouth green
@@ -94,6 +94,9 @@ const colors = {
   espresso: { bg: '#3B2820', text: '#FFFFFF' }, // Deep coffee brown
   cognac: { bg: '#6B4226', text: '#FFFFFF' }, // Rich leather
   sienna: { bg: '#8B5A2B', text: '#FFFFFF' }, // Warm tan, dried leaves
+
+  // Blue - Collegiate accent
+  navy: { bg: '#1E3A5F', text: '#FFFFFF' }, // Deep Ivy League blue
 };
 
 const genreColors: Record<string, { bg: string; text: string }> = {
@@ -111,11 +114,13 @@ const genreColors: Record<string, { bg: string; text: string }> = {
   Fiction: colors.sage,
   'Self-Help': colors.sage,
   Design: colors.sage,
-  Startup: colors.sage,
 
-  // Espresso - Precision, depth
-  Technology: colors.espresso,
-  Science: colors.espresso,
+  // Navy - Digital, innovation
+  Technology: colors.navy,
+  Science: colors.navy,
+  Startup: colors.navy,
+
+  // Espresso - Speculative depth
   'Science Fiction': colors.espresso,
 
   // Cognac - Professional, trusted

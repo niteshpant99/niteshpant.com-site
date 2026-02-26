@@ -99,3 +99,7 @@ A library of books with a shelf/stack view.
 - Site metadata configured in `app/config.ts`
 - ESLint uses flat config format (`eslint.config.mjs`)
 - Build uses webpack (`next build --webpack`) for compatibility
+
+## Project Context
+This project uses nocaap for organizational context.
+Read `.context/INDEX.md` for standards, guidelines, and documentation.
