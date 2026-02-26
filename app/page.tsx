@@ -30,6 +30,8 @@ const personSchema = {
     "Political Economy",
     "Management Consulting",
     "Product Development",
+    "Knowledge Management",
+    "Consulting Technology",
   ],
 };
 
@@ -39,7 +41,7 @@ const organizationSchema = {
   name: "DevDash Labs",
   url: "https://devdashlabs.com",
   logo: "https://devdashlabs.com/logo.png",
-  description: "Applied AI research and development company building products to solve the hardest problems.",
+  description: "Applied AI company building alkemy, an AI operating system for consulting firms. Powered by world-class Nepali talent with global ambitions.",
   founder: {
     "@type": "Person",
     name: "Nitesh Pant",
@@ -69,7 +71,7 @@ export default function Page() {
       <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
         <Image
           src="/profile.jpg"
-          alt="Nitesh Pant - Co-founder of DevDash Labs, AI Implementation Leader"
+          alt="Nitesh Pant - Co-founder of DevDash Labs, building alkemy"
           className="rounded-full bg-gray-100 block lg:mt-5 mt-0 lg:mb-5 mb-10 mx-auto sm:float-right sm:ml-5 sm:mb-5 grayscale hover:grayscale-0"
           width={160}
           height={160}
@@ -85,19 +87,17 @@ export default function Page() {
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          I&apos;m the co-founder of <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, an applied AI research and development company. We build products to solve the hardest problems for our customers. Our mission is to ignite the AI revolution within organizations. DevDash Labs exists to do great work. This is powered by world-class Nepali talent with global ambitions.
+          I&apos;m building alkemy, the AI operating system for consulting firms. Very smart people waste time doing very dumb things in consulting: hunting slides they&apos;ve made, redoing research that exists, losing decades of expertise when people leave. alkemy fixes that.
         </p>
         <p>
-          I grew up in Nepal, went to <a target="_blank" rel="noopener noreferrer" href="https://www.dartmouth.edu">Dartmouth College</a> (studied economics and government), and worked as a management consultant at <a target="_blank" rel="noopener noreferrer" href="https://www.rolandberger.com">Roland Berger</a>. 
+          I grew up in Nepal, studied economics and government at <a target="_blank" rel="noopener noreferrer" href="https://www.dartmouth.edu">Dartmouth College</a>, and worked as a management consultant at <a target="_blank" rel="noopener noreferrer" href="https://www.rolandberger.com">Roland Berger</a>. 
         </p>
         <p>
-          At DevDash, we are building out products to change the knowledge industry, tools for deep research, tools for sales, and implementing client solutions. We believe in AI&apos;s potential to empower people and organizations, and we work alongside our customers to solve hard problems with our exceptional team.
+          I&apos;m the co-founder of <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, the company behind alkemy. We&apos;re powered by world-class Nepali talent with global ambitions. <a href="mailto:nitesh@niteshpant.com">Reach out</a> if you&apos;re building something ambitious. We&apos;re hiring!
         </p>
+
         <p>
-          Connect with me <a href="mailto:nitesh.pant@devdashlabs.com">via email</a> to collaborate on projects. Plus points for fintech and AI products!
-        </p>
-        <p>
-          I love building products, creating amazing marketing ideas, thinking about philosophy (political economy), and bringing structure to madness. Talk to me about architecture, and we will have a good convo.
+        I love building products, creating amazing marketing ideas, thinking about philosophy (political economy), and bringing structure to madness. Talk to me about architecture, and we will have a good convo. 
         </p>
       </div>
     </section>
