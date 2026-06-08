@@ -176,16 +176,29 @@ export default async function BookPage({ params }: Props) {
             </div>
 
             {/* Status and Rating */}
-            <div className="flex items-center gap-3 flex-wrap">
-              <span
-                className={`inline-flex items-center px-2.5 py-1 text-sm font-medium ${statusConfig[book.status].color}`}
-              >
+            <div className="flex items-center gap-4 flex-wrap">
+              <span className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-wide text-neutral-600 dark:text-neutral-400">
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${statusConfig[book.status].dot}`}
+                  aria-hidden
+                />
                 {statusConfig[book.status].label}
               </span>
               {book.rating && (
-                <span className="text-lg text-amber-500">
-                  {'★'.repeat(book.rating)}
-                  {'☆'.repeat(5 - book.rating)}
+                <span className="inline-flex items-baseline">
+                  <span
+                    className="text-[13px] leading-none text-[#00693e] dark:text-[#a5d75f]"
+                    style={{ textShadow: '0 1px 0 rgba(0,0,0,.12)' }}
+                    aria-hidden
+                  >
+                    {'◆'.repeat(book.rating)}
+                    <span className="text-neutral-300 dark:text-neutral-700">
+                      {'◇'.repeat(5 - book.rating)}
+                    </span>
+                  </span>
+                  <span className="ml-1.5 font-mono text-[11px] tabular-nums text-neutral-500">
+                    {book.rating}/5
+                  </span>
                 </span>
               )}
             </div>

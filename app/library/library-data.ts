@@ -64,75 +64,74 @@ export const genres = [
 
 export type Genre = (typeof genres)[number];
 
-// Status labels and colors
+// Status labels + a 6px indicator dot. Dartmouth green is the only accent:
+// reading = filled green, read = hollow green ring, want-to-read = neutral.
 export const statusConfig = {
   read: {
     label: 'Read',
-    color:
-      'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
+    dot: 'ring-1 ring-inset ring-[#00693e] dark:ring-[#a5d75f]',
   },
   reading: {
     label: 'Currently Reading',
-    color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
+    dot: 'bg-[#00693e] dark:bg-[#a5d75f]',
   },
   'want-to-read': {
     label: 'Want to Read',
-    color:
-      'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300',
+    dot: 'bg-neutral-400 dark:bg-neutral-600',
   },
 } as const;
 
-// Warm library palette: Dartmouth greens + autumn browns + collegiate navy
-// Old leather books, wooden desks, fall foliage, Ivy League feel
+// Leather library palette — one closed, low-chroma set of aged book bindings,
+// all stamped in a single gold-foil cream (retires the old pure-white text).
+// forest/evergreen are low-chroma cousins of Dartmouth green so the shelf
+// rhymes with the brand accent; oxblood/cognac/espresso are aged calf leather.
+// Foil-on-leather contrast verified >= 6.5:1 (AA/AAA) for every pairing.
+const FOIL = '#ECDFB0'; // matte gold-foil lettering
+
 const colors = {
-  // Greens - Dartmouth inspired
-  forest: { bg: '#1E3A2F', text: '#FFFFFF' }, // Deep, dark Dartmouth green
-  evergreen: { bg: '#2D4A3E', text: '#FFFFFF' }, // Rich pine green
-  sage: { bg: '#3D5A4A', text: '#FFFFFF' }, // Softer green with warmth
-
-  // Browns - Fall/leather inspired
-  espresso: { bg: '#3B2820', text: '#FFFFFF' }, // Deep coffee brown
-  cognac: { bg: '#6B4226', text: '#FFFFFF' }, // Rich leather
-  sienna: { bg: '#8B5A2B', text: '#FFFFFF' }, // Warm tan, dried leaves
-
-  // Blue - Collegiate accent
-  navy: { bg: '#1E3A5F', text: '#FFFFFF' }, // Deep Ivy League blue
+  oxblood: { bg: '#5C2A2E', text: FOIL }, // aged red literary leather
+  forest: { bg: '#1F3A2E', text: FOIL }, // deep Dartmouth-green cousin
+  evergreen: { bg: '#2C4438', text: FOIL }, // second green tone
+  cognac: { bg: '#6B3F2A', text: FOIL }, // rich tan leather
+  navy: { bg: '#23364E', text: FOIL }, // desaturated collegiate blue
+  espresso: { bg: '#3A2A22', text: FOIL }, // deep coffee brown
+  sage: { bg: '#454E3B', text: FOIL }, // muted olive cloth
 };
 
 const genreColors: Record<string, { bg: string; text: string }> = {
-  // Forest - Deep thought, timeless
+  // Forest - deep thought, timeless
   Philosophy: colors.forest,
   Psychology: colors.forest,
   Classic: colors.forest,
 
-  // Evergreen - Stories that endure
+  // Evergreen - stories that endure
   History: colors.evergreen,
   Biography: colors.evergreen,
   Memoir: colors.evergreen,
 
-  // Sage - Growth, creativity
-  Fiction: colors.sage,
+  // Oxblood - literary fiction
+  Fiction: colors.oxblood,
+
+  // Espresso - speculative depth
+  'Science Fiction': colors.espresso,
+
+  // Sage - growth, craft, ideas (absorbs the former sienna genres)
   'Self-Help': colors.sage,
   Design: colors.sage,
+  'Non-Fiction': colors.sage,
+  Communication: colors.sage,
+  Politics: colors.sage,
 
-  // Navy - Digital, innovation
+  // Navy - digital, innovation
   Technology: colors.navy,
   Science: colors.navy,
   Startup: colors.navy,
 
-  // Espresso - Speculative depth
-  'Science Fiction': colors.espresso,
-
-  // Cognac - Professional, trusted
+  // Cognac - professional, trusted
   Business: colors.cognac,
   Economics: colors.cognac,
   Investing: colors.cognac,
   Leadership: colors.cognac,
-
-  // Sienna - Grounded, accessible
-  'Non-Fiction': colors.sienna,
-  Communication: colors.sienna,
-  Politics: colors.sienna,
 };
 
 const defaultColor = colors.cognac;
