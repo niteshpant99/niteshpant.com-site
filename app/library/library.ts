@@ -15,12 +15,14 @@ export async function getBookContent(slug: string) {
 
   try {
     const source = fs.readFileSync(filePath, 'utf8');
-    const { content } = await compileMDX({
+    const { content, frontmatter } = await compileMDX<{ personal?: boolean }>({
       source,
       options: { parseFrontmatter: true },
     });
 
-    return content;
+    // `personal: true` in frontmatter marks a first-person note (heading
+    // "Notes"); absent/false renders as a "Summary".
+    return { content, frontmatter };
   } catch {
     return null;
   }

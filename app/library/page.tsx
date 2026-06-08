@@ -1,27 +1,13 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import {
-  books,
-  genres,
-  statusConfig,
-  type ReadingStatus,
-} from './library-data';
+import { books, statusConfig, type ReadingStatus } from './library-data';
 import { Bookshelf } from '@/components/library/bookshelf';
 
-type ViewMode = 'shelf' | 'stack';
-
 export default function LibraryPage() {
-  // View mode
-  const [viewMode, setViewMode] = useState<ViewMode>('shelf');
-
-  // Filters
-  const [statusFilter, setStatusFilter] = useState<ReadingStatus | 'all'>(
-    'all'
-  );
+  const [statusFilter, setStatusFilter] = useState<ReadingStatus | 'all'>('all');
   const [genreFilter, setGenreFilter] = useState<string>('all');
 
-  // Filter and sort books
   const filteredBooks = useMemo(() => {
     return books
       .filter((book) => {
@@ -34,47 +20,33 @@ export default function LibraryPage() {
         // Currently reading first
         if (a.status === 'reading' && b.status !== 'reading') return -1;
         if (b.status === 'reading' && a.status !== 'reading') return 1;
-
-        // Then by date read (most recent first)
+        // Then by date (most recent first)
         const dateA = a.dateFinished?.date || a.dateStarted?.date || '0000';
         const dateB = b.dateFinished?.date || b.dateStarted?.date || '0000';
         return dateB.localeCompare(dateA);
       });
   }, [statusFilter, genreFilter]);
 
-  // Stats and available genres - single iteration over books
-  const { stats, availableGenres } = useMemo(() => {
-    let read = 0,
-      reading = 0,
-      wantToRead = 0;
-    const genreSet = new Set<string>();
-
-    for (const book of books) {
-      // Count by status
-      if (book.status === 'read') read++;
-      else if (book.status === 'reading') reading++;
-      else if (book.status === 'want-to-read') wantToRead++;
-
-      // Collect genres
-      for (const genre of book.genres) {
-        genreSet.add(genre);
-      }
-    }
-
-    return {
-      stats: { read, reading, wantToRead },
-      availableGenres: Array.from(genreSet).sort(),
-    };
+  const availableGenres = useMemo(() => {
+    const set = new Set<string>();
+    for (const book of books) for (const g of book.genres) set.add(g);
+    return Array.from(set).sort();
   }, []);
 
   const hasActiveFilters = statusFilter !== 'all' || genreFilter !== 'all';
+
+  const clearFilters = () => {
+    setStatusFilter('all');
+    setGenreFilter('all');
+  };
 
   return (
     <section className="space-y-8">
       {/* Header */}
       <div className="space-y-4">
-        <h1 className="text-3xl font-medium text-neutral-900 dark:text-neutral-100 text-balance">
+        <h1 className="font-serif text-4xl text-neutral-900 dark:text-neutral-100">
           Library
+          <span className="text-[#00693e] dark:text-[#a5d75f]">.</span>
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-pretty">
           Books that have shaped my thinking on technology, business, philosophy,
@@ -83,132 +55,53 @@ export default function LibraryPage() {
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-4">
-        <StatCard label="Read" value={stats.read} />
-        <StatCard label="Reading" value={stats.reading} />
-        <StatCard label="Want to Read" value={stats.wantToRead} />
-      </div>
-
-      {/* Controls */}
-      <div className="space-y-4">
-        {/* View Toggle + Book Count */}
-        <div className="flex items-center justify-between">
-          <span className="text-sm tabular-nums text-neutral-500 dark:text-neutral-400">
-            {filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}
-          </span>
-
-          <div
-            role="group"
-            aria-label="View mode"
-            className="flex items-center gap-0 border border-neutral-200 dark:border-neutral-800"
-          >
-            <button
-              onClick={() => setViewMode('shelf')}
-              aria-pressed={viewMode === 'shelf'}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950 ${
-                viewMode === 'shelf'
-                  ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
-                  : 'bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
-              }`}
-            >
-              Shelf
-            </button>
-            <button
-              onClick={() => setViewMode('stack')}
-              aria-pressed={viewMode === 'stack'}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors border-l border-neutral-200 dark:border-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950 ${
-                viewMode === 'stack'
-                  ? 'bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900'
-                  : 'bg-white dark:bg-neutral-950 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100'
-              }`}
-            >
-              Stack
-            </button>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2">
-          {/* Status filter */}
+      {/* Filters */}
+      <div className="flex flex-wrap gap-2">
+        <FilterButton
+          active={statusFilter === 'all'}
+          onClick={() => setStatusFilter('all')}
+        >
+          All
+        </FilterButton>
+        {(Object.keys(statusConfig) as ReadingStatus[]).map((status) => (
           <FilterButton
-            active={statusFilter === 'all'}
-            onClick={() => setStatusFilter('all')}
+            key={status}
+            active={statusFilter === status}
+            onClick={() => setStatusFilter(status)}
           >
-            All
+            {statusConfig[status].label}
           </FilterButton>
-          {(Object.keys(statusConfig) as ReadingStatus[]).map((status) => (
-            <FilterButton
-              key={status}
-              active={statusFilter === status}
-              onClick={() => setStatusFilter(status)}
-            >
-              {statusConfig[status].label}
-            </FilterButton>
+        ))}
+
+        <div className="w-px h-6 bg-[#cdb89a]/60 dark:bg-[#3a2e22]/80 self-center mx-1" />
+
+        <select
+          value={genreFilter}
+          onChange={(e) => setGenreFilter(e.target.value)}
+          aria-label="Filter by genre"
+          className="px-3 py-1.5 text-sm font-mono uppercase tracking-wide bg-transparent border border-[#cdb89a]/70 dark:border-[#3a2e22] text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-[#00693e] dark:hover:border-[#a5d75f] transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
+        >
+          <option value="all">All Genres</option>
+          {availableGenres.map((genre) => (
+            <option key={genre} value={genre}>
+              {genre}
+            </option>
           ))}
+        </select>
 
-          {/* Divider */}
-          <div className="w-px h-6 bg-neutral-200 dark:bg-neutral-700 self-center mx-1" />
-
-          {/* Genre dropdown */}
-          <select
-            value={genreFilter}
-            onChange={(e) => setGenreFilter(e.target.value)}
-            aria-label="Filter by genre"
-            className="px-3 py-1.5 text-sm font-medium bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-950"
+        {hasActiveFilters && (
+          <button
+            onClick={clearFilters}
+            className="px-3 py-1.5 text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
           >
-            <option value="all">All Genres</option>
-            {availableGenres.map((genre) => (
-              <option key={genre} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
-
-          {/* Clear filters */}
-          {hasActiveFilters && (
-            <button
-              onClick={() => {
-                setStatusFilter('all');
-                setGenreFilter('all');
-              }}
-              className="px-3 py-1.5 text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
+            Clear
+          </button>
+        )}
       </div>
 
-      {/* Bookshelf */}
-      <Bookshelf
-        books={filteredBooks}
-        viewMode={viewMode}
-        onClearFilters={() => {
-          setStatusFilter('all');
-          setGenreFilter('all');
-        }}
-      />
+      {/* Shelves */}
+      <Bookshelf books={filteredBooks} onClearFilters={clearFilters} />
     </section>
-  );
-}
-
-function StatCard({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}) {
-  return (
-    <div className="p-4 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
-      <div className="text-2xl font-semibold tabular-nums text-neutral-900 dark:text-neutral-100">
-        {value}
-      </div>
-      <div className="text-sm text-neutral-600 dark:text-neutral-400">
-        {label}
-      </div>
-    </div>
   );
 }
 
@@ -225,10 +118,10 @@ function FilterButton({
     <button
       onClick={onClick}
       aria-pressed={active}
-      className={`px-3 py-1.5 text-sm font-medium transition-colors border focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-950 ${
+      className={`px-3 py-1.5 text-sm font-medium transition-colors border focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2 ${
         active
-          ? 'bg-neutral-900 text-white border-neutral-900 dark:bg-neutral-100 dark:text-neutral-900 dark:border-neutral-100'
-          : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300 dark:bg-neutral-950 dark:text-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700'
+          ? 'bg-[#00693e] text-[#FBF7EE] border-[#00693e] dark:bg-[#a5d75f] dark:text-neutral-900 dark:border-[#a5d75f]'
+          : 'bg-transparent text-neutral-700 border-[#cdb89a]/70 hover:border-[#00693e] dark:text-neutral-300 dark:border-[#3a2e22] dark:hover:border-[#a5d75f]'
       }`}
     >
       {children}

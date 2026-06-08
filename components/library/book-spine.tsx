@@ -1,185 +1,78 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import {
-  motion,
-  useSpring,
-  useTransform,
-  MotionValue,
-} from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { motion, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
 import type { Book } from '../../app/library/library-data';
-import {
-  calculateSpineWidth,
-  calculateSpineHeight,
-} from '../../app/library/library-data';
-import { BookCoverImage } from './book-cover-image';
+import { calculateSpineWidth, SPINE_HEIGHT } from '../../app/library/library-data';
 
 interface BookSpineProps {
   book: Book;
-  index: number;
-  scrollX: MotionValue<number>;
-  offsetX: number; // Pre-calculated cumulative X position
-  containerWidth: number; // Visible width of scroll container
 }
 
-export function BookSpine({
-  book,
-  index,
-  scrollX,
-  offsetX,
-  containerWidth,
-}: BookSpineProps) {
-  const spineRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  const [isHovered, setIsHovered] = useState(false);
+const REST_SHADOW =
+  'inset 1px 0 0 rgba(255,255,255,.06), inset -1px 0 0 rgba(0,0,0,.25), 0 1px 3px rgba(20,14,8,.18)';
+const HOVER_SHADOW =
+  'inset 1px 0 0 rgba(255,255,255,.08), inset -1px 0 0 rgba(0,0,0,.28), 0 10px 22px -6px rgba(20,14,8,.45)';
 
-  const spineWidth = calculateSpineWidth(book.pageCount);
-  const spineHeight = calculateSpineHeight(book.pageCount);
-
-  // Font sizes based on spine width (thickness), not title length
-  const titleFontSize = spineWidth < 30 ? 10 : spineWidth < 45 ? 11 : 12;
-  const authorFontSize = titleFontSize - 2;
-
-  // Subtle scroll-based tilt - 4° max for modern, refined look
-  const scrollBasedRotateY = useTransform(scrollX, (scroll) => {
-    const bookCenterInView = offsetX + spineWidth / 2 - scroll;
-    const viewCenter = containerWidth / 2;
-    const distanceFromCenter = bookCenterInView - viewCenter;
-    const normalizedDistance = distanceFromCenter / (containerWidth / 2);
-    const clamped = Math.max(-1, Math.min(1, normalizedDistance));
-    // Reduced from 12° to 4° for subtle, modern feel
-    return clamped * -4;
-  });
-
-  // Snappy spring - less bouncy, more refined
-  const smoothRotateY = useSpring(scrollBasedRotateY, {
-    stiffness: 150,
-    damping: 25,
-    mass: 0.5,
-  });
-
-  // Hover: gentle lift (translateY) instead of dramatic 3D pull
-  const hoverTranslateY = useSpring(isHovered ? -4 : 0, {
-    stiffness: 300,
-    damping: 30,
-  });
-
-  // Floating cover opacity - shows on hover
-  const coverOpacity = useSpring(isHovered ? 1 : 0, {
-    stiffness: 300,
-    damping: 25,
-  });
-
-  // Direct navigation - no flip animation (honest about digital)
-  const handleClick = () => {
-    router.push(`/library/${book.slug}`);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleClick();
-    }
-  };
+// A single upright book spine: leather binding, gold-foil serif title, with two
+// foil head/tail bands. Real <Link> anchor (keyboard, cmd-click, prefetch).
+export function BookSpine({ book }: BookSpineProps) {
+  const reduce = useReducedMotion();
+  const width = calculateSpineWidth(book.pageCount);
 
   return (
-    <motion.div
-      ref={spineRef}
-      role="button"
-      tabIndex={0}
-      aria-label={`${book.title} by ${book.author}`}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      className="relative cursor-pointer flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 rounded-sm"
-      style={{
-        width: spineWidth,
-        height: spineHeight,
-        rotateY: smoothRotateY,
-        translateY: hoverTranslateY,
-      }}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.015, duration: 0.2 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-    >
-      {/* Floating cover thumbnail - appears on hover above the spine */}
-      <motion.div
-        className="absolute -top-14 left-1/2 -translate-x-1/2 pointer-events-none"
-        style={{
-          opacity: coverOpacity,
-        }}
+    <li className="list-none">
+      <Link
+        href={`/library/${book.slug}`}
+        aria-label={`${book.title} by ${book.author}`}
+        className="group block rounded-[2px] focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
       >
-        <div className="shadow-xl rounded-sm overflow-hidden border border-white/20">
-          <BookCoverImage
-            book={book}
-            width={Math.max(48, spineWidth * 1.5)}
-            height={Math.max(64, spineWidth * 2)}
-            className="object-cover"
+        <motion.div
+          className="relative rounded-[2px] overflow-hidden"
+          style={{
+            width,
+            height: SPINE_HEIGHT,
+            backgroundColor: book.dominantColor,
+            boxShadow: REST_SHADOW,
+          }}
+          whileHover={reduce ? undefined : { y: -6, boxShadow: HOVER_SHADOW }}
+          whileTap={reduce ? undefined : { scale: 0.985 }}
+          transition={{ type: 'spring', stiffness: 380, damping: 30, mass: 0.6 }}
+        >
+          {/* Foil head + tail bands */}
+          <span
+            className="absolute inset-x-1 top-3 h-px"
+            style={{ backgroundColor: 'rgba(200,162,74,0.7)' }}
+            aria-hidden
           />
-        </div>
-      </motion.div>
+          <span
+            className="absolute inset-x-1 bottom-3 h-px"
+            style={{ backgroundColor: 'rgba(200,162,74,0.7)' }}
+            aria-hidden
+          />
 
-      {/* Book spine - clean, modern design */}
-      <div
-        className="relative w-full h-full rounded-sm overflow-hidden"
-        style={{
-          backgroundColor: book.dominantColor,
-          // Single refined box-shadow instead of multiple gradients
-          boxShadow: isHovered
-            ? '0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)'
-            : '0 2px 8px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.05)',
-          transition: 'box-shadow 0.2s ease',
-        }}
-      >
-        {/* Subtle left edge for depth */}
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-black/20" />
-
-        {/* Vertical text - Title always visible, Author reveals on hover */}
-          <motion.div
-            layout
-            className="absolute inset-x-0 top-4 bottom-4 flex flex-col items-center justify-center overflow-hidden"
-          >
-            {/* Title - allows line breaks for long titles */}
-            <motion.span
-              layout
-              className="font-medium text-center"
+          {/* Vertical foil title */}
+          <span className="absolute inset-0 flex items-center justify-center px-0.5">
+            <span
+              className="font-serif font-semibold text-center"
               style={{
                 color: book.textColor,
                 writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
-                fontSize: `${titleFontSize}px`,
-                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
-                lineHeight: 1.3,
-                wordBreak: 'break-word',
+                fontSize: '13px',
+                letterSpacing: '0.02em',
+                lineHeight: 1.15,
+                maxHeight: SPINE_HEIGHT - 36,
+                overflow: 'hidden',
+                textShadow:
+                  '0 1px 0 rgba(255,240,200,.18), 0 -1px 1px rgba(0,0,0,.45)',
               }}
             >
               {book.title}
-            </motion.span>
-
-            {/* Author - height-based reveal on hover */}
-            <motion.span
-              className="whitespace-nowrap overflow-hidden"
-              style={{
-                color: book.textColor,
-                writingMode: 'vertical-rl',
-                textOrientation: 'mixed',
-                fontSize: `${authorFontSize}px`,
-                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
-              }}
-              initial={{ opacity: 0, height: 0, marginTop: 0 }}
-              animate={{
-                opacity: isHovered ? 0.8 : 0,
-                height: isHovered ? 'auto' : 0,
-                marginTop: isHovered ? 8 : 0,
-              }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-            >
-              {book.author}
-            </motion.span>
-          </motion.div>
-      </div>
-    </motion.div>
+            </span>
+          </span>
+        </motion.div>
+      </Link>
+    </li>
   );
 }

@@ -23,5 +23,15 @@ export default function LibraryLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {/* Warm parchment ground — the "reading room". Scoped to /library only;
+          dark mode keeps the site's near-black. */}
+      <div
+        aria-hidden
+        className="fixed inset-0 -z-10 bg-[#FBF7EE] dark:bg-transparent"
+      />
+      {children}
+    </>
+  );
 }

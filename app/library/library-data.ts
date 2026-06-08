@@ -819,15 +819,14 @@ export function getUniqueYears(): number[] {
   return Array.from(new Set(years)).sort((a, b) => b - a);
 }
 
-export function calculateSpineWidth(pageCount: number): number {
-  // Normalize: 100 pages = 24px, 700+ pages = 72px
-  return Math.max(24, Math.min(72, pageCount / 10 + 14));
-}
+// Uniform spine height so wrapped rows form clean, level shelves.
+export const SPINE_HEIGHT = 300;
 
-export function calculateSpineHeight(pageCount: number): number {
-  // Reduced variation for cleaner, more orderly appearance
-  // Range: 280px - 340px (60px variation vs previous 157px)
-  const baseHeight = 280;
-  const heightVariation = Math.min(60, pageCount / 8);
-  return Math.round(baseHeight + heightVariation);
+export function calculateSpineWidth(pageCount: number): number {
+  // Log scale so a 4100-page volume reads clearly thicker than a 200-page one
+  // (the old linear scale clamped most books to a near-uniform width).
+  const min = 28;
+  const max = 66;
+  const w = 26 + Math.log2(Math.max(50, pageCount) / 50) * 9;
+  return Math.round(Math.max(min, Math.min(max, w)));
 }
