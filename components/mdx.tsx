@@ -10,6 +10,8 @@ import { ImageGrid } from "./image-grid";
 import { XMLPromptEditor } from "./xml-prompt-editor";
 import { CodeBlockWithCopy } from "./code-block-with-copy";
 import { PhotoCarousel } from "./photo-carousel";
+import { InformationSpectrum } from "./information-spectrum";
+import { PyramidToDiamond } from "./pyramid-to-diamond";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
@@ -126,6 +128,8 @@ let components = {
   YouTube: YouTubeComponent,
   XMLPromptEditor,
   PhotoCarousel,
+  InformationSpectrum,
+  PyramidToDiamond,
   code: Code,
   pre: Pre,
   Table,

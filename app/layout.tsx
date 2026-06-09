@@ -4,6 +4,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { EB_Garamond } from "next/font/google";
 import { Navbar } from "../components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -11,6 +12,16 @@ import Footer from "../components/footer";
 import { ThemeProvider } from "../components/theme-switch";
 import { metaData } from "./config";
 import { PostHogProvider } from './providers'
+
+// EB Garamond: rationed to book identity (spine + bookplate titles) for the
+// old-library feel; Geist Sans/Mono stay the modern "chrome" voice.
+const ebGaramond = EB_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-eb-garamond",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -71,7 +82,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)} suppressHydrationWarning>
+    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable, ebGaramond.variable)} suppressHydrationWarning>
       <head>
         <link
           rel="alternate"

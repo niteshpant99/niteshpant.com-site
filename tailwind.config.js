@@ -13,6 +13,7 @@ module.exports = {
 		fontFamily: {
 		  sans: ["var(--font-geist-sans)"],
 		  mono: ["var(--font-geist-mono)"],
+		  serif: ["var(--font-eb-garamond)", "ui-serif", "Georgia", "serif"],
 		},
 		typography: {
 		  quoteless: {
