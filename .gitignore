@@ -45,3 +45,4 @@ repomix-output.txt
 # nocaap packages (auto-generated)
 .context/packages/
 .context/
+.gstack/
