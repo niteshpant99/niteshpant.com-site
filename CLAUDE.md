@@ -82,6 +82,15 @@ Interactive visual editor for building prompts with:
 
 Key files: `components/xml-prompt-editor.tsx`, `hooks/use-prompt-builder.ts`, `types/prompt-builder.ts`
 
+### Library (`/library`)
+A library of books with a shelf/stack view.
+- Books are stored in `app/library/library-data.ts`
+- Books are displayed in `app/library/page.tsx`
+- Books are displayed in `app/library/[slug]/page.tsx`
+- Books are displayed in `app/library/library.tsx`
+- Books are displayed in `app/library/library-data.ts`
+- Books are displayed in `app/library/library-data.ts`
+
 ## Development Notes
 
 - Server Components by default; use `'use client'` only where necessary
@@ -90,3 +99,7 @@ Key files: `components/xml-prompt-editor.tsx`, `hooks/use-prompt-builder.ts`, `t
 - Site metadata configured in `app/config.ts`
 - ESLint uses flat config format (`eslint.config.mjs`)
 - Build uses webpack (`next build --webpack`) for compatibility
+
+## Project Context
+This project uses nocaap for organizational context.
+Read `.context/INDEX.md` for standards, guidelines, and documentation.
