@@ -10,7 +10,7 @@ export async function getProjectContent(slug: string) {
     const source = fs.readFileSync(filePath, 'utf8');
     const { content } = await compileMDX({
       source,
-      options: { parseFrontmatter: true }
+      options: { parseFrontmatter: true, blockJS: false }
     });
     
     return content;
