@@ -84,7 +84,7 @@ export default function TimelineDemo() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Gained valuable experience in financial markets as a Hedge Fund Investment Intern at Blue Room Investing in Denver, while also deepening my involvement in Pearl Group's strategic operations.
+            Gained valuable experience in financial markets as a Hedge Fund Investment Intern at Blue Room Investing in Denver, while also deepening my involvement in Pearl Group&apos;s strategic operations.
           </p>
           <div className="mb-6">
             <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-3">Finance Experience:</h4>
@@ -108,7 +108,7 @@ export default function TimelineDemo() {
       content: (
         <div>
           <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Ongoing leadership role at Pearl Group, our family's multi-service enterprise in Far-West Nepal. Since age 16, I've been coordinating complex operations across education, healthcare, and infrastructure affecting 30,000+ people annually.
+            Ongoing leadership role at Pearl Group, our family&apos;s multi-service enterprise in Far-West Nepal. Since age 16, I&apos;ve been coordinating complex operations across education, healthcare, and infrastructure affecting 30,000+ people annually.
           </p>
           <div className="mb-6">
             <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-3">Community Impact:</h4>

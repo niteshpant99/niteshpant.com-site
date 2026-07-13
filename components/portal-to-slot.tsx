@@ -15,6 +15,9 @@ export function PortalToSlot({ targetId, children, fallback }: PortalToSlotProps
 
   useEffect(() => {
     const el = document.getElementById(targetId);
+    // Resolves the portal target DOM node after mount; a client-only sync to an external element
+    // that cannot be read during render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setContainer(el);
 
     const computeVisible = () => {
