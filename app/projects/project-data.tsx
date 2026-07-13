@@ -51,14 +51,14 @@ export const projects: Project[] = [
   },
   {
     title: "alkemy",
-    subtitle: "AI Operating System for Consulting Firms",
-    year: 2025,
-    description: "Never rebuild what you've already built. The first AI purpose-built for consulting firms—from M&A research to knowledge management.",
-    url: "https://alkemy.devdashlabs.com",
+    subtitle: "Relationship Intelligence for Expert Firms",
+    year: 2026,
+    description: "Democratize the rainmaker. alkemy turns the relationship discipline that grows expert firms into a system the whole firm can run.",
+    url: "https://alkemyos.com",
     category: 'products',
     status: 'development',
     featured: true,
-    technologies: ['AI Agents', 'Knowledge Management', 'RAG', 'M&A Research', 'GraphRAG']
+    technologies: ['AI Agents', 'Relationship Intelligence', 'Signal Detection', 'Business Development', 'CRM']
   },
   {
     title: "Kafka",

@@ -47,7 +47,7 @@ export default function Work() {
                   DevDash Labs
                 </h3>
                 <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Co-founder & CEO
+                  Product & Growth Lead
                 </p>
               </div>
               
