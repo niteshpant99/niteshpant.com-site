@@ -6,7 +6,7 @@ Personal website and portfolio of Nitesh Pant.
 
 ## About Me
 
-I'm the co-founder & CEO of [DevDash Labs](https://devdashlabs.com), an applied AI research and development company. We build AI products that solve hard problems—from enterprise chatbots to sales intelligence platforms.
+I'm half the duo behind [DevDash Labs](https://devdashlabs.com), an applied AI research and development company, where I lead product and growth. We build AI products that solve hard problems—from enterprise chatbots to sales intelligence platforms.
 
 Before DevDash, I was a consultant at Roland Berger and interned at a hedge fund. I studied Economics and Government at Dartmouth College.
 

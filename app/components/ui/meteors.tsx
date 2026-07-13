@@ -20,6 +20,9 @@ export const Meteors = ({ number = 20, ...props }: MeteorsProps) => {
       animationDelay: Math.random() * 1 + 0.2 + "s",
       animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
     }));
+    // Randomized decorative styles depend on window size and Math.random, so they must be
+    // generated after mount (client-only) to avoid an SSR hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMeteorStyles(styles);
   }, [number]);
 

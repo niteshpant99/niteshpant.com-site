@@ -30,6 +30,7 @@ export default function GenerativeEssayHero({
   const [isHovered, setIsHovered] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [particleCount, setParticleCount] = useState(0);
 
   // Initialize client-side rendering
   useEffect(() => {
@@ -100,7 +101,8 @@ export default function GenerativeEssayHero({
 
           // Initialize particles
           hero.initializeParticles(visualParams);
-          
+          setParticleCount(hero.particles?.length ?? 0);
+
           setIsReady(true);
           console.log('Generative hero system ready');
 
@@ -126,6 +128,7 @@ export default function GenerativeEssayHero({
           
           // Re-initialize particles for new size
           hero.initializeParticles(visualParams);
+          setParticleCount(hero.particles?.length ?? 0);
         }
       };
 
@@ -181,6 +184,9 @@ export default function GenerativeEssayHero({
       console.error('Failed to initialize generative hero system:', err);
       setError(err instanceof Error ? err.message : 'Failed to initialize');
     }
+    // `isReady` is intentionally omitted: including it would tear down and re-create the hero
+    // system every time the ready flag flips during initialization.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient, title, summary, tags, resolvedTheme, isPaused]);
 
   // Handle manual pause/play
@@ -263,7 +269,7 @@ export default function GenerativeEssayHero({
       {/* Performance indicator (development only) */}
       {process.env.NODE_ENV === 'development' && isReady && (
         <div className="absolute bottom-4 left-4 text-xs text-muted-foreground font-mono">
-          {heroRef.current?.particles?.length || 0} particles
+          {particleCount} particles
         </div>
       )}
       
