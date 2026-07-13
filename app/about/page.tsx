@@ -6,7 +6,7 @@ import { Meteors } from "../../components/ui/meteors";
 
 export const metadata: Metadata = {
     title: "About",
-    description: "About Nitesh Pant - Economist, AI entrepreneur, and co-founder of DevDash Labs. Dartmouth College educated, building AI solutions for global impact.",
+    description: "About Nitesh Pant - Economist, AI entrepreneur, and product and growth lead at DevDash Labs. Dartmouth College educated, building AI solutions for global impact.",
   };
 
 export default function About() {
@@ -34,7 +34,7 @@ export default function About() {
 
       <h2 className="text-xl font-semibold mt-8 mb-4">Building with AI</h2>
       <p className="mb-4">
-        I&apos;m the co-founder of <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>. I lead Product, Design, Strategy, and Growth at DevDash Labs. I spearheaded our transformation into an AI solutions provider. I&apos;ve learned to code, sell, and build products that enhance operational efficiency for clients across multiple industries.
+        I&apos;m half the duo behind <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, where I lead Product, Design, Strategy, and Growth. I spearheaded our transformation into an AI solutions provider. I&apos;ve learned to code, sell, and build products that enhance operational efficiency for clients across multiple industries.
       </p>
       <p className="mb-4">
         My approach combines traditional operational wisdom with cutting-edge AI capabilities. Having managed complex, interconnected services, I understand the nuances of implementing technology in environments where failure affects real people&apos;s lives.

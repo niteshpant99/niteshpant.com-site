@@ -4,7 +4,7 @@ export const metaData = {
   name: "Nitesh",
   ogImage: "/opengraph-image.png",
   description:
-    "Nitesh Pant. Co-founder, DevDash Labs. Building alkemy — an AI operating system for consulting firms.",
+    "Nitesh Pant. Leads product and growth at DevDash Labs. Building alkemy — an AI operating system for consulting firms.",
 };
 
 export const socialLinks = {

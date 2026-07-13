@@ -7,7 +7,7 @@ const personSchema = {
   name: "Nitesh Pant",
   url: metaData.baseUrl,
   image: `${metaData.baseUrl}profile.jpg`,
-  jobTitle: "Co-founder",
+  jobTitle: "Product & Growth Lead",
   worksFor: {
     "@type": "Organization",
     name: "DevDash Labs",
@@ -41,7 +41,7 @@ const organizationSchema = {
   url: "https://devdashlabs.com",
   logo: "https://devdashlabs.com/logo.png",
   description: "Applied AI company building alkemy, an AI operating system for consulting firms. Powered by world-class Nepali talent with global ambitions.",
-  founder: {
+  member: {
     "@type": "Person",
     name: "Nitesh Pant",
   },
@@ -70,10 +70,11 @@ export default function Page() {
       <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
         <Image
           src="/profile.jpg"
-          alt="Nitesh Pant - Co-founder of DevDash Labs, building alkemy"
+          alt="Nitesh Pant - leads product and growth at DevDash Labs, building alkemy"
           className="rounded-full bg-gray-100 block lg:mt-5 mt-0 lg:mb-5 mb-10 mx-auto sm:float-right sm:ml-5 sm:mb-5 grayscale hover:grayscale-0"
           width={160}
           height={160}
+          style={{ width: "auto", height: "auto" }}
           priority
         />
       </a>
@@ -92,7 +93,7 @@ export default function Page() {
           I grew up in Nepal, studied economics and government at <a target="_blank" rel="noopener noreferrer" href="https://www.dartmouth.edu">Dartmouth College</a>, and worked as a management consultant at <a target="_blank" rel="noopener noreferrer" href="https://www.rolandberger.com">Roland Berger</a>. 
         </p>
         <p>
-          I&apos;m the co-founder of <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, the company behind alkemy. We&apos;re powered by world-class Nepali talent with global ambitions. <a href="mailto:nitesh@niteshpant.com">Reach out</a> if you&apos;re building something ambitious. We&apos;re hiring!
+          I&apos;m half the duo behind <a target="_blank" rel="noopener noreferrer" href="https://devdashlabs.com">DevDash Labs</a>, the company behind alkemy, where I lead product and growth. We&apos;re powered by world-class Nepali talent with global ambitions. <a href="mailto:nitesh@niteshpant.com">Reach out</a> if you&apos;re building something ambitious. We&apos;re hiring!
         </p>
 
         <p>
