@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { useTheme } from 'next-themes';
 import { analyzeContent } from '../lib/content-to-visual';
 import { flowFields } from '../lib/flow-fields';
 import { GenerativeHero } from '../lib/generative-hero';
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+const subscribeNoop = () => () => {};
 
 interface GenerativeEssayHeroProps {
   title: string;
@@ -25,25 +28,33 @@ export default function GenerativeEssayHero({
   const animationRef = useRef<number | null>(null);
   
   const { resolvedTheme } = useTheme();
-  const [isClient, setIsClient] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  // true on the client, false during SSR and hydration
+  const isClient = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  // Respect prefers-reduced-motion (only read on the client; the SSR placeholder never shows it)
+  const [isPaused, setIsPaused] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(REDUCED_MOTION_QUERY).matches
+  );
   const [isHovered, setIsHovered] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [particleCount, setParticleCount] = useState(0);
 
-  // Initialize client-side rendering
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Respect prefers-reduced-motion
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches) {
-      setIsPaused(true);
+  // Analyze content outside the effect so a failure renders as an error, not a setState-in-effect
+  const analysis = useMemo(() => {
+    try {
+      const visualParams = analyzeContent(title, summary, tags);
+      const flowField = flowFields[visualParams.flowField] || flowFields.spiral;
+      return { visualParams, flowField, error: null as string | null };
+    } catch (err) {
+      console.error('Failed to initialize generative hero system:', err);
+      return { visualParams: null, flowField: null, error: err instanceof Error ? err.message : 'Failed to initialize' };
     }
-    
+  }, [title, summary, tags]);
+  const displayError = error ?? analysis.error;
+
+  // Follow later changes to prefers-reduced-motion
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
     const handleChange = (e: MediaQueryListEvent) => {
       setIsPaused(e.matches);
     };
@@ -59,19 +70,13 @@ export default function GenerativeEssayHero({
     const canvas = canvasRef.current;
     const container = containerRef.current;
 
-    // Reset state
-    setError(null);
-    setIsReady(false);
+    // Content analysis failed; `analysis.error` is rendered instead
+    if (!analysis.visualParams) return;
+    const { visualParams, flowField } = analysis;
 
     let hero: GenerativeHero | null = null;
-    let visualParams: any = null;
-    let flowField: any = null;
 
     try {
-      // Get visual parameters and flow field
-      visualParams = analyzeContent(title, summary, tags);
-      flowField = flowFields[visualParams.flowField] || flowFields.spiral;
-      
       console.log('Analyzed content:', { title, flowField: visualParams.flowField, density: visualParams.density });
 
       // Handle canvas sizing with proper initialization timing
@@ -178,16 +183,16 @@ export default function GenerativeEssayHero({
         }
         heroRef.current = null;
         setIsReady(false);
+        setError(null);
       };
 
     } catch (err) {
       console.error('Failed to initialize generative hero system:', err);
-      setError(err instanceof Error ? err.message : 'Failed to initialize');
     }
     // `isReady` is intentionally omitted: including it would tear down and re-create the hero
     // system every time the ready flag flips during initialization.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isClient, title, summary, tags, resolvedTheme, isPaused]);
+  }, [isClient, analysis, title, resolvedTheme, isPaused]);
 
   // Handle manual pause/play
   const togglePause = () => {
@@ -206,7 +211,7 @@ export default function GenerativeEssayHero({
   }
 
   // Error state
-  if (error) {
+  if (displayError) {
     return (
       <div 
         className={`relative w-full overflow-hidden bg-background ${className} flex items-center justify-center`}
@@ -214,7 +219,7 @@ export default function GenerativeEssayHero({
       >
         <div className="text-center text-muted-foreground">
           <p className="text-sm">Unable to load visual</p>
-          <p className="text-xs opacity-60">{error}</p>
+          <p className="text-xs opacity-60">{displayError}</p>
         </div>
       </div>
     );
@@ -240,7 +245,7 @@ export default function GenerativeEssayHero({
       />
       
       {/* Loading state */}
-      {!isReady && !error && (
+      {!isReady && !displayError && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-8 h-8 border-2 border-muted-foreground/20 border-t-muted-foreground rounded-full animate-spin" />
         </div>
@@ -250,7 +255,7 @@ export default function GenerativeEssayHero({
       {isHovered && isReady && (
         <button
           onClick={togglePause}
-          className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm transition-all duration-200 hover:bg-black/20 dark:hover:bg-white/20 hover:scale-110"
+          className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-xs transition-all duration-200 hover:bg-black/20 dark:hover:bg-white/20 hover:scale-110"
           aria-label={isPaused ? 'Play animation' : 'Pause animation'}
           title={isPaused ? 'Play animation' : 'Pause animation'}
         >

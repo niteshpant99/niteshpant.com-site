@@ -19,31 +19,34 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   );
 }
 
-export const ThemeSwitch: React.FC = () => {
-  const { setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  const [currentTheme, setCurrentTheme] = React.useState<'light' | 'dark'>('light');
-
-  const getColorPreference = (): 'light' | 'dark' => {
-    if (typeof window !== 'undefined') {
-      const storedPreference = localStorage.getItem(storageKey);
-      if (storedPreference) {
-        return storedPreference as 'light' | 'dark';
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+const getColorPreference = (): 'light' | 'dark' => {
+  if (typeof window !== 'undefined') {
+    const storedPreference = localStorage.getItem(storageKey);
+    if (storedPreference) {
+      return storedPreference as 'light' | 'dark';
     }
-    return 'light'; 
-  };
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return 'light';
+};
+
+// true on the client, false during SSR and hydration
+const subscribeNoop = () => () => {};
+const useMounted = () =>
+  React.useSyncExternalStore(subscribeNoop, () => true, () => false);
+
+export const ThemeSwitch: React.FC = () => {
+  const { resolvedTheme, setTheme } = useTheme();
+  const mounted = useMounted();
+  const currentTheme: 'light' | 'dark' = resolvedTheme === 'dark' ? 'dark' : 'light';
 
   const reflectPreference = React.useCallback((theme: 'light' | 'dark') => {
     document.documentElement.classList.remove('bg-light', 'bg-dark');
     document.documentElement.classList.add(`bg-${theme}`);
-    setCurrentTheme(theme);
     setTheme(theme);
   }, [setTheme]);
 
   React.useEffect(() => {
-    setMounted(true);
     const initTheme = getColorPreference();
     reflectPreference(initTheme);
 
@@ -57,7 +60,7 @@ export const ThemeSwitch: React.FC = () => {
     mediaQuery.addEventListener('change', handleChange);
 
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [setTheme, reflectPreference]);
+  }, [reflectPreference]);
 
   const toggleTheme = () => {
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';

@@ -213,7 +213,7 @@ export function XMLPromptEditor() {
                 <select
                   value={section.tag}
                   onChange={(e) => updateSection(section.id, 'tag', e.target.value)}
-                  className="px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground font-mono text-sm uppercase font-medium min-w-[90px]"
+                  className="px-3 py-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-background text-foreground font-mono text-sm uppercase font-medium min-w-[90px]"
                 >
                   {DEFAULT_TAG_OPTIONS.map((tag) => (
                     <option key={tag} value={tag}>
@@ -248,7 +248,7 @@ export function XMLPromptEditor() {
                 value={section.content}
                 onChange={(e) => updateSection(section.id, 'content', e.target.value)}
                 rows={3}
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground text-sm resize-y"
+                className="w-full px-3 py-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-background text-foreground text-sm resize-y"
                 placeholder={`Enter your ${section.tag} content here...`}
               />
             </div>

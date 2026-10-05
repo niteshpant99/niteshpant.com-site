@@ -16,7 +16,7 @@ function InstructionsDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary" size="icon" className="absolute top-4 right-4 bg-[--prose-link-decoration] hover:bg-[--prose-link-decoration-hover] shadow-lg hover:shadow-xl transition-shadow">
+        <Button variant="secondary" size="icon" className="absolute top-4 right-4 bg-(--prose-link-decoration) hover:bg-(--prose-link-decoration-hover) shadow-lg hover:shadow-xl transition-shadow">
           <HelpCircle className="h-10 w-10" />
         </Button>
       </DialogTrigger>
@@ -208,7 +208,7 @@ const PricingSimulator = () => {
             </div>
             
           {/* Container that breaks out of the default layout constraints */}
-          <div className="absolute left-1/2 right-1/2 -mx-[50vw] w-screen">
+          <div className="absolute left-1/2 right-1/2 mx-[-50vw] w-screen">
             <div className="relative left-1/2 -translate-x-1/2 px-6 w-full max-w-fit">
               {/* Configuration Card */}
               <Card className="mb-8 shadow-md">
@@ -218,7 +218,7 @@ const PricingSimulator = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div className="space-y-2">
+                    <div className="[&>*+*]:mt-2">
                       <Label htmlFor="baseFee" className="text-sm font-medium">
                         Per Practitioner Fee
                       </Label>
@@ -226,7 +226,7 @@ const PricingSimulator = () => {
                         <Switch
                           checked={config.usePractitionerFee}
                           onCheckedChange={checked => setConfig(prev => ({ ...prev, usePractitionerFee: checked }))}
-                          className="flex-shrink-0"
+                          className="shrink-0"
                         />
                         <Input
                           id="baseFee"
@@ -239,7 +239,7 @@ const PricingSimulator = () => {
                       </div>
                     </div>
                     
-                    <div className="space-y-2">
+                    <div className="[&>*+*]:mt-2">
                       <Label htmlFor="caseRate" className="text-sm font-medium">
                         Price Per Case
                       </Label>
@@ -252,7 +252,7 @@ const PricingSimulator = () => {
                       />
                     </div>
     
-                    <div className="space-y-2">
+                    <div className="[&>*+*]:mt-2">
                       <Label htmlFor="minimumCases" className="text-sm font-medium">
                         Minimum Cases
                       </Label>

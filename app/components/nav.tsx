@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ThemeSwitch } from "./theme-switch";
+import { ThemeSwitch } from "../../components/theme-switch";
 import { metaData } from "../config";
 
 const navItems = {
