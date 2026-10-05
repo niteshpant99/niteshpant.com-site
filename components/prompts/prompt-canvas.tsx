@@ -191,7 +191,7 @@ export function PromptCanvas() {
                 <select
                   value={box.tag}
                   onChange={(e) => actions.updateBox(box.id, 'tag', e.target.value)}
-                  className="px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground font-mono text-sm uppercase font-medium min-w-[100px]"
+                  className="px-3 py-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-background text-foreground font-mono text-sm uppercase font-medium min-w-[100px]"
                 >
                   {allTags.map((tag) => (
                     <option key={tag} value={tag}>
@@ -215,7 +215,7 @@ export function PromptCanvas() {
                 value={box.content}
                 onChange={(e) => actions.updateBox(box.id, 'content', e.target.value)}
                 rows={3}
-                className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground text-sm resize-y"
+                className="w-full px-3 py-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-background text-foreground text-sm resize-y"
                 placeholder={`Enter your ${box.tag} content here...`}
               />
             </div>

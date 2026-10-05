@@ -42,7 +42,13 @@ repomix-output.txt
 # Claude skills
 .claude/
 
+# agents
+.agents/
+
 # nocaap packages (auto-generated)
 .context/packages/
 .context/
 .gstack/
+
+# skills
+skills-lock.json

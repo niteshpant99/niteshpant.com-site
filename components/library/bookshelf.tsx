@@ -28,13 +28,13 @@ export function Bookshelf({ books, onClearFilters }: BookshelfProps) {
   if (books.length === 0) {
     return (
       <div className="py-12 text-center">
-        <p className="font-mono text-[13px] uppercase tracking-[0.1em] text-neutral-500 dark:text-neutral-400 mb-4">
+        <p className="font-mono text-[13px] uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-4">
           No books match these filters
         </p>
         {onClearFilters && (
           <button
             onClick={onClearFilters}
-            className="text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
+            className="text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
           >
             Clear filters
           </button>

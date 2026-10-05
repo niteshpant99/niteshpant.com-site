@@ -52,11 +52,11 @@ export function CodeBlockWithCopy({ children }: CodeBlockWithCopyProps) {
         onClick={copyToClipboard}
         variant="ghost"
         size="sm"
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 h-8 w-8 p-0"
+        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity z-10 h-8 w-8 p-0"
       >
         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
       </Button>
-      <pre ref={preRef} className="bg-[var(--prose-pre-bg)] rounded-lg overflow-x-auto">
+      <pre ref={preRef} className="bg-(--prose-pre-bg) rounded-lg overflow-x-auto">
         {children}
       </pre>
     </div>

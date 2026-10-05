@@ -79,7 +79,7 @@ export default function LibraryPage() {
           value={genreFilter}
           onChange={(e) => setGenreFilter(e.target.value)}
           aria-label="Filter by genre"
-          className="px-3 py-1.5 text-sm font-mono uppercase tracking-wide bg-transparent border border-[#cdb89a]/70 dark:border-[#3a2e22] text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-[#00693e] dark:hover:border-[#a5d75f] transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
+          className="px-3 py-1.5 text-sm font-mono uppercase tracking-wide bg-transparent border border-[#cdb89a]/70 dark:border-[#3a2e22] text-neutral-700 dark:text-neutral-300 cursor-pointer hover:border-[#00693e] dark:hover:border-[#a5d75f] transition-colors focus:outline-hidden focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
         >
           <option value="all">All Genres</option>
           {availableGenres.map((genre) => (
@@ -92,7 +92,7 @@ export default function LibraryPage() {
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="px-3 py-1.5 text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
+            className="px-3 py-1.5 text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
           >
             Clear
           </button>
@@ -118,7 +118,7 @@ function FilterButton({
     <button
       onClick={onClick}
       aria-pressed={active}
-      className={`px-3 py-1.5 text-sm font-medium transition-colors border focus:outline-none focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2 ${
+      className={`px-3 py-1.5 text-sm font-medium transition-colors border focus:outline-hidden focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2 ${
         active
           ? 'bg-[#00693e] text-[#FBF7EE] border-[#00693e] dark:bg-[#a5d75f] dark:text-neutral-900 dark:border-[#a5d75f]'
           : 'bg-transparent text-neutral-700 border-[#cdb89a]/70 hover:border-[#00693e] dark:text-neutral-300 dark:border-[#3a2e22] dark:hover:border-[#a5d75f]'

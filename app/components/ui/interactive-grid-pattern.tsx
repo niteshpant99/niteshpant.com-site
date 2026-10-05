@@ -42,7 +42,7 @@ export function InteractiveGridPattern({
             width={width}
             height={height}
             className={cn(
-              "stroke-border transition-all duration-100 ease-in-out [&:not(:hover)]:duration-1000",
+              "stroke-border transition-all duration-100 ease-in-out not-[&:hover]:duration-1000",
               hoveredSquare === index ? "fill-muted" : "fill-transparent",
               squaresClassName,
             )}
