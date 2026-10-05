@@ -25,7 +25,7 @@ export function BookSpine({ book }: BookSpineProps) {
       <Link
         href={`/library/${book.slug}`}
         aria-label={`${book.title} by ${book.author}`}
-        className="group block rounded-[2px] focus:outline-hidden focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
+        className="group block rounded-[2px] focus:outline-hidden focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
       >
         <motion.div
           className="relative rounded-[2px] overflow-hidden"

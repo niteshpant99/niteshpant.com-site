@@ -34,7 +34,7 @@ export function Bookshelf({ books, onClearFilters }: BookshelfProps) {
         {onClearFilters && (
           <button
             onClick={onClearFilters}
-            className="text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
+            className="text-sm font-medium text-[#00693e] dark:text-[#a5d75f] hover:underline underline-offset-4 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#00693e] dark:focus-visible:outline-[#a5d75f] focus-visible:outline-offset-2"
           >
             Clear filters
           </button>
