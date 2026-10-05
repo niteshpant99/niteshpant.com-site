@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
 import type { Book } from '../../app/library/library-data';
 import { calculateSpineWidth, SPINE_HEIGHT } from '../../app/library/library-data';
