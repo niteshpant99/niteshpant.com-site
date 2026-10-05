@@ -124,6 +124,7 @@ export default async function BookPage({ params }: Props) {
     ],
   };
 
+  // [&>*+*]:mt-N rather than space-y-N: Tailwind 4's space-y puts the margin below each child, which misspaces hidden <script> and inline children
   return (
     <article className="[&>*+*]:mt-10">
       <script

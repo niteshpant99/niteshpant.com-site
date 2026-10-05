@@ -217,6 +217,7 @@ const PricingSimulator = () => {
                   <CardTitle className="text-xl font-semibold">Pricing Configuration</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  {/* [&>*+*]:mt-N rather than space-y-N: Tailwind 4's space-y puts the margin below each child, which misspaces hidden <script> and inline children */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="[&>*+*]:mt-2">
                       <Label htmlFor="baseFee" className="text-sm font-medium">

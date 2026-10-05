@@ -29,6 +29,14 @@
   }
 }
 
+/* Tailwind v4 placeholders are the text colour at 50%; keep v3's gray-400 */
+@layer base {
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+}
+
 @layer utilities {
   ::selection {
     background-color: #47a3f3;
