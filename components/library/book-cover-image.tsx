@@ -67,8 +67,10 @@ export function BookCoverImage({
         alt={`Cover of ${book.title}`}
         width={width}
         height={height}
+        // h-full w-full: fill the frame and let object-cover crop; without them, preflight's
+        // height:auto sizes the cover by its own aspect ratio and leaves gaps or overflow
         className={cn(
-          'object-cover transition-opacity duration-200',
+          'h-full w-full object-cover transition-opacity duration-200',
           isLoading ? 'opacity-0' : 'opacity-100'
         )}
         onError={handleError}
