@@ -28,7 +28,7 @@ export default function Work() {
         <div className="space-y-8">
           {/* DevDash Labs */}
           <div id="devdash" className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-l border-neutral-200 dark:border-neutral-800 pl-6 relative">
-            <div className="absolute -left-[5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
+            <div className="absolute left-[-5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
             
             {/* Date and Location */}
             <div className="md:col-span-1 space-y-1">
@@ -99,7 +99,7 @@ export default function Work() {
 
           {/* Pearl Group */}
           <div id="pearl-group" className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-l border-neutral-200 dark:border-neutral-800 pl-6 relative">
-            <div className="absolute -left-[5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
+            <div className="absolute left-[-5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
             
             {/* Date and Location */}
             <div className="md:col-span-1 space-y-1">
@@ -166,7 +166,7 @@ export default function Work() {
 
           {/* Roland Berger */}
           <div id="roland-berger" className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-l border-neutral-200 dark:border-neutral-800 pl-6 relative">
-            <div className="absolute -left-[5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
+            <div className="absolute left-[-5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
             
             {/* Date and Location */}
             <div className="md:col-span-1 space-y-1">
@@ -208,7 +208,7 @@ export default function Work() {
 
           {/* Blue Room Investing */}
           <div id="blue-room-investing" className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-l border-neutral-200 dark:border-neutral-800 pl-6 relative">
-            <div className="absolute -left-[5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
+            <div className="absolute left-[-5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
             
             {/* Date and Location */}
             <div className="md:col-span-1 space-y-1">
@@ -258,7 +258,7 @@ export default function Work() {
         
         <div className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-l border-neutral-200 dark:border-neutral-800 pl-6 relative">
-            <div className="absolute -left-[5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
+            <div className="absolute left-[-5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
             
             <div className="md:col-span-1 space-y-1">
               <div className="text-sm font-mono text-neutral-500 dark:text-neutral-500">
@@ -289,7 +289,7 @@ export default function Work() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-l border-neutral-200 dark:border-neutral-800 pl-6 relative">
-            <div className="absolute -left-[5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
+            <div className="absolute left-[-5px] top-1 w-2 h-2 bg-neutral-400 dark:bg-neutral-600 rounded-full"></div>
             
             <div className="md:col-span-1 space-y-1">
               <div className="text-sm font-mono text-neutral-500 dark:text-neutral-500">

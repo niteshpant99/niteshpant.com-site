@@ -8,11 +8,11 @@ import React from "react";
 
 export default function WorldMapSection() {
   return (
-    <div className=" py-2 dark:bg-[--background] w-full">
+    <div className=" py-2 dark:bg-(--background) w-full">
       <div className="max-w-7xl mx-auto text-center">
-        <p className="text-[--prose-text] font-bold text-xl md:text-4xl">
+        <p className="text-(--prose-text) font-bold text-xl md:text-4xl">
           Dhangadhi →{" "}
-          <span className="text-[--prose-dartmouth]">
+          <span className="text-(--prose-dartmouth)">
             {"Dartmouth".split("").map((word, idx) => (
               <motion.span
                 key={idx}

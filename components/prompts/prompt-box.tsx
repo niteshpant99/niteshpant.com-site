@@ -48,7 +48,7 @@ export function PromptBox({
       }}
       onClick={() => onSelect?.(box.id)}
     >
-      <div className={`bg-card rounded-lg border-2 ${colorClass} shadow-sm hover:shadow-md transition-shadow`}>
+      <div className={`bg-card rounded-lg border-2 ${colorClass} shadow-xs hover:shadow-md transition-shadow`}>
         {/* Header */}
         <div className="flex items-center gap-1 p-2 pb-1">
           <div className="cursor-grab active:cursor-grabbing">
@@ -58,7 +58,7 @@ export function PromptBox({
           <select
             value={box.tag}
             onChange={(e) => onUpdate(box.id, 'tag', e.target.value)}
-            className="flex-1 px-1 py-0.5 border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring bg-background text-foreground font-mono text-xs uppercase font-medium"
+            className="flex-1 px-1 py-0.5 border border-input rounded focus:outline-hidden focus:ring-1 focus:ring-ring bg-background text-foreground font-mono text-xs uppercase font-medium"
             onClick={(e) => e.stopPropagation()}
           >
             {allTags.map((tag) => (
@@ -105,7 +105,7 @@ export function PromptBox({
             value={box.content}
             onChange={(e) => onUpdate(box.id, 'content', e.target.value)}
             rows={2}
-            className="w-full px-2 py-1 border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring bg-background text-foreground text-xs resize-y min-h-[60px]"
+            className="w-full px-2 py-1 border border-input rounded focus:outline-hidden focus:ring-1 focus:ring-ring bg-background text-foreground text-xs resize-y min-h-[60px]"
             placeholder={`Enter ${box.tag} content...`}
             onClick={(e) => e.stopPropagation()}
           />

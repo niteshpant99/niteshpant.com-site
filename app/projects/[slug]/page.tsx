@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: Props) {
   };
 
   return (
-    <article className="space-y-8">
+    <article className="[&>*+*]:mt-8">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -185,7 +185,7 @@ export default async function ProjectPage({ params }: Props) {
         </p>
 
         {/* Category */}
-        <div className="space-y-1">
+        <div className="[&>*+*]:mt-1">
           <span className="text-sm text-neutral-500 dark:text-neutral-500">Category:</span>
           <div>
             <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-neutral-50 text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-800">
@@ -196,7 +196,7 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* Technology Tags */}
         {project.technologies && (
-          <div className="space-y-1">
+          <div className="[&>*+*]:mt-1">
             <span className="text-sm text-neutral-500 dark:text-neutral-500">Technologies:</span>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech, index) => (

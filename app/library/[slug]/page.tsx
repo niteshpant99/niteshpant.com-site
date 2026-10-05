@@ -125,7 +125,7 @@ export default async function BookPage({ params }: Props) {
   };
 
   return (
-    <article className="space-y-10">
+    <article className="[&>*+*]:mt-10">
       <script
         type="application/ld+json"
         suppressHydrationWarning

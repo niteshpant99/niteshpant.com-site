@@ -255,7 +255,7 @@ export default function GenerativeEssayHero({
       {isHovered && isReady && (
         <button
           onClick={togglePause}
-          className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm transition-all duration-200 hover:bg-black/20 dark:hover:bg-white/20 hover:scale-110"
+          className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-xs transition-all duration-200 hover:bg-black/20 dark:hover:bg-white/20 hover:scale-110"
           aria-label={isPaused ? 'Play animation' : 'Pause animation'}
           title={isPaused ? 'Play animation' : 'Pause animation'}
         >

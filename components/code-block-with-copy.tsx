@@ -56,7 +56,7 @@ export function CodeBlockWithCopy({ children }: CodeBlockWithCopyProps) {
       >
         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
       </Button>
-      <pre ref={preRef} className="bg-[var(--prose-pre-bg)] rounded-lg overflow-x-auto">
+      <pre ref={preRef} className="bg-(--prose-pre-bg) rounded-lg overflow-x-auto">
         {children}
       </pre>
     </div>
